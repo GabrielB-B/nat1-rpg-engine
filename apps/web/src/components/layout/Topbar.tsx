@@ -1,17 +1,28 @@
 import {
   Bell,
   Compass,
+  LogOut,
   Plus,
   Search,
   Settings,
   Sparkles
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
+import { useAuth } from "../../features/auth/AuthContext";
 import { Button } from "../ui/Button";
 
 const ICON_STROKE = 1.75;
 
 export function Topbar() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate("/login", { replace: true });
+  }
+
   return (
     <header className="topbar" aria-label="Topo do workspace">
       <form
@@ -63,6 +74,18 @@ export function Topbar() {
         </Button>
         <button className="icon-button" type="button" aria-label="Configurações">
           <Settings
+            aria-hidden="true"
+            className="ui-icon icon-md"
+            strokeWidth={ICON_STROKE}
+          />
+        </button>
+        <button
+          className="icon-button"
+          type="button"
+          aria-label="Sair"
+          onClick={handleLogout}
+        >
+          <LogOut
             aria-hidden="true"
             className="ui-icon icon-md"
             strokeWidth={ICON_STROKE}

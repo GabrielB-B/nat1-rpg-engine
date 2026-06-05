@@ -99,7 +99,7 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 
 ### 2026-06-05 - Refinamento Cirurgico Da Home Cartographer
 
-- Nova comparacao visual foi feita contra a referencia aprovada enviada por Gabriel.
+- Comparada a Home do Mestre com a referencia visual aprovada do tema `cartographer`.
 - Bloco de saudacao deixou de ser card isolado e passou a ficar solto sobre o fundo, com ornamento cartografico discreto.
 - Fundo visual foi corrigido: removidas linhas diagonais pesadas e adicionadas linhas de mapa laterais, granulo leve e textura de pergaminho.
 - Grid principal foi compactado, reduzindo espacamentos entre estatisticas, campanha ativa, coluna lateral e cards inferiores.
@@ -111,7 +111,7 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 
 ### 2026-06-05 - Correcao De Largura Da Home Cartographer
 
-- Gabriel reprovou a tela por parecer pequena e centralizada em viewport largo.
+- Identificado desvio visual em viewport largo: tela pequena e centralizada.
 - Causa identificada: `workspace-dashboard` ainda usava `max-width` e `margin: auto`, criando uma ilha centralizada.
 - Corrigido para layout fluido: dashboard usa `width: 100%`, `max-width: none` e `margin: 0`.
 - Grid principal foi recalibrado para ocupar a largura util da area ao lado da sidebar, mantendo coluna direita encaixada.
@@ -120,7 +120,7 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 
 ### 2026-06-05 - Ajuste Responsivo De Respiro Da Home Cartographer
 
-- Gabriel reprovou o full-stretch por ficar largo demais e perder o respiro do fundo cartografico a direita.
+- Identificado excesso de expansao horizontal em telas largas, com perda do respiro cartografico a direita.
 - Layout foi corrigido para uma regra responsiva mais precisa: ocupa 100% em telas comuns, mas em telas largas usa `max-width: 1480px` ancorado a esquerda.
 - `workspace-main` passou a usar padding direito responsivo para preservar margem visual sem recentralizar a tela.
 - Resultado esperado: composicao mais parecida com a referencia, com conteudo encostado a esquerda da area principal e faixa de fundo visivel a direita em monitores largos.
@@ -129,7 +129,7 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 
 ### 2026-06-05 - Refinamento Final De Escala Da Home Cartographer
 
-- Gabriel reprovou novamente a Home por excesso de sobra inferior, largura ainda esticada em desktop largo e tipografia pesada demais para areas pequenas de UI.
+- Identificados tres pontos de ajuste visual: sobra inferior excessiva, largura esticada em desktop largo e tipografia pesada em areas pequenas de UI.
 - Tipografia foi recalibrada: serif editorial preservada em titulos, enquanto menu, labels, metadados, badges e listas passaram a usar peso mais limpo e utilitario.
 - `workspace-dashboard` passou a usar largura maxima ampla e ancorada, com grid mais controlado para reduzir o mapa principal em monitores largos sem voltar ao aspecto de ilha centralizada.
 - Cards de estatistica foram compactados em altura, numero e icone para se aproximarem da densidade do mock aprovado.
@@ -142,7 +142,7 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 
 ### 2026-06-05 - Correcao De Fidelidade Da Home Cartographer
 
-- Gabriel reprovou a composicao lateral criada na rodada anterior por se afastar da referencia aprovada.
+- Identificado afastamento da referencia aprovada na composicao lateral criada na versao anterior.
 - Campanha ativa foi restaurada para a estrutura correta: titulo da secao, mapa horizontal no topo, titulo da campanha com badge abaixo, metadados, tags e CTA no rodape direito.
 - Mapa recente foi restaurado para a estrutura correta: titulo da secao, imagem no topo, titulo/meta/descricao abaixo e link inferior.
 - Refinamentos preservados sem mudar a composicao: largura desktop controlada, altura do mapa limitada, padding compacto, metadados legiveis e textura cartografica CSS.
@@ -153,15 +153,50 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 
 ### 2026-06-05 - Correcao De Densidade Da Home Cartographer
 
-- Gabriel apontou que a Home ainda ficava boa em telas pequenas, mas terminava cedo demais e deixava vazio inferior em desktop largo.
+- Identificado vazio inferior em desktop largo, apesar de comportamento adequado em telas menores.
 - Card `Campanha ativa` recebeu a secao visivel `Resumo da campanha`, posicionada abaixo dos metadados e antes das tags/CTA.
 - O resumo usa texto mockado curto para reforcar continuidade narrativa sem transformar o card em bloco pesado.
 - Cards inferiores passaram a exibir detalhes ja existentes nos mocks de NPCs e notas, tornando a linha inferior mais util e menos vazia.
 - `dashboard-grid` ganhou altura responsiva baseada no viewport em desktop, preservando a disposicao aprovada: campanha/mapa no topo, sessoes a direita e linha inferior com NPCs, mapa e notas.
 - Fundo `cartographer` recebeu camada topografica adicional por CSS, com baixa opacidade e concentracao visual no lado direito/bordas.
-- Iconografia da rodada anterior foi preservada: classes `icon-xs`, `icon-sm`, `icon-md`, `icon-lg` e `strokeWidth` 1.75.
+- Iconografia definida foi preservada: classes `icon-xs`, `icon-sm`, `icon-md`, `icon-lg` e `strokeWidth` 1.75.
 - Validacoes executadas: `npm.cmd run build`, dev server em `http://127.0.0.1:5180` e resposta HTTP `200 OK`.
 - Nenhum backend, endpoint, model, migration, banco ou consumo real de API foi alterado.
+
+### 2026-06-05 - Fundacao De Autenticacao Frontend
+
+- Criadas telas `/login` e `/register` no tema `cartographer`, com card central, textos de produto, inputs e erros simples.
+- Criado `AuthLayout` para as telas publicas de autenticacao.
+- Criado modulo `apps/web/src/features/auth` com tipos, storage de token, API client de auth, contexto de autenticacao e rotas publica/protegida.
+- Login frontend usa `POST /auth/login` com OAuth2 form data, enviando o e-mail no campo `username`.
+- Cadastro frontend usa `POST /auth/register` com JSON e faz login automatico apos sucesso.
+- Sessao inicial e validada com `GET /auth/me` quando existe token em `localStorage`.
+- Token JWT e salvo em `localStorage` como `nat1.auth.access_token` e removido no logout.
+- Rota `/` foi protegida: usuario anonimo redireciona para `/login`; usuario autenticado acessa a Home mockada.
+- Usuarios autenticados sao redirecionados de `/login` e `/register` para `/`.
+- Logout simples foi adicionado como acao discreta na topbar.
+- `apiRequest` passou a suportar melhor JSON, form-urlencoded, Bearer token e erros estruturados com `ApiError`.
+- Validacoes executadas: `npm.cmd run build`, dev server em `http://127.0.0.1:5181`, `GET /health`, cadastro, login form-urlencoded e `GET /auth/me` com Bearer token.
+- Nenhum backend, endpoint, model, migration ou banco foi alterado.
+- Dashboard segue mockado; nao foi implementado CRUD visual nem consumo real de dados da Home.
+
+### 2026-06-05 - Fundacao De Integracao Com API Frontend
+
+- Implementada camada base de integracao com API em `apps/web/src/lib/api`.
+- Adicionado tratamento padronizado de erros HTTP com `ApiError` e `ApiNetworkError`.
+- Adicionado parser de erros compatível com payloads `detail` do FastAPI.
+- Adicionado helper `withQueryParams` para montagem de query string.
+- Adicionada configuracao central do API client para token Bearer salvo e callback de `401`.
+- Ajustada autenticacao frontend para chamadas publicas em login/cadastro e chamadas protegidas em `/auth/me`.
+- Adicionado logout automatico em respostas `401` de chamadas protegidas.
+- Configurado TanStack Query para evitar retry em `401`, `403` e `404`.
+- Criado hook `useCurrentUser`.
+- Criados tipos, servicos e hooks de leitura para GameProjects.
+- Criados tipos, servicos e hooks de leitura para Worlds.
+- Criados tipos, servicos e hooks de leitura para SystemTemplates.
+- Mantida a Home do Mestre com dados mockados, sem ligacao direta aos hooks novos nesta fase.
+- Validacoes executadas: `npm.cmd run build`, dev server em `http://127.0.0.1:5182` e resposta HTTP `200 OK` em `/login`.
+- Nenhum backend, endpoint, model, migration ou banco foi alterado.
 
 ## Restricoes De Escopo Mantidas
 

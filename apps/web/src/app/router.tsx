@@ -1,21 +1,49 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import { PublicAuthRoute } from "../features/auth/components/PublicAuthRoute";
+import { ProtectedRoute } from "../features/auth/components/ProtectedRoute";
+import { AuthLayout } from "../layouts/AuthLayout";
 import { RootLayout } from "../layouts/RootLayout";
 import { HomePage } from "../pages/HomePage";
+import { LoginPage } from "../pages/LoginPage";
 import { NotFoundPage } from "../pages/NotFoundPage";
+import { RegisterPage } from "../pages/RegisterPage";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <RootLayout />,
+    element: <PublicAuthRoute />,
     children: [
       {
-        index: true,
-        element: <HomePage />
-      },
+        element: <AuthLayout />,
+        children: [
+          {
+            path: "/login",
+            element: <LoginPage />
+          },
+          {
+            path: "/register",
+            element: <RegisterPage />
+          }
+        ]
+      }
+    ]
+  },
+  {
+    element: <ProtectedRoute />,
+    children: [
       {
-        path: "*",
-        element: <NotFoundPage />
+        path: "/",
+        element: <RootLayout />,
+        children: [
+          {
+            index: true,
+            element: <HomePage />
+          },
+          {
+            path: "*",
+            element: <NotFoundPage />
+          }
+        ]
       }
     ]
   }
