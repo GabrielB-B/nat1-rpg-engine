@@ -1,64 +1,63 @@
-const foundationItems = [
-  {
-    label: "Backend foundation",
-    status: "concluido",
-    detail: "FastAPI, PostgreSQL, SQLAlchemy e Alembic"
-  },
-  {
-    label: "Auth foundation",
-    status: "concluido",
-    detail: "JWT, Swagger Authorize e usuario atual"
-  },
-  {
-    label: "GameProject CRUD",
-    status: "concluido",
-    detail: "Campanhas & Cronicas com modulos padrao"
-  },
-  {
-    label: "Workspace foundation",
-    status: "concluido",
-    detail: "Worlds, SystemTemplates, modulos e summary"
-  },
-  {
-    label: "Frontend foundation",
-    status: "em andamento",
-    detail: "React, Vite, Tailwind e temas aprovados"
-  }
-];
-
-const themeKeys = ["cartographer", "dark_horror", "humanist_futuristic"];
+import { CampaignCard } from "../components/dashboard/CampaignCard";
+import { DashboardSection } from "../components/dashboard/DashboardSection";
+import { MapPreview } from "../components/dashboard/MapPreview";
+import { NpcList } from "../components/dashboard/NpcList";
+import { RecentNotes } from "../components/dashboard/RecentNotes";
+import { SessionList } from "../components/dashboard/SessionList";
+import { StatCard } from "../components/dashboard/StatCard";
+import { workspaceMock } from "../data/mockWorkspace";
 
 export function HomePage() {
   return (
-    <section className="home-grid">
-      <div className="intro-panel">
-        <p className="section-kicker">Workspace do mestre</p>
-        <h1>Nat 1 RPG Engine</h1>
-        <p className="intro-copy">
-          Ferramenta para mestres organizarem campanhas, cronicas e mundos
-          vivos.
-        </p>
-        <div className="theme-row" aria-label="Temas preparados">
-          {themeKeys.map((themeKey) => (
-            <span key={themeKey} className="theme-chip">
-              {themeKey}
-            </span>
-          ))}
+    <div className="workspace-dashboard">
+      <section className="welcome-panel" aria-labelledby="welcome-title">
+        <div className="welcome-copy">
+          <h1 id="welcome-title">{workspaceMock.greeting}</h1>
+          <p>{workspaceMock.subtitle}</p>
         </div>
-      </div>
+      </section>
 
-      <div className="status-board" aria-label="Estado tecnico da fundacao">
-        {foundationItems.map((item, index) => (
-          <article className="status-card" key={item.label}>
-            <span className="status-index">{String(index + 1).padStart(2, "0")}</span>
-            <div>
-              <h2>{item.label}</h2>
-              <p>{item.detail}</p>
-            </div>
-            <strong>{item.status}</strong>
-          </article>
+      <section className="stats-grid" aria-label="Resumo do workspace">
+        {workspaceMock.stats.map((stat) => (
+          <StatCard key={stat.label} stat={stat} />
         ))}
+      </section>
+
+      <div className="dashboard-grid">
+        <CampaignCard campaign={workspaceMock.activeCampaign} />
+
+        <DashboardSection
+          actionLabel="Ver todas as sessões"
+          className="sessions-panel"
+          title="Próximas sessões"
+        >
+          <SessionList records={workspaceMock.sessions} />
+        </DashboardSection>
+
+        <DashboardSection
+          actionLabel="Ver todos os NPCs"
+          className="npc-panel"
+          title="Últimos NPCs adicionados"
+        >
+          <NpcList records={workspaceMock.npcs} />
+        </DashboardSection>
+
+        <DashboardSection
+          actionLabel="Ver todos os mapas"
+          className="map-panel"
+          title="Mapa recente"
+        >
+          <MapPreview {...workspaceMock.recentMap} />
+        </DashboardSection>
+
+        <DashboardSection
+          actionLabel="Ver todas as notas"
+          className="notes-panel"
+          title="Notas recentes"
+        >
+          <RecentNotes records={workspaceMock.notes} />
+        </DashboardSection>
       </div>
-    </section>
+    </div>
   );
 }

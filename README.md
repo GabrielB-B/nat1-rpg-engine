@@ -33,6 +33,8 @@ The frontend foundation is now started in `apps/web`, using:
 - React Router
 - TanStack Query
 
+The first frontend design system foundation is also in place with the Cartographer theme, reusable UI/layout/dashboard components and a mocked Workspace do Mestre shell.
+
 ## Backend Commands
 
 ```powershell
