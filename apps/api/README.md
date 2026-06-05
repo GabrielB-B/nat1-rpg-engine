@@ -2,7 +2,7 @@
 
 Backend foundation for Nat 1 RPG Engine.
 
-This stage provides the FastAPI base, health check, settings, SQLAlchemy session setup, Alembic structure, security helpers, core database models, basic authentication, initial Game Project CRUD, and tests. It does not implement AI/RAG, uploads, players, internal module CRUD, or frontend.
+This stage provides the FastAPI base, health check, settings, SQLAlchemy session setup, Alembic structure, security helpers, core database models, basic authentication, initial Game Project CRUD, workspace foundation endpoints, and tests. It does not implement AI/RAG, uploads, players, internal content module CRUD, or frontend.
 
 ## Requirements
 
@@ -198,6 +198,81 @@ Game Project notes:
 - New projects default to `status = "preparation"` and `theme = "cartographer"`.
 - Archive is used instead of permanent deletion.
 - Default module settings are created for each new project.
+
+## Workspace Foundation
+
+Workspace endpoints also require Bearer authentication with `$headers`.
+
+Create and list Worlds:
+
+```powershell
+$world = Invoke-RestMethod `
+  -Uri http://127.0.0.1:8000/api/v1/worlds `
+  -Method Post `
+  -ContentType "application/json" `
+  -Headers $headers `
+  -Body '{"name":"Aelthos","description":"Mundo autoral de fantasia sombria."}'
+
+Invoke-RestMethod `
+  -Uri http://127.0.0.1:8000/api/v1/worlds `
+  -Headers $headers
+```
+
+Create and list System Templates:
+
+```powershell
+$template = Invoke-RestMethod `
+  -Uri http://127.0.0.1:8000/api/v1/system-templates `
+  -Method Post `
+  -ContentType "application/json" `
+  -Headers $headers `
+  -Body '{"name":"Sistema Aelthos","type":"custom"}'
+
+Invoke-RestMethod `
+  -Uri http://127.0.0.1:8000/api/v1/system-templates `
+  -Headers $headers
+```
+
+Link a World or System Template to a Game Project:
+
+```powershell
+Invoke-RestMethod `
+  -Uri "http://127.0.0.1:8000/api/v1/game-projects/$($project.id)" `
+  -Method Patch `
+  -ContentType "application/json" `
+  -Headers $headers `
+  -Body "{`"world_id`":`"$($world.id)`",`"system_template_id`":`"$($template.id)`"}"
+```
+
+List and update Game Project modules:
+
+```powershell
+$modules = Invoke-RestMethod `
+  -Uri "http://127.0.0.1:8000/api/v1/game-projects/$($project.id)/modules" `
+  -Headers $headers
+
+Invoke-RestMethod `
+  -Uri "http://127.0.0.1:8000/api/v1/game-projects/$($project.id)/modules/$($modules[0].id)" `
+  -Method Patch `
+  -ContentType "application/json" `
+  -Headers $headers `
+  -Body '{"display_name":"Painel","is_enabled":true,"order_index":5,"icon_key":"panel-top"}'
+```
+
+Get the Game Project summary for the future dashboard:
+
+```powershell
+Invoke-RestMethod `
+  -Uri "http://127.0.0.1:8000/api/v1/game-projects/$($project.id)/summary" `
+  -Headers $headers
+```
+
+Workspace notes:
+
+- Worlds and user-created System Templates are isolated by authenticated user.
+- Built-in System Templates can be listed and read, but not edited or archived by regular users in this phase.
+- Game Project summary returns zero counters until the internal modules are implemented.
+- Module reorder in batch is intentionally left for a later task; individual `order_index` updates are available.
 
 ## Tests
 
