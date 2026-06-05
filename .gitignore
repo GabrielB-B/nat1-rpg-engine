@@ -31,3 +31,6 @@ Thumbs.db
 uploads/
 local_uploads/
 apps/api/uploads/
+
+# TypeScript build cache
+*.tsbuildinfo
