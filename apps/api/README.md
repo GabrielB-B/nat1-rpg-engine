@@ -2,7 +2,7 @@
 
 Backend foundation for Nat 1 RPG Engine.
 
-This stage provides the FastAPI base, health check, settings, SQLAlchemy session setup, Alembic structure, security helpers, core database models, and tests. It does not implement authentication routes, CRUD, AI/RAG, uploads, players, or frontend.
+This stage provides the FastAPI base, health check, settings, SQLAlchemy session setup, Alembic structure, security helpers, core database models, basic authentication, and tests. It does not implement CRUD, AI/RAG, uploads, players, or frontend.
 
 ## Requirements
 
@@ -48,6 +48,51 @@ Expected response:
 }
 ```
 
+## Banco Local Com Docker
+
+1. Na raiz do projeto, suba o PostgreSQL local:
+
+```powershell
+docker compose up -d
+```
+
+2. Em `apps/api`, crie o arquivo `.env` local:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+3. Confira no `.env`:
+
+```env
+DATABASE_URL=postgresql+psycopg://nat1_user:nat1_password@localhost:5432/nat1_db
+```
+
+4. Ative a virtualenv:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+5. Aplique as migrations:
+
+```powershell
+alembic upgrade head
+```
+
+6. Suba a API:
+
+```powershell
+uvicorn app.main:app --reload
+```
+
+7. Teste:
+
+```txt
+GET http://127.0.0.1:8000/api/v1/health
+POST http://127.0.0.1:8000/api/v1/auth/register
+```
+
 ## Authentication
 
 Register a user:
@@ -60,14 +105,14 @@ Invoke-RestMethod `
   -Body '{"name":"Gabriel","email":"gabriel@example.com","password":"strong-password"}'
 ```
 
-Login:
+Login with OAuth2 form data:
 
 ```powershell
 $login = Invoke-RestMethod `
   -Uri http://127.0.0.1:8000/api/v1/auth/login `
   -Method Post `
-  -ContentType "application/json" `
-  -Body '{"email":"gabriel@example.com","password":"strong-password"}'
+  -ContentType "application/x-www-form-urlencoded" `
+  -Body "username=gabriel@example.com&password=strong-password"
 ```
 
 Use the Bearer token:
@@ -82,7 +127,8 @@ Authentication notes:
 
 - Passwords are stored only as hashes.
 - API responses never return `password_hash`.
-- The current login endpoint accepts JSON with `email` and `password`.
+- The login endpoint uses OAuth2 form data.
+- In Swagger, click `Authorize`, use the user's email in `username`, and use the password in `password`.
 
 ## Tests
 

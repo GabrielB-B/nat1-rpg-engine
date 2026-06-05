@@ -85,19 +85,19 @@ def test_register_duplicate_email_returns_conflict(client: TestClient) -> None:
     assert duplicate_response.json()["detail"] == "Email already registered"
 
 
-def test_login_success_returns_token(client: TestClient) -> None:
+def test_login_oauth2_form_success_returns_token(client: TestClient) -> None:
     register_payload = {
         "name": "Gabriel",
         "email": "gabriel@example.com",
         "password": "strong-password",
     }
     login_payload = {
-        "email": register_payload["email"],
+        "username": register_payload["email"],
         "password": register_payload["password"],
     }
 
     client.post("/api/v1/auth/register", json=register_payload)
-    response = client.post("/api/v1/auth/login", json=login_payload)
+    response = client.post("/api/v1/auth/login", data=login_payload)
 
     assert response.status_code == 200
     data = response.json()
@@ -115,7 +115,7 @@ def test_login_wrong_password_returns_unauthorized(client: TestClient) -> None:
     client.post("/api/v1/auth/register", json=register_payload)
     response = client.post(
         "/api/v1/auth/login",
-        json={"email": register_payload["email"], "password": "wrong-password"},
+        data={"username": register_payload["email"], "password": "wrong-password"},
     )
 
     assert response.status_code == 401
@@ -132,8 +132,8 @@ def test_me_returns_current_user_with_valid_token(client: TestClient) -> None:
     register_response = client.post("/api/v1/auth/register", json=register_payload)
     login_response = client.post(
         "/api/v1/auth/login",
-        json={
-            "email": register_payload["email"],
+        data={
+            "username": register_payload["email"],
             "password": register_payload["password"],
         },
     )

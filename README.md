@@ -41,3 +41,29 @@ Health check:
 ```txt
 GET http://127.0.0.1:8000/api/v1/health
 ```
+
+## Local Database
+
+Start the local PostgreSQL database:
+
+```powershell
+docker compose up -d
+```
+
+Check whether the container is running:
+
+```powershell
+docker ps
+```
+
+Stop the local database:
+
+```powershell
+docker compose down
+```
+
+Remove the local database volume only when you intentionally want to erase local data:
+
+```powershell
+docker compose down -v
+```

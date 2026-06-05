@@ -34,6 +34,15 @@ Este arquivo registra decisões técnicas e marcos relevantes do Nat 1 RPG Engin
 - API não retorna `password_hash`.
 - Testes de cadastro, login e usuário autenticado adicionados.
 
+### 2026-06-05 - PostgreSQL Local Com Docker
+
+- Adicionado Docker Compose para PostgreSQL local de desenvolvimento.
+- Banco padrão local: `nat1_db`.
+- Usuário local: `nat1_user`.
+- Serviço/container: `nat1_postgres`.
+- `DATABASE_URL` documentada em `apps/api/.env.example`.
+- Fluxo local documentado: subir Docker, copiar `.env`, aplicar Alembic e retestar autenticação pelo Swagger.
+
 ## Restrições De Escopo Mantidas
 
 - Não implementar frontend antes da fase própria.

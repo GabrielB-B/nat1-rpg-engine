@@ -1,30 +1,39 @@
 # Status Atual
 
-## Identificação
+## Identificacao
 
 Projeto: Nat 1 RPG Engine  
-Fase atual: MVP 1 - Fundação Backend  
-Data da última atualização: 2026-06-05  
+Fase atual: MVP 1 - Fundacao Backend  
+Data da ultima atualizacao: 2026-06-05  
 Branch atual: `back/auth-foundation`
 
-## Última Tarefa Concluída
+## Tarefa Atual
 
-Fundação de autenticação básica do backend com cadastro, login, JWT e rota de usuário autenticado.
+Compatibilizar autenticacao com Swagger OAuth2 usando `OAuth2PasswordRequestForm`.
+
+## Ultima Tarefa Concluida
+
+Autenticacao basica validada com banco PostgreSQL local e ajustada para funcionar com o botao Authorize do Swagger.
 
 ## Arquivos Principais Alterados
 
-- `apps/api/app/core/security.py`
-- `apps/api/app/api/deps.py`
 - `apps/api/app/api/v1/endpoints/auth.py`
-- `apps/api/app/api/v1/router.py`
 - `apps/api/app/schemas/auth.py`
-- `apps/api/app/schemas/user.py`
-- `apps/api/app/repositories/user_repository.py`
-- `apps/api/app/services/auth_service.py`
+- `apps/api/app/schemas/__init__.py`
 - `apps/api/tests/test_auth.py`
+- `apps/api/requirements.txt`
 - `apps/api/README.md`
+- `Docs/ControleDeProjeto/STATUS_ATUAL.md`
 
-## Últimos Testes Executados
+Arquivos ainda alterados da tarefa anterior de ambiente local:
+
+- `docker-compose.yml`
+- `apps/api/.env.example`
+- `README.md`
+- `apps/api/alembic.ini`
+- `Docs/ControleDeProjeto/HISTORICO_TECNICO.md`
+
+## Ultimos Testes Executados
 
 ```powershell
 cd apps/api
@@ -32,7 +41,7 @@ ruff check .
 pytest
 ```
 
-Validação HTTP registrada:
+Validacao HTTP registrada anteriormente com banco local:
 
 ```txt
 GET /api/v1/health
@@ -43,7 +52,7 @@ GET /api/v1/auth/me
 
 ## Resultado Dos Testes
 
-Última validação técnica registrada: passando.
+Autenticacao validada com banco local. Login ajustado para o padrao OAuth2 do Swagger, usando `username` como e-mail e `password` como senha.
 
 Endpoint validado:
 
@@ -57,18 +66,18 @@ Resultado esperado:
 {"status":"ok","service":"nat1-api"}
 ```
 
-Fluxos de autenticação validados:
+Fluxos de autenticacao validados:
 
-- Cadastro cria usuário e não retorna `password_hash`.
+- Cadastro cria usuario e nao retorna `password_hash`.
 - Cadastro duplicado retorna erro.
-- Login com senha correta retorna JWT.
+- Login OAuth2 com `username=email` e senha correta retorna JWT.
 - Login com senha errada retorna 401.
-- `/api/v1/auth/me` retorna usuário com Bearer token válido.
+- `/api/v1/auth/me` retorna usuario com Bearer token valido.
 - `/api/v1/auth/me` retorna 401 sem token.
 
-## Próxima Tarefa Recomendada
+## Proxima Tarefa Recomendada
 
-Seguir para CRUD de Projetos de Jogo.
+Seguir para CRUD de Projetos de Jogo ou fazer revisao final/commit da `auth foundation`.
 
 Tarefa recomendada:
 
@@ -78,13 +87,15 @@ back/game-project-crud
 
 ## Bloqueios Atuais
 
-Nenhum bloqueio técnico registrado para a próxima etapa.
+Nenhum bloqueio tecnico registrado para a proxima etapa.
 
-## Observações Importantes
+Observacao: para testar pelo Swagger, o PostgreSQL local deve estar rodando, as migrations devem estar aplicadas e o `uvicorn` deve ser reiniciado depois de mudancas no `.env`.
 
-- MVP 1 é organizacional.
-- Não implementar IA pesada, RAG, jogadores, chat, mapas interativos avançados ou upload inteligente neste momento.
-- O frontend ainda não foi iniciado.
-- A documentação oficial de produto está em `Docs/Documento_tecnico/`.
-- O guia visual oficial está em `Docs/IdentidadeVisual/`.
+## Observacoes Importantes
+
+- MVP 1 e organizacional.
+- Nao implementar IA pesada, RAG, jogadores, chat, mapas interativos avancados ou upload inteligente neste momento.
+- O frontend ainda nao foi iniciado.
+- A documentacao oficial de produto esta em `Docs/Documento_tecnico/`.
+- O guia visual oficial esta em `Docs/IdentidadeVisual/`.
 - Toda tarefa futura do Codex deve atualizar este arquivo ao final.
