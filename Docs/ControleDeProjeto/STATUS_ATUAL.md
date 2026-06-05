@@ -5,56 +5,76 @@
 Projeto: Nat 1 RPG Engine  
 Fase atual: MVP 1 - Fundacao Backend  
 Data da ultima atualizacao: 2026-06-05  
-Branch atual: `back/auth-foundation`
+Branch atual: `back/game-project-crud`
 
 ## Tarefa Atual
 
-Compatibilizar autenticacao com Swagger OAuth2 usando `OAuth2PasswordRequestForm`.
+Criar o CRUD inicial autenticado de Projetos de Jogo, exibidos no produto como Campanhas & Cronicas.
 
 ## Ultima Tarefa Concluida
 
-Autenticacao basica validada com banco PostgreSQL local e ajustada para funcionar com o botao Authorize do Swagger.
+CRUD inicial de `GameProject` implementado com rotas protegidas, isolamento por usuario, slug unico por usuario, modulos padrao e arquivamento sem exclusao permanente.
 
 ## Arquivos Principais Alterados
 
-- `apps/api/app/api/v1/endpoints/auth.py`
-- `apps/api/app/schemas/auth.py`
+- `apps/api/app/api/v1/endpoints/game_projects.py`
+- `apps/api/app/api/v1/router.py`
+- `apps/api/app/schemas/game_project.py`
 - `apps/api/app/schemas/__init__.py`
-- `apps/api/tests/test_auth.py`
-- `apps/api/requirements.txt`
+- `apps/api/app/repositories/game_project_repository.py`
+- `apps/api/app/repositories/__init__.py`
+- `apps/api/app/services/game_project_service.py`
+- `apps/api/app/services/__init__.py`
+- `apps/api/tests/test_game_projects.py`
 - `apps/api/README.md`
 - `Docs/ControleDeProjeto/STATUS_ATUAL.md`
-
-Arquivos ainda alterados da tarefa anterior de ambiente local:
-
-- `docker-compose.yml`
-- `apps/api/.env.example`
-- `README.md`
-- `apps/api/alembic.ini`
 - `Docs/ControleDeProjeto/HISTORICO_TECNICO.md`
+- `Docs/ControleDeProjeto/PROXIMAS_TAREFAS_CODEX.md`
 
 ## Ultimos Testes Executados
 
 ```powershell
 cd apps/api
-ruff check .
-pytest
+.\.venv\Scripts\python.exe -m ruff check .
+.\.venv\Scripts\python.exe -m pytest
 ```
 
-Validacao HTTP registrada anteriormente com banco local:
+Validacoes cobertas por testes automatizados:
 
 ```txt
 GET /api/v1/health
 POST /api/v1/auth/register
 POST /api/v1/auth/login
 GET /api/v1/auth/me
+POST /api/v1/game-projects
+GET /api/v1/game-projects
+GET /api/v1/game-projects/{project_id}
+PATCH /api/v1/game-projects/{project_id}
+POST /api/v1/game-projects/{project_id}/archive
+POST /api/v1/game-projects/{project_id}/restore
 ```
 
 ## Resultado Dos Testes
 
-Autenticacao validada com banco local. Login ajustado para o padrao OAuth2 do Swagger, usando `username` como e-mail e `password` como senha.
+`ruff check .` passou.
 
-Endpoint validado:
+`pytest` passou com 17 testes:
+
+- autenticacao basica preservada;
+- health check preservado;
+- criacao autenticada de Projeto de Jogo;
+- bloqueio de criacao sem token;
+- listagem isolada por usuario;
+- bloqueio de acesso a projeto de outro usuario;
+- atualizacao pelo dono;
+- arquivamento ocultando da lista padrao;
+- `include_archived=true` retornando arquivados;
+- restore recolocando o projeto na lista padrao;
+- slugs duplicados recebendo sufixo por usuario.
+
+Aviso conhecido: `StarletteDeprecationWarning` do `TestClient` sobre `httpx`, sem falha de teste.
+
+## Endpoint Validado
 
 ```txt
 GET /api/v1/health
@@ -66,34 +86,25 @@ Resultado esperado:
 {"status":"ok","service":"nat1-api"}
 ```
 
-Fluxos de autenticacao validados:
-
-- Cadastro cria usuario e nao retorna `password_hash`.
-- Cadastro duplicado retorna erro.
-- Login OAuth2 com `username=email` e senha correta retorna JWT.
-- Login com senha errada retorna 401.
-- `/api/v1/auth/me` retorna usuario com Bearer token valido.
-- `/api/v1/auth/me` retorna 401 sem token.
-
 ## Proxima Tarefa Recomendada
 
-Seguir para CRUD de Projetos de Jogo ou fazer revisao final/commit da `auth foundation`.
+Seguir para endpoints simples de Worlds e SystemTemplates, aproveitando os models centrais ja existentes.
 
 Tarefa recomendada:
 
 ```txt
-back/game-project-crud
+back/world-system-templates
 ```
 
 ## Bloqueios Atuais
 
 Nenhum bloqueio tecnico registrado para a proxima etapa.
 
-Observacao: para testar pelo Swagger, o PostgreSQL local deve estar rodando, as migrations devem estar aplicadas e o `uvicorn` deve ser reiniciado depois de mudancas no `.env`.
+Para teste manual pelo Swagger, manter o PostgreSQL local rodando, migrations aplicadas e login feito pelo botao Authorize com `username=email`.
 
 ## Observacoes Importantes
 
-- MVP 1 e organizacional.
+- MVP 1 continua organizacional.
 - Nao implementar IA pesada, RAG, jogadores, chat, mapas interativos avancados ou upload inteligente neste momento.
 - O frontend ainda nao foi iniciado.
 - A documentacao oficial de produto esta em `Docs/Documento_tecnico/`.

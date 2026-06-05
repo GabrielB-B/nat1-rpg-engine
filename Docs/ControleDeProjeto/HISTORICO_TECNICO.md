@@ -43,6 +43,17 @@ Este arquivo registra decisões técnicas e marcos relevantes do Nat 1 RPG Engin
 - `DATABASE_URL` documentada em `apps/api/.env.example`.
 - Fluxo local documentado: subir Docker, copiar `.env`, aplicar Alembic e retestar autenticação pelo Swagger.
 
+### 2026-06-05 - CRUD Inicial De Projetos De Jogo
+
+- Criadas rotas protegidas para criar, listar, detalhar, atualizar, arquivar e restaurar `GameProject`.
+- Mantida a equivalencia de produto: interface usa Campanhas & Cronicas; backend usa Projeto de Jogo / `GameProject`.
+- Implementado isolamento por usuario autenticado em todas as consultas.
+- Slugs sao gerados automaticamente e mantidos unicos por usuario.
+- Novos projetos usam `status` inicial `preparation` e tema padrao `cartographer`.
+- Criadas configuracoes iniciais de modulos por projeto em `project_module_settings`.
+- Arquivamento foi implementado como soft delete com `archived_at`.
+- Testes automatizados cobrem criacao, isolamento, atualizacao, arquivamento, restore, autenticacao e health check.
+
 ## Restrições De Escopo Mantidas
 
 - Não implementar frontend antes da fase própria.

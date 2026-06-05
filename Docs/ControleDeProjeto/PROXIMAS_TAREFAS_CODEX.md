@@ -13,7 +13,7 @@ Status possíveis:
 | --- | --- | --- | --- |
 | 1 | `back/database-foundation` | concluída | Criar models centrais e migration inicial. |
 | 2 | `back/auth-foundation` | concluída | Criar autenticação básica com usuário, hash de senha e JWT. |
-| 3 | `back/game-project-crud` | pendente | Criar CRUD de Projetos de Jogo. |
+| 3 | `back/game-project-crud` | concluída | Criar CRUD de Projetos de Jogo. |
 | 4 | `back/world-system-templates` | pendente | Criar endpoints simples para Worlds e SystemTemplates. |
 | 5 | `front/setup-foundation` | pendente | Iniciar React + Vite + TypeScript + Tailwind. |
 | 6 | `front/design-system-foundation` | pendente | Aplicar tokens visuais do tema Cartógrafo. |

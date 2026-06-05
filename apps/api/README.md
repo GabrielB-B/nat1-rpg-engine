@@ -2,7 +2,7 @@
 
 Backend foundation for Nat 1 RPG Engine.
 
-This stage provides the FastAPI base, health check, settings, SQLAlchemy session setup, Alembic structure, security helpers, core database models, basic authentication, and tests. It does not implement CRUD, AI/RAG, uploads, players, or frontend.
+This stage provides the FastAPI base, health check, settings, SQLAlchemy session setup, Alembic structure, security helpers, core database models, basic authentication, initial Game Project CRUD, and tests. It does not implement AI/RAG, uploads, players, internal module CRUD, or frontend.
 
 ## Requirements
 
@@ -129,6 +129,75 @@ Authentication notes:
 - API responses never return `password_hash`.
 - The login endpoint uses OAuth2 form data.
 - In Swagger, click `Authorize`, use the user's email in `username`, and use the password in `password`.
+
+## Campanhas & Cronicas / Game Projects
+
+The API uses the technical name `GameProject` for the product concept shown to users as Campanhas & Cronicas.
+
+All Game Project routes require Bearer authentication:
+
+```powershell
+$headers = @{ Authorization = "Bearer $($login.access_token)" }
+```
+
+Create a Game Project:
+
+```powershell
+$project = Invoke-RestMethod `
+  -Uri http://127.0.0.1:8000/api/v1/game-projects `
+  -Method Post `
+  -ContentType "application/json" `
+  -Headers $headers `
+  -Body '{"name":"Aelthos - A Dama de Ferro","format":"Campanha","description":"Campanha principal."}'
+```
+
+List active Game Projects:
+
+```powershell
+Invoke-RestMethod `
+  -Uri http://127.0.0.1:8000/api/v1/game-projects `
+  -Headers $headers
+```
+
+Include archived Game Projects:
+
+```powershell
+Invoke-RestMethod `
+  -Uri "http://127.0.0.1:8000/api/v1/game-projects?include_archived=true" `
+  -Headers $headers
+```
+
+Get, update, archive, and restore:
+
+```powershell
+Invoke-RestMethod `
+  -Uri "http://127.0.0.1:8000/api/v1/game-projects/$($project.id)" `
+  -Headers $headers
+
+Invoke-RestMethod `
+  -Uri "http://127.0.0.1:8000/api/v1/game-projects/$($project.id)" `
+  -Method Patch `
+  -ContentType "application/json" `
+  -Headers $headers `
+  -Body '{"description":"Descricao revisada.","status":"active"}'
+
+Invoke-RestMethod `
+  -Uri "http://127.0.0.1:8000/api/v1/game-projects/$($project.id)/archive" `
+  -Method Post `
+  -Headers $headers
+
+Invoke-RestMethod `
+  -Uri "http://127.0.0.1:8000/api/v1/game-projects/$($project.id)/restore" `
+  -Method Post `
+  -Headers $headers
+```
+
+Game Project notes:
+
+- `slug` is generated automatically and is unique per user.
+- New projects default to `status = "preparation"` and `theme = "cartographer"`.
+- Archive is used instead of permanent deletion.
+- Default module settings are created for each new project.
 
 ## Tests
 
