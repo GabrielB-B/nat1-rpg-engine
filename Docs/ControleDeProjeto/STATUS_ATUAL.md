@@ -2,66 +2,68 @@
 
 ## Identificacao
 
-Projeto: Nat 1 RPG Engine  
-Fase atual: MVP 1 - Fundacao Backend  
-Data da ultima atualizacao: 2026-06-05  
-Branch atual: `back/workspace-foundation`
+Projeto: Nat 1 RPG Engine
+Fase atual: Documentacao visual antes do frontend
+Data da ultima atualizacao: 2026-06-05
+Branch atual: `docs/fix-approved-visual-themes`
 
 ## Tarefa Atual
 
-Criar a fundacao do workspace do mestre ao redor de Campanhas & Cronicas.
+Corrigir e consolidar os tres temas visuais oficiais antes do inicio do frontend.
 
 ## Ultima Tarefa Concluida
 
-Fundacao de workspace implementada com CRUD basico de Worlds, CRUD basico de SystemTemplates, leitura/atualizacao de modulos de GameProject e summary basico para futuro Dashboard.
+Documentacao dos temas aprovados consolidada em `Docs/IdentidadeVisual/TEMAS_APROVADOS.md`, com destaque para a correcao do Tema Futurista Humanista para evitar repeticao indevida do Cartografo.
+
+## Estado Tecnico Do Produto
+
+Backend concluido ate esta etapa:
+
+- backend foundation;
+- PostgreSQL local via Docker;
+- SQLAlchemy + Alembic;
+- autenticacao com JWT;
+- Swagger Authorize com OAuth2PasswordRequestForm usando `username` como e-mail;
+- CRUD de GameProject / Campanhas & Cronicas;
+- criacao automatica de modulos padrao de GameProject;
+- workspace foundation com Worlds, SystemTemplates, ProjectModuleSettings e GameProject Summary;
+- testes automatizados com `pytest`;
+- validacao com `ruff`.
+
+Frontend:
+
+- ainda nao iniciado.
 
 ## Arquivos Principais Alterados
 
-- `apps/api/app/api/v1/endpoints/worlds.py`
-- `apps/api/app/api/v1/endpoints/system_templates.py`
-- `apps/api/app/api/v1/endpoints/game_projects.py`
-- `apps/api/app/api/v1/router.py`
-- `apps/api/app/core/slug.py`
-- `apps/api/app/schemas/world.py`
-- `apps/api/app/schemas/system_template.py`
-- `apps/api/app/schemas/project_module_setting.py`
-- `apps/api/app/schemas/game_project.py`
-- `apps/api/app/repositories/world_repository.py`
-- `apps/api/app/repositories/system_template_repository.py`
-- `apps/api/app/repositories/project_module_setting_repository.py`
-- `apps/api/app/repositories/game_project_repository.py`
-- `apps/api/app/services/world_service.py`
-- `apps/api/app/services/system_template_service.py`
-- `apps/api/app/services/project_module_setting_service.py`
-- `apps/api/app/services/game_project_service.py`
-- `apps/api/tests/test_workspace_foundation.py`
-- `apps/api/README.md`
+- `Docs/IdentidadeVisual/TEMAS_APROVADOS.md`
 - `Docs/ControleDeProjeto/STATUS_ATUAL.md`
 - `Docs/ControleDeProjeto/HISTORICO_TECNICO.md`
 - `Docs/ControleDeProjeto/PROXIMAS_TAREFAS_CODEX.md`
 
-## Endpoints Criados Ou Ampliados
+## Temas Oficiais Consolidados
 
 ```txt
-POST /api/v1/worlds
-GET /api/v1/worlds
-GET /api/v1/worlds/{world_id}
-PATCH /api/v1/worlds/{world_id}
-POST /api/v1/worlds/{world_id}/archive
-POST /api/v1/worlds/{world_id}/restore
-
-POST /api/v1/system-templates
-GET /api/v1/system-templates
-GET /api/v1/system-templates/{template_id}
-PATCH /api/v1/system-templates/{template_id}
-POST /api/v1/system-templates/{template_id}/archive
-
-GET /api/v1/game-projects/{project_id}/modules
-PATCH /api/v1/game-projects/{project_id}/modules/{module_setting_id}
-GET /api/v1/game-projects/{project_id}/summary
+cartographer
+dark_horror
+humanist_futuristic
 ```
 
+## Resultado Da Tarefa
+
+- Tema Cartografo / Modelo C documentado como tema principal e padrao inicial.
+- Tema Sombrio/Terror / Modelo II documentado como tema escuro atmosferico.
+- Tema Futurista Humanista / Modelo II documentado como tema tecnico, elegante, espacial e humanista.
+- Paleta Futurista Humanista aprovada registrada.
+- Alertas incluidos para nao repetir Cartografo no Futurista Humanista.
+- Alertas incluidos para nao transformar o Futurista Humanista em cyberpunk pesado.
+- Notas para frontend futuro registram tokens por tema e troca por `theme_key`.
+
 ## Ultimos Testes Executados
+
+Nenhum teste automatizado foi executado nesta tarefa, pois o escopo foi exclusivamente documental.
+
+Ultima validacao tecnica registrada da etapa anterior:
 
 ```powershell
 cd apps/api
@@ -69,63 +71,27 @@ cd apps/api
 .\.venv\Scripts\python.exe -m pytest
 ```
 
-## Resultado Dos Testes
-
-`ruff check .` passou.
-
-`pytest` passou com 25 testes:
-
-- health check preservado;
-- autenticacao OAuth2 preservada;
-- CRUD inicial de GameProject preservado;
-- Worlds com criacao, listagem, isolamento, update, archive e restore;
-- SystemTemplates com criacao, listagem, isolamento, update e archive;
-- templates built-in listaveis, mas protegidos contra edicao;
-- modulos de GameProject listaveis e atualizaveis pelo dono;
-- bloqueio de modulos de projeto de outro usuario;
-- summary de GameProject protegido por dono;
-- summary retorna modulos ativos e contadores basicos zerados;
-- GameProject so aceita vincular World do dono;
-- GameProject so aceita vincular SystemTemplate built-in ou do dono.
-
-Aviso conhecido: `StarletteDeprecationWarning` do `TestClient` sobre `httpx`, sem falha de teste.
-
-## Endpoint Validado
-
-```txt
-GET /api/v1/health
-```
-
-Resultado esperado:
-
-```json
-{"status":"ok","service":"nat1-api"}
-```
+Resultado anterior: `ruff` passou e `pytest` passou com 25 testes.
 
 ## Proxima Tarefa Recomendada
 
-Seguir para frontend foundation ou iniciar a fundacao de Sessoes e Cenas no backend.
-
-Tarefas recomendadas:
+Apos merge desta documentacao visual:
 
 ```txt
 front/setup-foundation
-back/session-scene-foundation
 ```
 
 ## Bloqueios Atuais
 
-Nenhum bloqueio tecnico registrado para a proxima etapa.
-
-Nao foi criada migration nesta tarefa porque os models/tabelas necessarios ja existiam.
+Nenhum bloqueio tecnico registrado.
 
 ## Observacoes Importantes
 
-- MVP 1 continua organizacional.
-- Nao implementar IA pesada, RAG, jogadores, chat, mapas interativos avancados ou upload inteligente neste momento.
-- O frontend ainda nao foi iniciado.
-- `ProjectModuleSettings` possui update individual; reorder em lote fica para uma tarefa futura.
-- Contadores do summary retornam zero ate os modulos internos existirem.
-- A documentacao oficial de produto esta em `Docs/Documento_tecnico/`.
-- O guia visual oficial esta em `Docs/IdentidadeVisual/`.
+- Esta tarefa nao alterou backend.
+- Esta tarefa nao alterou banco.
+- Esta tarefa nao alterou endpoints.
+- Esta tarefa nao iniciou frontend.
+- Esta tarefa nao criou imagens novas.
+- O frontend deve nascer com tokens preparados para `cartographer`, `dark_horror` e `humanist_futuristic`.
+- O Tema Futurista Humanista nao deve repetir estetica medieval, pergaminho, mapa antigo ou paleta Cartografo.
 - Toda tarefa futura do Codex deve atualizar este arquivo ao final.
