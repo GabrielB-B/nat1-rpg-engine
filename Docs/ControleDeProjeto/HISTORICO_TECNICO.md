@@ -67,6 +67,17 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 - Mantida validacao de vinculo: `GameProject` so aceita `world_id` do dono e `system_template_id` built-in ou do dono.
 - Nenhuma migration foi criada porque os models centrais ja tinham os campos necessarios.
 
+### 2026-06-05 - Correcao Dos Temas Visuais Aprovados
+
+- Consolidada a documentacao dos tres temas visuais oficiais em `Docs/IdentidadeVisual/TEMAS_APROVADOS.md`.
+- Confirmado o tema `cartographer` como Cartografo / Modelo C, tema principal e padrao inicial.
+- Confirmado o tema `dark_horror` como Sombrio/Terror / Modelo II, tema escuro atmosferico.
+- Confirmado o tema `humanist_futuristic` como Futurista Humanista / Modelo II, tema tecnico, espacial, elegante e humanista.
+- Registrado que o Futurista Humanista nao deve repetir o Cartografo.
+- Registrado que o Futurista Humanista nao deve virar cyberpunk pesado.
+- Registrada a paleta aprovada do Futurista Humanista.
+- Confirmado que o frontend deve nascer com tokens preparados para `cartographer`, `dark_horror` e `humanist_futuristic`.
+
 ## Restricoes De Escopo Mantidas
 
 - Nao implementar frontend antes da fase propria.
