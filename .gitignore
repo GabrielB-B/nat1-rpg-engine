@@ -34,3 +34,7 @@ apps/api/uploads/
 
 # TypeScript build cache
 *.tsbuildinfo
+
+# Vite local cache
+apps/web/.vite/
+
