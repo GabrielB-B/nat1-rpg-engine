@@ -1,0 +1,255 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+body::before {
+  background:
+    linear-gradient(110deg, transparent 0 42%, var(--line-art) 42.2% 42.6%, transparent 42.8%),
+    linear-gradient(16deg, transparent 0 61%, var(--line-art) 61.2% 61.6%, transparent 61.8%),
+    radial-gradient(circle at 18% 18%, var(--line-art) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 76% 22%, var(--line-art) 0 1px, transparent 1.5px);
+  background-size: 100% 100%, 100% 100%, 52px 52px, 76px 76px;
+  content: "";
+  inset: 0;
+  opacity: 0.72;
+  pointer-events: none;
+  position: fixed;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+.app-shell {
+  margin: 0 auto;
+  max-width: 1180px;
+  min-height: 100vh;
+  padding: 28px;
+  position: relative;
+}
+
+.site-header {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 54px;
+}
+
+.site-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.site-kicker,
+.section-kicker {
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.theme-pill,
+.theme-chip {
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.theme-pill {
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border-radius: 999px;
+  padding: 10px 14px;
+}
+
+.home-grid {
+  align-items: stretch;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+}
+
+.intro-panel,
+.status-card,
+.empty-state {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 96%, white 4%), var(--surface-raised));
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-panel);
+}
+
+.intro-panel {
+  min-height: 530px;
+  padding: clamp(28px, 5vw, 58px);
+  position: relative;
+}
+
+.intro-panel::after {
+  border: 1px solid var(--border);
+  content: "";
+  inset: 18px;
+  opacity: 0.48;
+  pointer-events: none;
+  position: absolute;
+}
+
+.intro-panel h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 8vw, 7.3rem);
+  letter-spacing: 0;
+  line-height: 0.9;
+  margin: 0;
+  max-width: 760px;
+}
+
+.intro-copy {
+  color: var(--text-muted);
+  font-size: clamp(1.05rem, 2vw, 1.32rem);
+  line-height: 1.7;
+  margin: 34px 0 0;
+  max-width: 560px;
+}
+
+.theme-row {
+  bottom: clamp(28px, 5vw, 58px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  left: clamp(28px, 5vw, 58px);
+  position: absolute;
+  right: clamp(28px, 5vw, 58px);
+}
+
+.theme-chip {
+  background: color-mix(in srgb, var(--surface) 80%, var(--accent) 20%);
+  border-radius: 999px;
+  padding: 9px 12px;
+}
+
+.status-board {
+  display: grid;
+  gap: 14px;
+}
+
+.status-card {
+  align-items: center;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  min-height: 96px;
+  padding: 20px;
+}
+
+.status-index {
+  align-items: center;
+  background: var(--primary);
+  color: var(--surface);
+  display: grid;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  height: 46px;
+  justify-items: center;
+  width: 46px;
+}
+
+.status-card h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.08rem, 2vw, 1.32rem);
+  letter-spacing: 0;
+  line-height: 1.15;
+  margin: 0 0 6px;
+}
+
+.status-card p {
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.status-card strong {
+  color: var(--success);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.empty-state {
+  padding: 40px;
+}
+
+.empty-state h1 {
+  font-family: var(--font-display);
+  margin: 0 0 18px;
+}
+
+.text-link {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+@media (max-width: 880px) {
+  .app-shell {
+    padding: 18px;
+  }
+
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 28px;
+  }
+
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-panel {
+    min-height: 470px;
+  }
+}
+
+@media (max-width: 560px) {
+  .status-card {
+    align-items: flex-start;
+    grid-template-columns: 1fr;
+  }
+
+  .status-card strong {
+    white-space: normal;
+  }
+
+  .theme-row {
+    position: static;
+    margin-top: 36px;
+  }
+}

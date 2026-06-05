@@ -15,11 +15,12 @@ Status possiveis:
 | 2 | `back/auth-foundation` | concluida | Criar autenticacao basica com usuario, hash de senha e JWT. |
 | 3 | `back/game-project-crud` | concluida | Criar CRUD de Projetos de Jogo. |
 | 4 | `back/workspace-foundation` | concluida | Criar Worlds, SystemTemplates, modulos de projeto e summary de GameProject. |
-| 5 | `front/setup-foundation` | pendente | Iniciar React + Vite + TypeScript + Tailwind. |
-| 6 | `back/session-scene-foundation` | pendente | Criar fundacao backend de Sessoes e Cenas. |
-| 7 | `front/design-system-foundation` | pendente | Aplicar tokens visuais do tema Cartografo. |
+| 5 | `docs/fix-approved-visual-themes` | concluida | Consolidar os temas oficiais `cartographer`, `dark_horror` e `humanist_futuristic`. |
+| 6 | `front/setup-foundation` | concluida | Iniciar React + Vite + TypeScript + Tailwind. |
+| 7 | `front/design-system-foundation` | pendente | Aplicar componentes base e tokens visuais dos tres temas aprovados. |
 | 8 | `front/auth-pages` | pendente | Criar telas de login e cadastro. |
-| 9 | `front/home-master-shell` | pendente | Criar shell da Home do Mestre. |
+| 9 | `front/master-home-shell` | pendente | Criar shell da Home do Mestre. |
+| 10 | `back/session-scene-foundation` | pendente | Criar fundacao backend de Sessoes e Cenas. |
 
 ## Regra De Uso
 

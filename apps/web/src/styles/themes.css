@@ -1,0 +1,54 @@
+:root,
+[data-theme="cartographer"] {
+  --background: #f4ead2;
+  --surface: #fff8e8;
+  --surface-raised: #fbf0d7;
+  --border: #c9b77e;
+  --text: #342719;
+  --text-muted: #6c5a3d;
+  --primary: #556b4e;
+  --accent: #b58a42;
+  --danger: #a1533f;
+  --success: #6f7f58;
+  --warning: #c49a4a;
+  --line-art: rgba(74, 52, 36, 0.16);
+  --shadow-panel: 0 24px 80px rgba(74, 52, 36, 0.14);
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: Aptos, "Segoe UI", system-ui, sans-serif;
+}
+
+[data-theme="dark_horror"] {
+  --background: #111111;
+  --surface: #1a1715;
+  --surface-raised: #241f1c;
+  --border: #4d4a45;
+  --text: #d8c7a5;
+  --text-muted: #b9a27e;
+  --primary: #8a6a3c;
+  --accent: #6e1e1a;
+  --danger: #8e2a24;
+  --success: #263f3b;
+  --warning: #b9a27e;
+  --line-art: rgba(216, 199, 165, 0.11);
+  --shadow-panel: 0 24px 80px rgba(0, 0, 0, 0.38);
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: Aptos, "Segoe UI", system-ui, sans-serif;
+}
+
+[data-theme="humanist_futuristic"] {
+  --background: #f2f6f7;
+  --surface: #ffffff;
+  --surface-raised: #e8f1f3;
+  --border: #b8c4c9;
+  --text: #1b242c;
+  --text-muted: #3a5e72;
+  --primary: #3a5e72;
+  --accent: #72c7d1;
+  --danger: #9f4c5e;
+  --success: #4f897d;
+  --warning: #c3a66a;
+  --line-art: rgba(16, 43, 58, 0.12);
+  --shadow-panel: 0 24px 80px rgba(16, 43, 58, 0.14);
+  --font-display: "Aptos Display", "Segoe UI", system-ui, sans-serif;
+  --font-body: Aptos, "Segoe UI", system-ui, sans-serif;
+}

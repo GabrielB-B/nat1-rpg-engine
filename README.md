@@ -2,7 +2,7 @@
 
 Nat 1 RPG Engine is a web application for RPG masters and narrators to organize campaigns, chronicles, worlds, sessions, scenes, characters, creatures, locations, factions, documents, notes, and relationships.
 
-The MVP 1 is organizational only. It does not include frontend implementation, AI/RAG, player access, chat, or advanced interactive maps in this stage.
+The MVP 1 is organizational only. It does not include AI/RAG, player access, chat, or advanced interactive maps in this stage.
 
 ## Official Documentation
 
@@ -24,6 +24,15 @@ This repository currently contains the backend foundation in `apps/api`, using:
 - Alembic
 - Pydantic Settings
 
+The frontend foundation is now started in `apps/web`, using:
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- TanStack Query
+
 ## Backend Commands
 
 ```powershell
@@ -40,6 +49,23 @@ Health check:
 
 ```txt
 GET http://127.0.0.1:8000/api/v1/health
+```
+
+## Frontend Commands
+
+```powershell
+cd apps/web
+npm install
+Copy-Item .env.example .env
+npm run dev
+npm run typecheck
+npm run build
+```
+
+Frontend local URL:
+
+```txt
+http://127.0.0.1:5173
 ```
 
 ## Local Database

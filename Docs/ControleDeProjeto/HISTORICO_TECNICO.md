@@ -67,10 +67,29 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 - Mantida validacao de vinculo: `GameProject` so aceita `world_id` do dono e `system_template_id` built-in ou do dono.
 - Nenhuma migration foi criada porque os models centrais ja tinham os campos necessarios.
 
+### 2026-06-05 - Temas Visuais Aprovados
+
+- Consolidada a documentacao dos tres temas visuais oficiais em `Docs/IdentidadeVisual/TEMAS_APROVADOS.md`.
+- Confirmado `cartographer` como tema Cartografo / Modelo C.
+- Confirmado `dark_horror` como tema Sombrio/Terror / Modelo II.
+- Confirmado `humanist_futuristic` como tema Futurista Humanista / Modelo II.
+- Registrado que o Futurista Humanista e elegante, espacial, tecnico e humanista, nao cyberpunk pesado.
+- Confirmado que o frontend deve nascer com tokens preparados para os tres temas.
+
+### 2026-06-05 - Frontend Foundation
+
+- Iniciado o frontend em `apps/web`.
+- Stack criada com React, TypeScript, Vite, Tailwind CSS, React Router e TanStack Query.
+- Criado API client base com `fetch` e `VITE_API_BASE_URL`.
+- Criados tokens iniciais em CSS variables para `cartographer`, `dark_horror` e `humanist_futuristic`.
+- Mantida decisao de UX base consistente entre temas; os temas mudam atmosfera, paleta, textura e icones.
+- Criada tela inicial tecnica para validar funcionamento do frontend, sem representar ainda a Home final do Mestre.
+- Validacao registrada com `npm run typecheck` e `npm run build`.
+
 ## Restricoes De Escopo Mantidas
 
-- Nao implementar frontend antes da fase propria.
 - Nao implementar IA/RAG no MVP 1 inicial.
 - Nao implementar jogadores ou permissoes avancadas nesta fase.
 - Nao criar mapas interativos avancados no primeiro corte.
+- Nao transformar a tela tecnica inicial na Home final do Mestre sem tarefa propria.
 - Nao adicionar CRUDs fora da tarefa ativa.
