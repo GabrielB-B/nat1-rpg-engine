@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: nat1_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: nat1_db
+      POSTGRES_USER: nat1_user
+      POSTGRES_PASSWORD: nat1_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - nat1_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  nat1_postgres_data:
