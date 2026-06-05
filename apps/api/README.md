@@ -2,7 +2,7 @@
 
 Backend foundation for Nat 1 RPG Engine.
 
-This stage provides only the FastAPI base, health check, settings, SQLAlchemy session setup, Alembic structure, security helpers, and tests. It does not implement business models, authentication routes, AI/RAG, uploads, players, or frontend.
+This stage provides the FastAPI base, health check, settings, SQLAlchemy session setup, Alembic structure, security helpers, core database models, and tests. It does not implement authentication routes, CRUD, AI/RAG, uploads, players, or frontend.
 
 ## Requirements
 
@@ -48,10 +48,72 @@ Expected response:
 }
 ```
 
+## Authentication
+
+Register a user:
+
+```powershell
+Invoke-RestMethod `
+  -Uri http://127.0.0.1:8000/api/v1/auth/register `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body '{"name":"Gabriel","email":"gabriel@example.com","password":"strong-password"}'
+```
+
+Login:
+
+```powershell
+$login = Invoke-RestMethod `
+  -Uri http://127.0.0.1:8000/api/v1/auth/login `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body '{"email":"gabriel@example.com","password":"strong-password"}'
+```
+
+Use the Bearer token:
+
+```powershell
+Invoke-RestMethod `
+  -Uri http://127.0.0.1:8000/api/v1/auth/me `
+  -Headers @{ Authorization = "Bearer $($login.access_token)" }
+```
+
+Authentication notes:
+
+- Passwords are stored only as hashes.
+- API responses never return `password_hash`.
+- The current login endpoint accepts JSON with `email` and `password`.
+
 ## Tests
 
 ```powershell
 pytest
+```
+
+## Database Migrations
+
+Create a new migration after model changes:
+
+```powershell
+alembic revision --autogenerate -m "describe change"
+```
+
+Apply migrations:
+
+```powershell
+alembic upgrade head
+```
+
+Rollback the latest migration, if needed:
+
+```powershell
+alembic downgrade -1
+```
+
+Return to an empty schema, if needed:
+
+```powershell
+alembic downgrade base
 ```
 
 ## Code Quality
@@ -63,6 +125,7 @@ ruff check .
 ## Notes
 
 - Settings are loaded with `pydantic-settings`.
-- Database access is prepared with SQLAlchemy and `SessionLocal`, but no models are implemented yet.
-- Alembic is configured for future migrations.
-- Security helpers include password hashing and JWT token creation helpers, but no authentication flow is implemented in this stage.
+- Database access is prepared with SQLAlchemy and `SessionLocal`.
+- Alembic is configured for versioned migrations.
+- `SystemTemplate.owner_user_id` is nullable by design. Built-in templates belong to the product, not to a specific user; custom templates should set `owner_user_id`.
+- Authentication is intentionally basic in this stage: register, login, JWT access token, and current-user lookup.

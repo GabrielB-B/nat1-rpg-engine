@@ -1,1 +1,3 @@
-"""Business services package."""
+from app.services.auth_service import AuthService, EmailAlreadyRegisteredError
+
+__all__ = ["AuthService", "EmailAlreadyRegisteredError"]
