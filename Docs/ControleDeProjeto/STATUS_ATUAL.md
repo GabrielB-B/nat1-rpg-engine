@@ -5,31 +5,61 @@
 Projeto: Nat 1 RPG Engine  
 Fase atual: MVP 1 - Fundacao Backend  
 Data da ultima atualizacao: 2026-06-05  
-Branch atual: `back/game-project-crud`
+Branch atual: `back/workspace-foundation`
 
 ## Tarefa Atual
 
-Criar o CRUD inicial autenticado de Projetos de Jogo, exibidos no produto como Campanhas & Cronicas.
+Criar a fundacao do workspace do mestre ao redor de Campanhas & Cronicas.
 
 ## Ultima Tarefa Concluida
 
-CRUD inicial de `GameProject` implementado com rotas protegidas, isolamento por usuario, slug unico por usuario, modulos padrao e arquivamento sem exclusao permanente.
+Fundacao de workspace implementada com CRUD basico de Worlds, CRUD basico de SystemTemplates, leitura/atualizacao de modulos de GameProject e summary basico para futuro Dashboard.
 
 ## Arquivos Principais Alterados
 
+- `apps/api/app/api/v1/endpoints/worlds.py`
+- `apps/api/app/api/v1/endpoints/system_templates.py`
 - `apps/api/app/api/v1/endpoints/game_projects.py`
 - `apps/api/app/api/v1/router.py`
+- `apps/api/app/core/slug.py`
+- `apps/api/app/schemas/world.py`
+- `apps/api/app/schemas/system_template.py`
+- `apps/api/app/schemas/project_module_setting.py`
 - `apps/api/app/schemas/game_project.py`
-- `apps/api/app/schemas/__init__.py`
+- `apps/api/app/repositories/world_repository.py`
+- `apps/api/app/repositories/system_template_repository.py`
+- `apps/api/app/repositories/project_module_setting_repository.py`
 - `apps/api/app/repositories/game_project_repository.py`
-- `apps/api/app/repositories/__init__.py`
+- `apps/api/app/services/world_service.py`
+- `apps/api/app/services/system_template_service.py`
+- `apps/api/app/services/project_module_setting_service.py`
 - `apps/api/app/services/game_project_service.py`
-- `apps/api/app/services/__init__.py`
-- `apps/api/tests/test_game_projects.py`
+- `apps/api/tests/test_workspace_foundation.py`
 - `apps/api/README.md`
 - `Docs/ControleDeProjeto/STATUS_ATUAL.md`
 - `Docs/ControleDeProjeto/HISTORICO_TECNICO.md`
 - `Docs/ControleDeProjeto/PROXIMAS_TAREFAS_CODEX.md`
+
+## Endpoints Criados Ou Ampliados
+
+```txt
+POST /api/v1/worlds
+GET /api/v1/worlds
+GET /api/v1/worlds/{world_id}
+PATCH /api/v1/worlds/{world_id}
+POST /api/v1/worlds/{world_id}/archive
+POST /api/v1/worlds/{world_id}/restore
+
+POST /api/v1/system-templates
+GET /api/v1/system-templates
+GET /api/v1/system-templates/{template_id}
+PATCH /api/v1/system-templates/{template_id}
+POST /api/v1/system-templates/{template_id}/archive
+
+GET /api/v1/game-projects/{project_id}/modules
+PATCH /api/v1/game-projects/{project_id}/modules/{module_setting_id}
+GET /api/v1/game-projects/{project_id}/summary
+```
 
 ## Ultimos Testes Executados
 
@@ -39,38 +69,24 @@ cd apps/api
 .\.venv\Scripts\python.exe -m pytest
 ```
 
-Validacoes cobertas por testes automatizados:
-
-```txt
-GET /api/v1/health
-POST /api/v1/auth/register
-POST /api/v1/auth/login
-GET /api/v1/auth/me
-POST /api/v1/game-projects
-GET /api/v1/game-projects
-GET /api/v1/game-projects/{project_id}
-PATCH /api/v1/game-projects/{project_id}
-POST /api/v1/game-projects/{project_id}/archive
-POST /api/v1/game-projects/{project_id}/restore
-```
-
 ## Resultado Dos Testes
 
 `ruff check .` passou.
 
-`pytest` passou com 17 testes:
+`pytest` passou com 25 testes:
 
-- autenticacao basica preservada;
 - health check preservado;
-- criacao autenticada de Projeto de Jogo;
-- bloqueio de criacao sem token;
-- listagem isolada por usuario;
-- bloqueio de acesso a projeto de outro usuario;
-- atualizacao pelo dono;
-- arquivamento ocultando da lista padrao;
-- `include_archived=true` retornando arquivados;
-- restore recolocando o projeto na lista padrao;
-- slugs duplicados recebendo sufixo por usuario.
+- autenticacao OAuth2 preservada;
+- CRUD inicial de GameProject preservado;
+- Worlds com criacao, listagem, isolamento, update, archive e restore;
+- SystemTemplates com criacao, listagem, isolamento, update e archive;
+- templates built-in listaveis, mas protegidos contra edicao;
+- modulos de GameProject listaveis e atualizaveis pelo dono;
+- bloqueio de modulos de projeto de outro usuario;
+- summary de GameProject protegido por dono;
+- summary retorna modulos ativos e contadores basicos zerados;
+- GameProject so aceita vincular World do dono;
+- GameProject so aceita vincular SystemTemplate built-in ou do dono.
 
 Aviso conhecido: `StarletteDeprecationWarning` do `TestClient` sobre `httpx`, sem falha de teste.
 
@@ -88,25 +104,28 @@ Resultado esperado:
 
 ## Proxima Tarefa Recomendada
 
-Seguir para endpoints simples de Worlds e SystemTemplates, aproveitando os models centrais ja existentes.
+Seguir para frontend foundation ou iniciar a fundacao de Sessoes e Cenas no backend.
 
-Tarefa recomendada:
+Tarefas recomendadas:
 
 ```txt
-back/world-system-templates
+front/setup-foundation
+back/session-scene-foundation
 ```
 
 ## Bloqueios Atuais
 
 Nenhum bloqueio tecnico registrado para a proxima etapa.
 
-Para teste manual pelo Swagger, manter o PostgreSQL local rodando, migrations aplicadas e login feito pelo botao Authorize com `username=email`.
+Nao foi criada migration nesta tarefa porque os models/tabelas necessarios ja existiam.
 
 ## Observacoes Importantes
 
 - MVP 1 continua organizacional.
 - Nao implementar IA pesada, RAG, jogadores, chat, mapas interativos avancados ou upload inteligente neste momento.
 - O frontend ainda nao foi iniciado.
+- `ProjectModuleSettings` possui update individual; reorder em lote fica para uma tarefa futura.
+- Contadores do summary retornam zero ate os modulos internos existirem.
 - A documentacao oficial de produto esta em `Docs/Documento_tecnico/`.
 - O guia visual oficial esta em `Docs/IdentidadeVisual/`.
 - Toda tarefa futura do Codex deve atualizar este arquivo ao final.
