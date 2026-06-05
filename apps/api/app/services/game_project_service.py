@@ -1,15 +1,20 @@
-import re
-import unicodedata
 from uuid import UUID
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from app.core.slug import slugify
 from app.models.game_project import GameProject
 from app.models.mixins import utc_now
 from app.models.user import User
 from app.repositories.game_project_repository import GameProjectRepository
-from app.schemas.game_project import GameProjectCreate, GameProjectUpdate
+from app.schemas.game_project import (
+    GameProjectCreate,
+    GameProjectSummary,
+    GameProjectSummaryCounts,
+    GameProjectSummaryLinkedResource,
+    GameProjectUpdate,
+)
 
 DEFAULT_PROJECT_STATUS = "preparation"
 ARCHIVED_PROJECT_STATUS = "archived"
@@ -250,8 +255,47 @@ class GameProjectService:
             project_id=project.id,
         )
 
+    def get_project_summary(
+        self,
+        *,
+        current_user: User,
+        project_id: UUID,
+    ) -> GameProjectSummary:
+        project = self.projects.get_by_id_for_owner(
+            owner_user_id=current_user.id,
+            project_id=project_id,
+        )
+        if project is None:
+            raise GameProjectNotFoundError
+
+        sorted_project = self._sort_module_settings(project)
+        active_modules = [
+            module_setting
+            for module_setting in sorted_project.module_settings
+            if module_setting.is_enabled
+        ]
+
+        # Internal module tables are not part of this foundation yet.
+        # These counters are wired as zeros until those modules are implemented.
+        counters = GameProjectSummaryCounts()
+
+        return GameProjectSummary(
+            id=project.id,
+            name=project.name,
+            slug=project.slug,
+            format=project.format,
+            description=project.description,
+            status=project.status,
+            theme=project.theme,
+            archived_at=project.archived_at,
+            world=self._linked_resource(project.world),
+            system_template=self._linked_resource(project.system_template),
+            active_modules=active_modules,
+            counters=counters,
+        )
+
     def _generate_unique_slug(self, *, owner_user_id: UUID, name: str) -> str:
-        base_slug = self._slugify(name)
+        base_slug = slugify(name, fallback="game-project")
         slug = base_slug
         suffix = 2
 
@@ -266,12 +310,6 @@ class GameProjectService:
             suffix += 1
 
         return slug
-
-    def _slugify(self, value: str) -> str:
-        normalized = unicodedata.normalize("NFKD", value)
-        ascii_value = normalized.encode("ascii", "ignore").decode("ascii")
-        slug = re.sub(r"[^a-zA-Z0-9]+", "-", ascii_value.lower()).strip("-")
-        return slug or "game-project"
 
     def _validate_related_resources(
         self,
@@ -331,3 +369,9 @@ class GameProjectService:
     def _sort_module_settings(self, project: GameProject) -> GameProject:
         project.module_settings.sort(key=lambda setting: setting.order_index)
         return project
+
+    def _linked_resource(self, resource) -> GameProjectSummaryLinkedResource | None:
+        if resource is None:
+            return None
+
+        return GameProjectSummaryLinkedResource(id=resource.id, name=resource.name)

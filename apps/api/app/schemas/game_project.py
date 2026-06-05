@@ -4,18 +4,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-
-class ProjectModuleSettingRead(BaseModel):
-    id: UUID
-    module_key: str
-    display_name: str
-    is_enabled: bool
-    order_index: int
-    icon_key: str | None
-    created_at: datetime
-    updated_at: datetime
-
-    model_config = ConfigDict(from_attributes=True)
+from app.schemas.project_module_setting import ProjectModuleSettingRead
 
 
 class GameProjectCreate(BaseModel):
@@ -98,3 +87,38 @@ class GameProjectListItem(BaseModel):
 
 class GameProjectRead(GameProjectListItem):
     module_settings: list[ProjectModuleSettingRead] = Field(default_factory=list)
+
+
+class GameProjectSummaryLinkedResource(BaseModel):
+    id: UUID
+    name: str
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class GameProjectSummaryCounts(BaseModel):
+    sessions_count: int = 0
+    scenes_count: int = 0
+    characters_creatures_count: int = 0
+    locations_count: int = 0
+    organizations_factions_count: int = 0
+    documents_count: int = 0
+    notes_count: int = 0
+    relationships_count: int = 0
+
+
+class GameProjectSummary(BaseModel):
+    id: UUID
+    name: str
+    slug: str
+    format: str
+    description: str | None
+    status: str
+    theme: str
+    archived_at: datetime | None
+    world: GameProjectSummaryLinkedResource | None
+    system_template: GameProjectSummaryLinkedResource | None
+    active_modules: list[ProjectModuleSettingRead]
+    counters: GameProjectSummaryCounts
+
+    model_config = ConfigDict(from_attributes=True)

@@ -87,7 +87,11 @@ class GameProjectRepository:
     ) -> GameProject | None:
         statement = (
             select(GameProject)
-            .options(selectinload(GameProject.module_settings))
+            .options(
+                selectinload(GameProject.module_settings),
+                selectinload(GameProject.system_template),
+                selectinload(GameProject.world),
+            )
             .where(
                 GameProject.id == project_id,
                 GameProject.owner_user_id == owner_user_id,
