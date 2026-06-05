@@ -13,7 +13,8 @@ Criar a fundacao inicial do frontend em `apps/web` com React, TypeScript, Vite, 
 
 ## Ultima Tarefa Concluida
 
-Frontend foundation criado com estrutura profissional, tema padrao `cartographer`, tokens CSS preparados para os tres temas oficiais e uma tela tecnica inicial para validar que o frontend esta funcionando.
+- Frontend foundation criado com estrutura profissional, tema padrao `cartographer`, tokens CSS preparados para os tres temas oficiais e uma tela tecnica inicial para validar que o frontend esta funcionando.
+- Documentacao dos temas aprovados consolidada em `Docs/IdentidadeVisual/TEMAS_APROVADOS.md`, com destaque para a correcao do Tema Futurista Humanista para evitar repeticao indevida do Cartografo.
 
 ## Estado Tecnico Do Produto
 

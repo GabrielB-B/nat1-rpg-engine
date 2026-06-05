@@ -2,13 +2,13 @@
 
 ## Estado do projeto
 
-Esta documentacao foi consolidada antes da fase `front/setup-foundation`.
+Esta documentacao foi consolidada na branch `docs/fix-approved-visual-themes`, antes da fase `front/setup-foundation`.
 
 O objetivo e impedir divergencia visual antes da criacao do frontend, dos tokens de tema, das CSS variables, do Tailwind e do design system inicial.
 
 ## Regra geral
 
-A UX base deve permanecer consistente entre os temas. Os temas mudam atmosfera, paleta, textura, icones, avatares e contraste, mas nao reinventam a navegacao.
+A UX base deve permanecer consistente entre os temas. Os temas mudam atmosfera, paleta, textura, icones, avatares e nivel de contraste, mas nao reinventam a navegacao.
 
 A estrutura base aprovada para dashboard inclui menu lateral, cards, busca no topo, campanha ativa, notas rapidas e visao organizada.
 
