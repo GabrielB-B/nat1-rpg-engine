@@ -1,6 +1,7 @@
 import { apiRequest } from "../../../lib/api/client";
 import { withQueryParams } from "../../../lib/api/http";
 import type {
+  CreateGameProjectPayload,
   GameProject,
   GameProjectListItem,
   GameProjectSummary,
@@ -14,6 +15,19 @@ export function getGameProjects(params: ListGameProjectsParams = {}) {
       include_archived: params.includeArchived
     })
   );
+}
+
+export function createGameProject(payload: CreateGameProjectPayload) {
+  return apiRequest<GameProject>("/game-projects", {
+    body: JSON.stringify(payload),
+    method: "POST"
+  });
+}
+
+export function archiveGameProject(projectId: string) {
+  return apiRequest<GameProject>(`/game-projects/${projectId}/archive`, {
+    method: "POST"
+  });
 }
 
 export function getGameProject(projectId: string) {

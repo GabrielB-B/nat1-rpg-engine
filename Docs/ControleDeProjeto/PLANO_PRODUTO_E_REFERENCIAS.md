@@ -13,7 +13,7 @@ O produto deve atender primeiro o mestre, com foco em preparar, organizar, consu
 ## Direcao Estrategica
 
 1. Entregar primeiro a Home do Mestre.
-2. Consolidar Campanhas & Cronicas como unidade principal de trabalho.
+2. Consolidar Campanhas & Crônicas como unidade principal de trabalho.
 3. Criar modulos internos relacionais dentro de cada campanha.
 4. Manter Mundo / Cenario como camada ampla de worldbuilding, separada da campanha.
 5. Manter Sistema / Template separado do mundo, permitindo campanhas com regras e estruturas diferentes.
@@ -34,7 +34,7 @@ O produto deve atender primeiro o mestre, com foco em preparar, organizar, consu
 ## Diferencial Do Nat 1
 
 - Fluxo guiado a partir da Home do Mestre.
-- Organizacao por Campanhas & Cronicas antes de modulos profundos.
+- Organizacao por Campanhas & Crônicas antes de modulos profundos.
 - Modulos relacionais planejados desde a base.
 - Separacao entre campanha, mundo e sistema.
 - IA como assistente de criacao, revisao e organizacao, com controle humano.
@@ -56,7 +56,7 @@ O produto deve atender primeiro o mestre, com foco em preparar, organizar, consu
 
 | Ordem | Fase Recomendada | Objetivo | Resultado Esperado |
 | --- | --- | --- | --- |
-| 1 | `front/game-project-list-create` | Criar listagem e cadastro inicial de Campanhas & Cronicas no frontend. | Primeiro fluxo real: login, listar campanhas e criar campanha. |
+| 1 | `front/game-project-list-create` | Criar listagem e cadastro inicial de Campanhas & Crônicas no frontend. | Primeiro fluxo real: login, listar campanhas e criar campanha. |
 | 2 | `front/home-master-real-data` | Conectar a Home do Mestre aos dados reais ja disponiveis. | Home com dados da conta, estados vazios e CTA funcional. |
 | 3 | `front/game-project-dashboard-shell` | Criar shell interna da campanha com contexto do projeto ativo. | Entrada clara para modulos, summary e navegacao por campanha. |
 | 4 | `back/session-scene-foundation` | Criar fundacao backend de sessoes e cenas. | Primeiros modulos internos do MVP com CRUD testado. |
@@ -69,37 +69,28 @@ O produto deve atender primeiro o mestre, com foco em preparar, organizar, consu
 
 ## Proxima Fase Recomendada
 
-Fase: `front/game-project-list-create`
+Fase: `front/home-master-real-data`
 
-Objetivo: permitir que o usuario autenticado liste Campanhas & Cronicas reais e crie a primeira campanha sem depender de Swagger ou chamadas manuais.
+Objetivo: conectar a Home do Mestre aos dados reais ja disponiveis, usando a listagem e criacao de campanhas implementadas no frontend.
 
 ## Escopo Da Proxima Fase
 
-- Criar pagina de Campanhas & Cronicas.
-- Consumir `GET /game-projects` via hook existente.
-- Criar servico e hook de mutacao para `POST /game-projects`.
-- Exibir estados de loading, vazio, erro e sucesso.
-- Criar formulario minimo de campanha:
-  - nome;
-  - formato;
-  - descricao opcional;
-  - mundo opcional;
-  - sistema/template opcional;
-  - tema inicial.
-- Consumir `GET /worlds` e `GET /system-templates` para selects, se houver dados.
-- Atualizar lista apos criacao.
-- Manter arquivamento, edicao completa, restore e modulos internos fora do escopo.
+- Consumir campanhas reais na Home do Mestre.
+- Exibir estado vazio quando a conta ainda nao tiver campanhas.
+- Destacar campanha recente ou principal quando existir dado real.
+- Ajustar CTAs da Home para apontar para `/campaigns`.
+- Preservar a Home visualmente alinhada ao tema `cartographer`.
+- Manter CRUD visual completo de modulos internos fora do escopo.
+- Manter edicao, arquivamento, upload, PDF e IA fora do escopo.
 - Atualizar documentacao e validar build/dev server.
 
 ## Criterios De Aceite Da Proxima Fase
 
-- Usuario autenticado acessa uma tela de Campanhas & Cronicas.
+- Usuario autenticado acessa a Home do Mestre com dados reais basicos.
 - Usuario anonimo continua sendo redirecionado para `/login`.
-- Lista real de campanhas e carregada via API.
-- Estado vazio orienta a criacao da primeira campanha.
-- Criacao de campanha funciona contra o backend local.
-- Lista e atualizada apos criacao.
-- Erros da API aparecem com mensagem controlada.
+- Campanhas reais influenciam os cards e CTAs principais da Home.
+- Estado vazio orienta a criacao da primeira campanha em `/campaigns`.
+- Erros da API aparecem com mensagem controlada sem stack trace.
 - Layout respeita o tema `cartographer` e o design system existente.
 - `npm.cmd run build` passa.
 - `npm.cmd run dev` funciona.

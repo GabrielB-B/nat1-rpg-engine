@@ -23,8 +23,8 @@ export function Sidebar({ items, userName }: SidebarProps) {
       </div>
 
       <nav className="sidebar-group" aria-label="Workspace do Mestre">
-        {items.map((item, index) => (
-          <ModuleNavItem key={item.id} item={item} isActive={index === 0} />
+        {items.map((item) => (
+          <ModuleNavItem key={item.id} item={item} />
         ))}
       </nav>
 

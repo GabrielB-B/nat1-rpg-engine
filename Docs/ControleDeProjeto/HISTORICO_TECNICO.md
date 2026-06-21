@@ -46,7 +46,7 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 ### 2026-06-05 - CRUD Inicial De Projetos De Jogo
 
 - Criadas rotas protegidas para criar, listar, detalhar, atualizar, arquivar e restaurar `GameProject`.
-- Mantida a equivalencia de produto: interface usa Campanhas & Cronicas; backend usa Projeto de Jogo / `GameProject`.
+- Mantida a equivalencia de produto: interface usa Campanhas & Crônicas; backend usa Projeto de Jogo / `GameProject`.
 - Implementado isolamento por usuario autenticado em todas as consultas.
 - Slugs sao gerados automaticamente e mantidos unicos por usuario.
 - Novos projetos usam `status` inicial `preparation` e tema padrao `cartographer`.
@@ -202,7 +202,7 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 
 - Criado documento `Docs/ControleDeProjeto/PLANO_PRODUTO_E_REFERENCIAS.md`.
 - Registrado objetivo do Nat 1 como plataforma de gestao, criacao e organizacao de campanhas de RPG.
-- Registrada direcao de produto: Home do Mestre, Campanhas & Cronicas, modulos relacionais, mundo amplo, sistemas/templates separados e IA com aprovacao do mestre.
+- Registrada direcao de produto: Home do Mestre, Campanhas & Crônicas, modulos relacionais, mundo amplo, sistemas/templates separados e IA com aprovacao do mestre.
 - Registradas referencias de produto: Kanka, World Anvil, LegendKeeper, Campfire, Notion, Obsidian e Roll20.
 - Definida Kanka como referencia principal de organizacao modular.
 - Definidas World Anvil, LegendKeeper e Campfire como referencias secundarias de worldbuilding e estrutura editorial.
@@ -211,6 +211,110 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 - Atualizada proxima fase recomendada para `front/game-project-list-create`.
 - Validacoes executadas: pesquisa de referencias oficiais, revisao dos documentos de controle, varredura de tom documental, `git diff --check` e `npm.cmd run build`.
 - Nenhum backend, endpoint, model, migration, banco ou codigo de frontend foi alterado nesta etapa.
+
+### 2026-06-21 - Listagem E Criacao De Campanhas No Frontend
+
+- Criada rota protegida `/campaigns` para Campanhas & Crônicas.
+- Criada pagina `GameProjectsPage` com listagem real de campanhas via `GET /game-projects`.
+- Criados componentes de interface para card de campanha, estado vazio e formulario de criacao.
+- Criada mutation `useCreateGameProject` usando TanStack Query e invalidacao da lista apos sucesso.
+- Adicionado `POST /game-projects` na camada de API do frontend.
+- Adicionada entrada navegavel "Campanhas" na sidebar, preservando a Home como rota principal.
+- Implementado formulario rapido com nome, formato, sistema/template, mundo/cenario, status, descricao curta e URL de capa.
+- Mantido tema visual `cartographer`, com cards em linguagem de biblioteca de cronicas e placeholder cartografico para campanhas sem capa.
+- Genero/tom narrativo ficou visualmente preparado, mas nao e enviado para a API porque o backend ainda nao possui campo explicito.
+- Mantidos fora do escopo: edicao, arquivamento visual, upload, PDF, IA e shell interna da campanha.
+- Nenhum backend, endpoint, model, migration ou banco foi alterado.
+- Validacoes executadas: `npm.cmd run build`, dev server em `http://127.0.0.1:5173`, resposta HTTP `200 OK` em `/login`, resposta HTTP `200 OK` em `/campaigns` e `GET /api/v1/health`.
+- Validacao manual de criacao com banco local nao foi concluida porque o Docker/PostgreSQL local nao estava disponivel no ambiente.
+
+### 2026-06-21 - Polish Da Biblioteca De Campanhas
+
+- Refinada tela `/campaigns` na fase `front/game-project-list-create-polish`.
+- Substituido feedback de sucesso por toast compacto, evitando faixa alta e espaco morto.
+- Adicionado layout adaptativo para 0, 1-2 e 3+ campanhas.
+- Substituido painel tutorial fixo por painel compacto `Acoes da biblioteca` quando houver 1 ou 2 campanhas.
+- Estado vazio passou a concentrar a orientacao inicial com texto curto e CTA de primeira campanha.
+- Refinados cards de campanha com metadados de sistema, mundo, jogadores pendentes, proxima sessao pendente e ultima atualizacao.
+- Adicionado menu secundario de acoes no card, com correcao de clipping para impedir corte da opcao `Arquivar`.
+- Implementado arquivamento de campanha via endpoint existente `POST /game-projects/{project_id}/archive`.
+- Adicionada confirmacao antes do arquivamento, informando que a campanha sai da biblioteca principal sem exclusao permanente.
+- Adicionadas abas simples `Ativas` e `Arquivadas`, usando `GET /game-projects?include_archived=true` e filtro local.
+- Mantida exclusao permanente fora do escopo.
+- Jogadores ativos e proxima sessao foram documentados como pendencias funcionais porque nao existem campos ou relacoes no backend atual.
+- Nenhum backend, endpoint, model, migration ou banco foi alterado.
+- Validacoes executadas: `npm.cmd run build`, criacao de conta via API, criacao de campanha via API, arquivamento via API, listagem ativa, listagem com arquivadas, resposta HTTP `200 OK` em `/campaigns` e `git diff --check`.
+
+### 2026-06-21 - Correcao De Imersao Da Biblioteca De Campanhas
+
+- Identificado que a tela `/campaigns` ainda apresentava um vazio vertical grande no topo em desktop.
+- Causa tecnica: `.projects-page` era um grid com `min-height` e sem alinhamento inicial, permitindo que o navegador distribuisse a sobra vertical entre as linhas.
+- Corrigido o alinhamento da pagina com `align-content: start`, mantendo hero, abas e conteudo ancorados no topo util da tela.
+- Reduzida a altura minima do hero da biblioteca e aproximados filtros/conteudo para remover espaco morto.
+- Estado vazio recebeu composicao cartografica mais imersiva, com mapa maior, trilha de fundo, camadas de terreno e CTA alinhado ao bloco narrativo.
+- Mantida a correcao anterior do menu secundario dos cards para impedir corte da opcao `Arquivar`.
+- Nenhum backend, endpoint, model, migration ou banco foi alterado.
+- Validacoes executadas: `npm.cmd run build` e `git diff --check`.
+
+### 2026-06-21 - Empty State Hibrido De Primeira Campanha
+
+- Refinado estado vazio de Campanhas & Crônicas com a Opcao C: boas-vindas imersiva, texto editorial curto e CTA forte para primeira campanha.
+- Substituido o bloco visual retangular por composicao cartografica integrada ao painel, com tomo aberto, rotas, marcadores, rosa dos ventos e selo discreto do Nat 1 em CSS.
+- Atualizado texto principal do estado ativo para comunicar inicio de cronica e proximo passo de criacao.
+- Mantido CTA `Criar primeira campanha` acionando o modal existente de criacao, sem navegacao externa.
+- Estado vazio da aba Arquivadas foi mantido compacto para nao competir com o empty state principal.
+- Ajustado texto de confirmacao de arquivamento para informar remocao da biblioteca principal e recuperacao futura.
+- Mantida validacao de URL de capa apenas para `http` e `https`.
+- Nenhum backend, endpoint, model, migration, banco, upload, IA, calendario ou jogadores foi alterado.
+- Validacoes executadas: `npm.cmd run build`, resposta HTTP `200 OK` em `/campaigns`, resposta HTTP `200 OK` em `/api/v1/health`, cadastro/login temporario via API, criacao de campanha, arquivamento e listagem com arquivadas.
+
+### 2026-06-21 - Ajuste Condicional Do Empty State De Campanhas
+
+- Fase: `front/game-project-list-create-polish`.
+- Estado vazio ativo passou a diferenciar biblioteca sem histórico e biblioteca com campanhas arquivadas.
+- Biblioteca sem campanhas usa título de primeira campanha e CTA `Criar primeira campanha`.
+- Biblioteca com campanhas arquivadas e nenhuma ativa usa título `Nenhuma campanha ativa no momento.`, CTA `Criar nova campanha` e ação secundária `Ver arquivadas`.
+- Ação `Ver arquivadas` alterna diretamente para a aba Arquivadas.
+- CTA superior `Nova campanha` fica oculto quando o empty state ativo concentra a ação principal.
+- CTA superior `Nova campanha` permanece disponível quando existem campanhas ativas.
+- Removida ação duplicada de criação no painel `Acoes da biblioteca`.
+- Hero do empty state recebeu ajuste de altura, colunas, espaçamentos e composição cartográfica para melhor leitura em desktop e viewport intermediário.
+- Corrigida nomenclatura acentuada de `Campanhas & Crônicas` nos arquivos principais da fase.
+- Nenhum backend, endpoint, model, migration, banco, upload, IA, calendário ou jogador foi alterado.
+- Validações executadas: `npm.cmd run build`, `GET /api/v1/health`, validação funcional temporária com Playwright e Microsoft Edge, cenários ativos 0/arquivadas 0, ativos 0/arquivadas maior que 0, ativos maior que 0, viewport 900x720, varredura textual de nomenclatura e `git diff --check`.
+
+### 2026-06-21 - Remocao Do Painel Lateral Da Biblioteca
+
+- Fase: `front/game-project-list-create-polish`.
+- Removido componente lateral `GameProjectsActionPanel` da rota `/campaigns`.
+- Removida renderização do painel `Acoes da biblioteca` para evitar coluna auxiliar com ações repetidas ou secundárias.
+- Layout com 1-2 campanhas passou a usar lista focalizada em uma única coluna, com largura máxima controlada para evitar esticamento excessivo dos cards.
+- Layout com 3 ou mais campanhas manteve grid de cards.
+- A ação de criação permanece na topbar quando existem campanhas ativas.
+- O acesso a campanhas arquivadas permanece nas abas `Ativas` e `Arquivadas`.
+- Nenhum backend, endpoint, model, migration, banco, upload, IA, calendário ou jogador foi alterado.
+- Validações executadas: `npm.cmd run build`, varredura de importações e estilos do painel removido, e `git diff --check`.
+
+### 2026-06-21 - Ajuste De Ritmo Vertical Da Biblioteca
+
+- Fase: `front/game-project-list-create-polish`.
+- Aplicada regra de respiro vertical na tela `/campaigns` entre topbar, hero, filtros e lista.
+- Hero recebeu aumento controlado de altura, `padding-top` e espaçamento interno entre kicker, título e subtítulo.
+- Filtros e cards receberam intervalo maior para reduzir compressão visual no topo da página.
+- Lista focalizada manteve largura máxima controlada e não voltou a usar painel lateral.
+- Nenhum backend, endpoint, model, migration, banco, upload, IA, calendário ou jogador foi alterado.
+- Validações executadas: `npm.cmd run build`, medição renderizada em viewport desktop e `git diff --check`.
+
+### 2026-06-21 - Correcao De Interacao Dos Cards De Campanha
+
+- Fase: `front/game-project-list-create-polish`.
+- Substituido menu secundario baseado em `details` por menu controlado em React.
+- Menu de arquivamento passou a fechar com clique externo, mudança de foco e tecla Escape.
+- Ação `Arquivar` fecha o menu antes de abrir a confirmação de arquivamento.
+- Textos nao interativos dos cards receberam cursor padrão, seleção desabilitada e `caret-color` transparente para evitar indicação visual de edição.
+- Mantidos botões, modal de criação e confirmação de arquivamento como elementos interativos normais.
+- Nenhum backend, endpoint, model, migration, banco, upload, IA, calendário ou jogador foi alterado.
+- Validações executadas: `npm.cmd run build`, teste renderizado de abertura/fechamento do menu, validação de estilo de caret e `git diff --check`.
 
 ## Restricoes De Escopo Mantidas
 

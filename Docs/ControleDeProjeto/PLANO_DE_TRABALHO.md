@@ -5,13 +5,13 @@ Documento complementar de direcao de produto: `Docs/ControleDeProjeto/PLANO_PROD
 ## Prioridade Direcional Atual
 
 1. Home do Mestre.
-2. Campanhas & Cronicas.
+2. Campanhas & Crônicas.
 3. Modulos relacionais dentro da campanha.
 4. Mundo / Cenario amplo para worldbuilding.
 5. Sistema / Template separado de mundo.
 6. IA e PDF inteligente com aprovacao do mestre.
 
-Proxima fase recomendada: `front/game-project-list-create`.
+Proxima fase recomendada: `front/home-master-real-data`.
 
 Este plano organiza as fases práticas do Nat 1 RPG Engine para manter escopo, validação e continuidade entre tarefas.
 
