@@ -22,6 +22,7 @@
 | 9 | `docs/product-roadmap-references` | concluida | Registrar direcao de produto, referencias e roadmap direcional. | Documentacao criada em `Docs/ControleDeProjeto/PLANO_PRODUTO_E_REFERENCIAS.md`. | Objetivos, referencias e proxima fase documentados. |
 | 10 | `front/game-project-list-create` | concluida | Criar listagem e cadastro inicial de Campanhas & Crônicas no frontend. | Usa hooks e API client existentes; nao altera backend. | Usuario autenticado lista e cria campanhas reais; build validado. |
 | 10.1 | `front/game-project-list-create-polish` | concluida | Refinar biblioteca de campanhas, reduzir vazio visual, adicionar empty state hibrido e arquivamento. | Usa endpoint real de arquivamento, filtro local de arquivadas, empty state condicional e lista focalizada sem painel lateral; nao altera backend. | Layout adaptativo, CTAs sem duplicidade, cards sem esticamento excessivo, fluxo para arquivadas, confirmacao de arquivamento e build validado. |
+| 10.2 | `docs/architecture-roadmap-checkpoints` | concluida | Consolidar arquitetura, módulos, checkpoints, padrões de engenharia e decisões técnicas. | Fase documental sem alteração funcional de backend, frontend, banco, dependências ou design visual. | Plano de arquitetura, mapa de módulos, checkpoints, decisões e padrões registrados; validações documentais concluídas. |
 | 11 | `front/home-master-real-data` | pendente | Conectar a Home do Mestre aos dados reais ja disponiveis. | Depende de campanhas criaveis no frontend para estado vazio e CTA terem fluxo completo. | Home exibe dados reais, loading, erro e vazio sem CRUD completo. |
 | 12 | `front/game-project-dashboard-shell` | pendente | Criar shell interna da campanha com contexto do projeto ativo. | Usa `GameProjectSummary` e `ProjectModuleSettings`. | Dashboard de campanha exige autenticacao e respeita modulos ativos. |
 | 13 | `back/session-scene-foundation` | pendente | Criar fundacao backend de Sessoes e Cenas. | Definir entidades, endpoints protegidos e relacao com `GameProject`. | Migration, testes e documentacao atualizados. |
@@ -35,6 +36,8 @@
 - Atualizar `Docs/ControleDeProjeto/STATUS_ATUAL.md` ao finalizar uma fase.
 - Atualizar `Docs/ControleDeProjeto/HISTORICO_TECNICO.md` com data, fase, entregas, decisoes tecnicas e validacoes.
 - Registrar comandos de validacao executados.
+- Atualizar `Docs/ControleDeProjeto/CHECKPOINTS.md` ao concluir ou redirecionar uma fase.
+- Registrar decisões técnicas relevantes em `Docs/ControleDeProjeto/DECISOES_TECNICAS.md`.
 
 ## Observacoes Tecnicas
 
@@ -44,4 +47,22 @@
 - `front/api-integration-foundation` permanece concluida com servicos e hooks preparados para leitura protegida.
 - `front/game-project-list-create` permanece concluida com listagem e criacao real de campanhas.
 - `front/game-project-list-create-polish` permanece concluida com biblioteca adaptativa, empty state condicional, CTAs sem duplicidade, lista focalizada sem painel lateral e arquivamento via API real.
+- `docs/architecture-roadmap-checkpoints` consolida arquitetura, módulos, checkpoints, padrões e decisões sem alterar código funcional.
 - A proxima expansao recomendada e `front/home-master-real-data`, conectando a Home do Mestre aos dados reais sem implementar CRUD visual completo dos modulos internos.
+
+## Padrão Obrigatório Para Próximas Fases
+
+Toda fase técnica deve:
+
+1. Ler documentação de controle antes de alterar arquivos.
+2. Identificar fase atual e branch.
+3. Respeitar escopo da fase.
+4. Não apagar histórico.
+5. Atualizar checkpoints.
+6. Atualizar status atual.
+7. Atualizar próximas tarefas.
+8. Documentar pendências.
+9. Manter código legível e manutenível.
+10. Executar validações.
+11. Informar arquivos alterados.
+12. Não fazer commit automático.
