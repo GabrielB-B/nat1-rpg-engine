@@ -130,9 +130,9 @@ Authentication notes:
 - The login endpoint uses OAuth2 form data.
 - In Swagger, click `Authorize`, use the user's email in `username`, and use the password in `password`.
 
-## Campanhas & Cronicas / Game Projects
+## Campanhas & Crônicas / Game Projects
 
-The API uses the technical name `GameProject` for the product concept shown to users as Campanhas & Cronicas.
+The API uses the technical name `GameProject` for the product concept shown to users as Campanhas & Crônicas.
 
 All Game Project routes require Bearer authentication:
 
@@ -311,6 +311,21 @@ alembic downgrade base
 ```powershell
 ruff check .
 ```
+
+## Architecture Documentation
+
+Project architecture and continuity documents live in:
+
+```txt
+Docs/ControleDeProjeto/
+  PLANO_ARQUITETURA.md
+  MODULOS_DO_SISTEMA.md
+  CHECKPOINTS.md
+  PADROES_DE_ENGENHARIA.md
+  DECISOES_TECNICAS.md
+```
+
+Backend changes should preserve the endpoint, service, repository, model and schema boundaries documented there.
 
 ## Notes
 

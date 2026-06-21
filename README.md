@@ -6,12 +6,13 @@ The MVP 1 is organizational only. It does not include AI/RAG, player access, cha
 
 ## Official Documentation
 
-The product and visual decisions live in:
+The product, architecture, roadmap and visual decisions live in:
 
+- `Docs/ControleDeProjeto/`
 - `Docs/Documento_tecnico/`
 - `Docs/IdentidadeVisual/`
 
-These documents are the source of truth for product scope, business rules, non-functional requirements, initial data modeling, and visual identity.
+These documents are the source of truth for product scope, business rules, non-functional requirements, architecture, checkpoints, data modeling, engineering standards and visual identity.
 
 ## Current Stage
 
@@ -23,8 +24,11 @@ This repository currently contains the backend foundation in `apps/api`, using:
 - SQLAlchemy
 - Alembic
 - Pydantic Settings
+- JWT authentication
+- bcrypt password hashing
+- protected Game Project, World and System Template endpoints
 
-The frontend foundation is now started in `apps/web`, using:
+The frontend foundation is active in `apps/web`, using:
 
 - React
 - TypeScript
@@ -33,7 +37,7 @@ The frontend foundation is now started in `apps/web`, using:
 - React Router
 - TanStack Query
 
-The first frontend design system foundation is also in place with the Cartographer theme, reusable UI/layout/dashboard components and a mocked Workspace do Mestre shell.
+The current frontend includes the Cartographer design system foundation, login/register routes, protected routing, API integration and the first real Campanhas & Crônicas screen. The Home do Mestre is still a mocked visual shell and is scheduled to consume real account data in `front/home-master-real-data`.
 
 ## Backend Commands
 

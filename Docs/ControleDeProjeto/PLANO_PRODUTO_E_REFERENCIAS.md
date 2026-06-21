@@ -4,6 +4,14 @@ Projeto: Nat 1 RPG Engine
 
 Data de referencia: 2026-06-05
 
+Documentos complementares:
+
+- Arquitetura técnica: `Docs/ControleDeProjeto/PLANO_ARQUITETURA.md`.
+- Módulos atuais e planejados: `Docs/ControleDeProjeto/MODULOS_DO_SISTEMA.md`.
+- Checkpoints por fase: `Docs/ControleDeProjeto/CHECKPOINTS.md`.
+- Padrões de engenharia: `Docs/ControleDeProjeto/PADROES_DE_ENGENHARIA.md`.
+- Decisões técnicas: `Docs/ControleDeProjeto/DECISOES_TECNICAS.md`.
+
 ## Objetivo Do Produto
 
 O Nat 1 RPG Engine deve evoluir como uma plataforma de gestao, criacao e organizacao de campanhas de RPG de mesa.
@@ -57,15 +65,16 @@ O produto deve atender primeiro o mestre, com foco em preparar, organizar, consu
 | Ordem | Fase Recomendada | Objetivo | Resultado Esperado |
 | --- | --- | --- | --- |
 | 1 | `front/game-project-list-create` | Criar listagem e cadastro inicial de Campanhas & Crônicas no frontend. | Primeiro fluxo real: login, listar campanhas e criar campanha. |
-| 2 | `front/home-master-real-data` | Conectar a Home do Mestre aos dados reais ja disponiveis. | Home com dados da conta, estados vazios e CTA funcional. |
-| 3 | `front/game-project-dashboard-shell` | Criar shell interna da campanha com contexto do projeto ativo. | Entrada clara para modulos, summary e navegacao por campanha. |
-| 4 | `back/session-scene-foundation` | Criar fundacao backend de sessoes e cenas. | Primeiros modulos internos do MVP com CRUD testado. |
-| 5 | `front/session-scene-foundation` | Criar telas iniciais de sessoes e cenas. | Mestre registra sessoes e organiza cenas dentro da campanha. |
-| 6 | `back/relational-modules-foundation` | Expandir entidades centrais: personagens, locais, organizacoes, documentos, notas e relacoes. | Base relacional para worldbuilding e campanha. |
-| 7 | `front/relational-modules-shell` | Criar navegacao e shells para os modulos relacionais. | Experiencia modular consistente sem depender de CRUD completo em todos os modulos. |
-| 8 | `back/document-ingestion-foundation` | Preparar upload controlado de PDFs e documentos. | Materiais podem ser enviados, armazenados, indexados e revisados sem IA generativa obrigatoria. |
-| 9 | `back/ai-assist-foundation` | Criar assistencia inicial de IA com aprovacao do mestre. | Sugestoes, classificacoes e resumos nao alteram dados oficiais sem aprovacao. |
-| 10 | `front/ai-review-workbench` | Criar bancada de revisao de sugestoes da IA. | Mestre aprova, edita ou rejeita organizacoes propostas. |
+| 2 | `docs/architecture-roadmap-checkpoints` | Consolidar arquitetura, módulos, checkpoints, padrões e decisões técnicas. | Projeto retomável sem perda de contexto entre fases. |
+| 3 | `front/home-master-real-data` | Conectar a Home do Mestre aos dados reais ja disponiveis. | Home com dados da conta, estados vazios e CTA funcional. |
+| 4 | `front/game-project-dashboard-shell` | Criar shell interna da campanha com contexto do projeto ativo. | Entrada clara para modulos, summary e navegacao por campanha. |
+| 5 | `back/session-scene-foundation` | Criar fundacao backend de sessoes e cenas. | Primeiros modulos internos do MVP com CRUD testado. |
+| 6 | `front/session-scene-foundation` | Criar telas iniciais de sessoes e cenas. | Mestre registra sessoes e organiza cenas dentro da campanha. |
+| 7 | `back/relational-modules-foundation` | Expandir entidades centrais: personagens, locais, organizacoes, documentos, notas e relacoes. | Base relacional para worldbuilding e campanha. |
+| 8 | `front/relational-modules-shell` | Criar navegacao e shells para os modulos relacionais. | Experiencia modular consistente sem depender de CRUD completo em todos os modulos. |
+| 9 | `back/document-ingestion-foundation` | Preparar upload controlado de PDFs e documentos. | Materiais podem ser enviados, armazenados, indexados e revisados sem IA generativa obrigatoria. |
+| 10 | `back/ai-assist-foundation` | Criar assistencia inicial de IA com aprovacao do mestre. | Sugestoes, classificacoes e resumos nao alteram dados oficiais sem aprovacao. |
+| 11 | `front/ai-review-workbench` | Criar bancada de revisao de sugestoes da IA. | Mestre aprova, edita ou rejeita organizacoes propostas. |
 
 ## Proxima Fase Recomendada
 

@@ -316,6 +316,19 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 - Nenhum backend, endpoint, model, migration, banco, upload, IA, calendário ou jogador foi alterado.
 - Validações executadas: `npm.cmd run build`, teste renderizado de abertura/fechamento do menu, validação de estilo de caret e `git diff --check`.
 
+### 2026-06-21 - Architecture Roadmap Checkpoints
+
+- Fase: `docs/architecture-roadmap-checkpoints`.
+- Criado plano de arquitetura com camadas de backend, frontend, infra local, fluxos, riscos e lacunas.
+- Criado mapa de módulos atuais e planejados, incluindo Auth, GameProjects, Worlds, SystemTemplates, ProjectModuleSettings, Home do Mestre, módulos relacionais, upload futuro e IA/RAG.
+- Criado controle de checkpoints por fase com objetivo, entregas, validações, pendências, próxima fase e riscos.
+- Criado guia de padrões de engenharia com regras para código, comentários, backend, frontend, segurança, documentação, branches e validações.
+- Criado registro de decisões técnicas para FastAPI, PostgreSQL, SQLAlchemy, Alembic, JWT, bcrypt, React, TanStack Query, tema Cartógrafo, arquivamento, separação entre campanha/mundo/sistema e IA com aprovação do mestre.
+- Atualizados `STATUS_ATUAL.md`, `PROXIMAS_TAREFAS_CODEX.md`, `PLANO_DE_TRABALHO.md`, `PLANO_PRODUTO_E_REFERENCIAS.md`, `README.md`, `apps/api/README.md` e `apps/web/README.md`.
+- Preservados histórico técnico, plano de produto, temas aprovados e documentação visual existente.
+- Nenhum backend, frontend, endpoint, model, migration, banco, dependência ou redesign visual foi alterado.
+- Validações executadas: `npm.cmd run build`, `pytest`, varredura de tom documental proibido, varredura de espaços finais, revisão de arquivos alterados, `git diff --check` e `git status --short --branch`.
+
 ## Restricoes De Escopo Mantidas
 
 - Nao implementar IA/RAG no MVP 1 inicial.

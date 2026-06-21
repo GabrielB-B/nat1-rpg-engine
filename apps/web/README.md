@@ -2,7 +2,7 @@
 
 Frontend foundation for Nat 1 RPG Engine.
 
-This stage starts `apps/web` with React, TypeScript, Vite, Tailwind CSS, React Router and TanStack Query. The current interface also includes the first visual design system foundation for the Cartographer theme, a mocked "Workspace do Mestre" dashboard shell, the initial frontend authentication flow, the base API integration layer, and the first real Campanhas & Crônicas screen.
+This stage runs `apps/web` with React, TypeScript, Vite, Tailwind CSS, React Router and TanStack Query. The current interface also includes the first visual design system foundation for the Cartographer theme, a mocked "Workspace do Mestre" dashboard shell, the initial frontend authentication flow, the base API integration layer, and the first real Campanhas & Crônicas screen.
 
 It does not implement password recovery, OAuth, permissions, real dashboard data, edit/restore campaign flows, AI, upload, players or advanced maps yet.
 
@@ -276,3 +276,18 @@ Permanent deletion remains out of scope. Active player count and next-session da
 - Domain hooks are implemented and `/campaigns` uses the Game Projects, Worlds and System Templates read paths.
 - The Cartographer dashboard is intentionally compact and should stay close to the approved reference: narrow sidebar, small stats, horizontal active campaign card, side sessions and lower NPC/map/notes cards.
 - ESLint is intentionally left for a later frontend quality pass.
+
+## Architecture Documentation
+
+Project architecture and continuity documents live in:
+
+```txt
+Docs/ControleDeProjeto/
+  PLANO_ARQUITETURA.md
+  MODULOS_DO_SISTEMA.md
+  CHECKPOINTS.md
+  PADROES_DE_ENGENHARIA.md
+  DECISOES_TECNICAS.md
+```
+
+Frontend changes should preserve feature boundaries, protected routing, domain hooks, API client conventions and theme token usage documented there.

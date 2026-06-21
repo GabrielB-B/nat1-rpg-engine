@@ -1,6 +1,14 @@
 # Plano De Trabalho
 
-Documento complementar de direcao de produto: `Docs/ControleDeProjeto/PLANO_PRODUTO_E_REFERENCIAS.md`.
+Documento complementar de direção de produto: `Docs/ControleDeProjeto/PLANO_PRODUTO_E_REFERENCIAS.md`.
+
+Documentos complementares de arquitetura e continuidade:
+
+- `Docs/ControleDeProjeto/PLANO_ARQUITETURA.md`
+- `Docs/ControleDeProjeto/MODULOS_DO_SISTEMA.md`
+- `Docs/ControleDeProjeto/CHECKPOINTS.md`
+- `Docs/ControleDeProjeto/PADROES_DE_ENGENHARIA.md`
+- `Docs/ControleDeProjeto/DECISOES_TECNICAS.md`
 
 ## Prioridade Direcional Atual
 
@@ -11,9 +19,36 @@ Documento complementar de direcao de produto: `Docs/ControleDeProjeto/PLANO_PROD
 5. Sistema / Template separado de mundo.
 6. IA e PDF inteligente com aprovacao do mestre.
 
-Proxima fase recomendada: `front/home-master-real-data`.
+Próxima fase recomendada: `front/home-master-real-data`.
 
 Este plano organiza as fases práticas do Nat 1 RPG Engine para manter escopo, validação e continuidade entre tarefas.
+
+## Fase De Controle - Arquitetura, Roadmap E Checkpoints
+
+Objetivo: consolidar a documentação técnica de continuidade sem implementar funcionalidade de produto.
+
+Entregáveis:
+- Plano de arquitetura.
+- Mapa de módulos atuais e planejados.
+- Checkpoints por fase.
+- Padrões de engenharia.
+- Decisões técnicas.
+- Atualização de status, próximas tarefas e histórico técnico.
+
+Fora de escopo:
+- Backend novo.
+- Frontend novo.
+- Migrations.
+- Dependências.
+- Redesign visual.
+- Segurança hardening.
+
+Critérios de aceite:
+- Documentação permite retomada técnica sem perda de contexto.
+- Fases concluídas, fase atual e próximas fases estão claras.
+- Nenhum plano existente é apagado.
+- Nenhum código funcional é alterado sem necessidade.
+- Validações documentais são executadas.
 
 ## Fase A - Fundação Do Repositório E Backend
 
@@ -241,3 +276,20 @@ Critérios de aceite:
 - Documentação permite continuidade do projeto.
 - Testes críticos passam.
 - Escopo do MVP 1 está claro e controlado.
+
+## Padrão Obrigatório Para Próximas Fases
+
+Toda fase técnica deve:
+
+1. Ler documentação de controle antes de alterar arquivos.
+2. Identificar fase atual e branch.
+3. Respeitar escopo da fase.
+4. Não apagar histórico.
+5. Atualizar checkpoints.
+6. Atualizar status atual.
+7. Atualizar próximas tarefas.
+8. Documentar pendências.
+9. Manter código legível e manutenível.
+10. Executar validações.
+11. Informar arquivos alterados.
+12. Não fazer commit automático.
