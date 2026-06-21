@@ -9,6 +9,20 @@ export type ProjectModuleSetting = {
   updated_at: string;
 };
 
+export type GameProjectFormat =
+  | "campaign"
+  | "one_shot"
+  | "mini_series"
+  | "short_adventure"
+  | "sandbox";
+
+export type GameProjectStatus =
+  | "preparation"
+  | "active"
+  | "paused"
+  | "completed"
+  | "archived";
+
 export type GameProjectListItem = {
   id: string;
   owner_user_id: string;
@@ -64,4 +78,15 @@ export type GameProjectSummary = {
 
 export type ListGameProjectsParams = {
   includeArchived?: boolean;
+};
+
+export type CreateGameProjectPayload = {
+  name: string;
+  format: GameProjectFormat;
+  description?: string;
+  status?: GameProjectStatus;
+  system_template_id?: string;
+  world_id?: string;
+  theme?: "cartographer" | "dark_horror" | "humanist_futuristic";
+  cover_image_url?: string;
 };

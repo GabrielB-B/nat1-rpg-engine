@@ -4,6 +4,7 @@ export type NavigationItem = {
   description: string;
   iconKey: string;
   isEnabled: boolean;
+  path?: string;
 };
 
 export type WorkspaceStat = {
@@ -95,14 +96,16 @@ export const workspaceMock = {
       label: "Visão geral",
       description: "Home do mestre",
       iconKey: "layout-dashboard",
-      isEnabled: true
+      isEnabled: true,
+      path: "/"
     },
     {
       id: "campaigns",
       label: "Campanhas",
       description: "Crônicas e mesas",
       iconKey: "book-open",
-      isEnabled: true
+      isEnabled: true,
+      path: "/campaigns"
     },
     {
       id: "sessions",

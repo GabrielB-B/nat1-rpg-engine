@@ -2,9 +2,9 @@
 
 Frontend foundation for Nat 1 RPG Engine.
 
-This stage starts `apps/web` with React, TypeScript, Vite, Tailwind CSS, React Router and TanStack Query. The current interface also includes the first visual design system foundation for the Cartographer theme, a mocked "Workspace do Mestre" dashboard shell, the initial frontend authentication flow, and the base API integration layer.
+This stage starts `apps/web` with React, TypeScript, Vite, Tailwind CSS, React Router and TanStack Query. The current interface also includes the first visual design system foundation for the Cartographer theme, a mocked "Workspace do Mestre" dashboard shell, the initial frontend authentication flow, the base API integration layer, and the first real Campanhas & Crônicas screen.
 
-It does not implement password recovery, OAuth, permissions, real dashboard data, real CRUD flows, AI, upload, players or advanced maps yet.
+It does not implement password recovery, OAuth, permissions, real dashboard data, edit/restore campaign flows, AI, upload, players or advanced maps yet.
 
 The visual shell uses `lucide-react` for lightweight interface icons.
 
@@ -122,6 +122,7 @@ Implemented routes:
 - `/login`
 - `/register`
 - `/` protected by the frontend auth guard
+- `/campaigns` protected by the frontend auth guard
 
 Implemented flow:
 
@@ -229,11 +230,49 @@ Prepared read hooks:
 
 The Home do Mestre remains mocked in this stage. The prepared hooks are available for the next product screens and controlled API integration.
 
+## Campanhas & Crônicas
+
+The protected route lives at:
+
+```txt
+/campaigns
+```
+
+Implemented flow:
+
+- List real Game Projects through `GET /game-projects`.
+- Create a Game Project through `POST /game-projects`.
+- Archive a Game Project through `POST /game-projects/{project_id}/archive`.
+- Invalidate the Game Projects query after successful creation.
+- Display loading, error, conditional empty and compact success states.
+- Switch between active and archived campaigns through a local filter over `include_archived=true`.
+- Adapt the layout for empty, sparse and dense campaign libraries.
+- Use distinct empty states for first campaign, archived-only library and empty archive tab.
+- Avoid duplicated create CTAs when the empty state owns the primary action.
+- Use optional `GET /worlds` and `GET /system-templates` data for selects.
+- Validate required fields and cover URL before sending payload.
+- Keep the campaign opening CTA visually present while the internal campaign shell remains a later phase.
+
+Creation payload currently sends only fields accepted by the backend schema:
+
+- `name`
+- `format`
+- `description`
+- `status`
+- `system_template_id`
+- `world_id`
+- `theme`
+- `cover_image_url`
+
+The narrative genre/tone field is visually prepared but not submitted because there is no explicit backend field for it yet. Uploads, PDF ingestion, AI, edit, restore, permanent deletion and campaign-internal navigation remain out of scope for this phase.
+
+Permanent deletion remains out of scope. Active player count and next-session data are displayed only as pending states because the backend does not have participant or session entities yet.
+
 ## Notes
 
 - The current `HomePage` is a mocked visual shell for the Home do Mestre.
 - Sidebar buttons, search and dashboard actions are visual only in this stage.
-- Auth pages consume the real local API; the dashboard still does not consume real API data.
-- Domain hooks are implemented but not wired into the dashboard yet.
+- Auth pages and `/campaigns` consume the real local API; the dashboard still does not consume real API data.
+- Domain hooks are implemented and `/campaigns` uses the Game Projects, Worlds and System Templates read paths.
 - The Cartographer dashboard is intentionally compact and should stay close to the approved reference: narrow sidebar, small stats, horizontal active campaign card, side sessions and lower NPC/map/notes cards.
 - ESLint is intentionally left for a later frontend quality pass.

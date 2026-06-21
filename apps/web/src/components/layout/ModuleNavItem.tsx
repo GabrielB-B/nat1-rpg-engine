@@ -13,6 +13,7 @@ import {
   UserRound,
   Users
 } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 import type { NavigationItem } from "../../data/mockWorkspace";
 
@@ -20,7 +21,6 @@ const ICON_STROKE = 1.75;
 
 type ModuleNavItemProps = {
   item: NavigationItem;
-  isActive?: boolean;
 };
 
 const iconMap: Record<string, LucideIcon> = {
@@ -40,25 +40,42 @@ const iconMap: Record<string, LucideIcon> = {
   users: Users
 };
 
-export function ModuleNavItem({ item, isActive = false }: ModuleNavItemProps) {
-  const classes = ["module-nav-item", isActive ? "is-active" : ""]
-    .filter(Boolean)
-    .join(" ");
+export function ModuleNavItem({ item }: ModuleNavItemProps) {
   const Icon = iconMap[item.iconKey] ?? LayoutDashboard;
-
-  return (
-    <button
-      aria-current={isActive ? "page" : undefined}
-      className={classes}
-      disabled={!item.isEnabled}
-      type="button"
-    >
+  const content = (
+    <>
       <span aria-hidden="true" className="module-nav-symbol">
         <Icon className="ui-icon icon-md" strokeWidth={ICON_STROKE} />
       </span>
       <span className="module-nav-copy">
         <span className="module-nav-label">{item.label}</span>
       </span>
+    </>
+  );
+
+  if (item.path) {
+    return (
+      <NavLink
+        className={({ isActive }) =>
+          ["module-nav-item", isActive ? "is-active" : ""]
+            .filter(Boolean)
+            .join(" ")
+        }
+        end={item.path === "/"}
+        to={item.path}
+      >
+        {content}
+      </NavLink>
+    );
+  }
+
+  return (
+    <button
+      className="module-nav-item"
+      disabled={!item.isEnabled}
+      type="button"
+    >
+      {content}
     </button>
   );
 }
