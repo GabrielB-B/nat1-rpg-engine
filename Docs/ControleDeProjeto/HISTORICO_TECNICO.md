@@ -198,6 +198,20 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 - Validacoes executadas: `npm.cmd run build`, dev server em `http://127.0.0.1:5182` e resposta HTTP `200 OK` em `/login`.
 - Nenhum backend, endpoint, model, migration ou banco foi alterado.
 
+### 2026-06-05 - Planejamento De Produto E Referencias
+
+- Criado documento `Docs/ControleDeProjeto/PLANO_PRODUTO_E_REFERENCIAS.md`.
+- Registrado objetivo do Nat 1 como plataforma de gestao, criacao e organizacao de campanhas de RPG.
+- Registrada direcao de produto: Home do Mestre, Campanhas & Cronicas, modulos relacionais, mundo amplo, sistemas/templates separados e IA com aprovacao do mestre.
+- Registradas referencias de produto: Kanka, World Anvil, LegendKeeper, Campfire, Notion, Obsidian e Roll20.
+- Definida Kanka como referencia principal de organizacao modular.
+- Definidas World Anvil, LegendKeeper e Campfire como referencias secundarias de worldbuilding e estrutura editorial.
+- Definidas Notion e Obsidian como referencias de flexibilidade organizacional.
+- Definido Roll20 como referencia secundaria de journal e mesa, sem papel de UX principal.
+- Atualizada proxima fase recomendada para `front/game-project-list-create`.
+- Validacoes executadas: pesquisa de referencias oficiais, revisao dos documentos de controle, varredura de tom documental, `git diff --check` e `npm.cmd run build`.
+- Nenhum backend, endpoint, model, migration, banco ou codigo de frontend foi alterado nesta etapa.
+
 ## Restricoes De Escopo Mantidas
 
 - Nao implementar IA/RAG no MVP 1 inicial.

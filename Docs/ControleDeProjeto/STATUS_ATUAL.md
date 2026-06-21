@@ -72,18 +72,23 @@ Frontend concluido ate esta etapa:
 - `apps/web/src/features/system-templates/hooks/useSystemTemplates.ts`
 - `apps/web/src/features/system-templates/types.ts`
 - `apps/web/README.md`
+- `Docs/ControleDeProjeto/PLANO_PRODUTO_E_REFERENCIAS.md`
 
 ## Validacoes Executadas
 
 - `npm.cmd run build`
 - `npm.cmd run dev -- --host 127.0.0.1 --port 5182`
 - `GET /login` no dev server local
+- Varredura de tom documental nos arquivos de controle.
+- `git diff --check`
 
 ## Resultado Das Validacoes
 
 - Build do frontend concluido com sucesso.
 - Dev server do frontend iniciado com sucesso em `http://127.0.0.1:5182`.
 - Rota `/login` respondeu `200 OK`.
+- Documentacao de controle revisada sem termos proibidos de tom informal.
+- Checagem de diff concluida sem erros de whitespace.
 
 ## Pendencias Conhecidas
 
@@ -98,11 +103,13 @@ Frontend concluido ate esta etapa:
 
 ## Proxima Etapa Recomendada
 
-Fase recomendada: `front/home-master-shell`
+Fase recomendada: `front/game-project-list-create`
 
-Objetivo: iniciar consumo controlado dos hooks preparados e evoluir a Home do Mestre com estados de loading, vazio e erro, sem implementar CRUD visual completo.
+Objetivo: permitir que usuarios autenticados listem Campanhas & Cronicas reais e criem a primeira campanha pelo frontend, sem depender de Swagger ou chamadas manuais.
 
-Alternativa tecnica: `back/session-scene-foundation`, para iniciar a fundacao backend de sessoes e cenas antes da expansao visual do dashboard.
+Justificativa tecnica: a Home do Mestre ainda depende de campanhas reais para deixar de ser mockada. A listagem/criacao de campanhas fecha o primeiro fluxo funcional do produto: cadastro, login, listagem e criacao de campanha.
+
+Alternativa tecnica posterior: `front/home-master-real-data`, para conectar a Home aos dados reais depois que a criacao de campanha estiver disponivel no frontend.
 
 ## Bloqueios Atuais
 

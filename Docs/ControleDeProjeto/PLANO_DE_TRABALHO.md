@@ -1,5 +1,18 @@
 # Plano De Trabalho
 
+Documento complementar de direcao de produto: `Docs/ControleDeProjeto/PLANO_PRODUTO_E_REFERENCIAS.md`.
+
+## Prioridade Direcional Atual
+
+1. Home do Mestre.
+2. Campanhas & Cronicas.
+3. Modulos relacionais dentro da campanha.
+4. Mundo / Cenario amplo para worldbuilding.
+5. Sistema / Template separado de mundo.
+6. IA e PDF inteligente com aprovacao do mestre.
+
+Proxima fase recomendada: `front/game-project-list-create`.
+
 Este plano organiza as fases práticas do Nat 1 RPG Engine para manter escopo, validação e continuidade entre tarefas.
 
 ## Fase A - Fundação Do Repositório E Backend
