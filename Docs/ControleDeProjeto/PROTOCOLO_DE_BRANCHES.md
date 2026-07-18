@@ -10,6 +10,8 @@ Use branches por tarefa:
 back/nome-da-tarefa
 front/nome-da-tarefa
 docs/nome-da-tarefa
+security/nome-da-tarefa
+research/nome-da-tarefa
 chore/nome-da-tarefa
 ```
 
@@ -19,6 +21,8 @@ Exemplos:
 back/auth-foundation
 front/setup-foundation
 docs/project-control
+security/baseline-hardening
+research/gm-vertical-pilot
 chore/update-dependencies
 ```
 
@@ -55,10 +59,18 @@ pytest
 Quando a tarefa envolver Alembic, validar também:
 
 ```powershell
-alembic upgrade head --sql
+alembic upgrade head
+alembic current
+alembic check
 ```
 
-Aplicar migration em banco real somente quando a tarefa pedir explicitamente ou Gabriel autorizar.
+Mudança de model ou migration exige PostgreSQL real descartável e o ciclo
+`upgrade → teste integrado → downgrade → upgrade`. O rollback destrutivo nunca deve usar
+o banco persistente local. Aplicar migration fora de ambiente descartável somente quando
+a tarefa pedir explicitamente ou Gabriel autorizar.
+
+Antes da integração, o Pull Request também deve comprovar os gates aplicáveis de
+`PLANO_DE_QUALIDADE_E_CI.md`, incluindo CI remoto verde.
 
 ## Regras De Escopo
 

@@ -329,6 +329,74 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 - Nenhum backend, frontend, endpoint, model, migration, banco, dependência ou redesign visual foi alterado.
 - Validações executadas: `npm.cmd run build`, `pytest`, varredura de tom documental proibido, varredura de espaços finais, revisão de arquivos alterados, `git diff --check` e `git status --short --branch`.
 
+### 2026-06-21 - Baseline De Segurança Do MVP
+
+- Fase: `security/baseline-hardening`.
+- Branch: `security/baseline-hardening`.
+- Revisada configuração de autenticação JWT, storage de token, rotas protegidas, CORS local, schemas, endpoints protegidos e isolamento por usuário.
+- Criado `Docs/ControleDeProjeto/RELATORIO_SEGURANCA_BASELINE.md`.
+- Reforçado `.gitignore` para caches, artefatos temporários, relatórios locais e bancos locais.
+- Adicionada validação para impedir `SECRET_KEY` placeholder fora de ambientes locais/teste.
+- Atualizado `apps/api/.env.example` com placeholder explícito de desenvolvimento local.
+- Adicionada validação backend para `cover_image_url`, aceitando apenas URLs `http` e `https`.
+- Adicionados testes para token inválido em `/auth/me` e erro genérico no login com e-mail inexistente.
+- Adicionados testes de IDOR para update, archive e restore de GameProject de outro usuário.
+- Adicionado teste para rejeição de `cover_image_url` com protocolo inseguro.
+- `pytest` direto falhou no Python global por ausência de `psycopg`; validação aprovada pelo `.venv` local.
+- `ruff check .` direto falhou porque `ruff` não está no `PATH` global; validação aprovada pelo `.venv` local.
+- Validações executadas: `.\.venv\Scripts\python.exe -m pytest`, `.\.venv\Scripts\python.exe -m ruff check .`, `.\.venv\Scripts\python.exe -m pip check`, `npm.cmd run build`, `npm.cmd audit`, varreduras textuais de segurança, `git diff --check` e `git status --short --branch`.
+- Resultado: 33 testes backend aprovados, `ruff` aprovado, build frontend aprovado, `pip check` sem dependências quebradas e `npm audit` com 0 vulnerabilidades reportadas.
+- Pendências registradas: `localStorage` para token JWT, ausência de rate limiting, CORS de produção, security headers, lock de dependências backend e credenciais locais do Docker Compose.
+
+### 2026-07-18 - Preparação Técnica Local De G0 E Consolidação De Direção
+
+- Fase: continuação de `security/baseline-hardening`.
+- Branch: `security/baseline-hardening`.
+- Confirmado que branch, `main` e `origin/main` ainda apontam para `7cd56d7`; todo o trabalho permanece sem commit no working tree.
+- Alinhada a URL padrão do PostgreSQL com Docker Compose e `.env.example`.
+- `ENVIRONMENT`, `DATABASE_URL` e `SECRET_KEY` passaram a ser obrigatórios em toda execução; configuração ausente ou inválida interrompe a inicialização da API (fail-closed).
+- Fora de local/teste, a URL/credencial documentada do banco é recusada e CORS exige HTTPS com host não-loopback; secret e expiração de token também receberam validações restritivas.
+- Adicionados headers HTTP baseline e verificação de hash dummy para login com usuário inexistente.
+- Novos hashes passaram a usar `passlib` `bcrypt_sha256`, com limite de 128 caracteres; hashes bcrypt legados permanecem verificáveis e são regravados oportunisticamente após login válido.
+- Tentativas com mais de 128 caracteres e credenciais bcrypt legadas acima de 72 bytes são recusadas com erro genérico; o segundo caso dependerá do futuro fluxo de reset de senha.
+- Fixadas dependências Python e criado `apps/api/requirements.lock`.
+- Substituído `python-jose` por `PyJWT==2.13.0`: `ecdsa` possuía CVE-2024-23342/GHSA-wj6h-64fc-37mp sem versão corrigida, enquanto o Nat 1 usa somente `HS256`; a troca removeu dependências assimétricas desnecessárias do lock.
+- Criado teste PostgreSQL integrado sem `Base.metadata.create_all()`.
+- Criado workflow `.github/workflows/ci.yml` com backend, PostgreSQL, Alembic, frontend, lint, testes, build e auditorias.
+- Adicionados ESLint, Vitest e dois testes de smoke do componente `Button`.
+- Corrigido fallback instável de lista em `GameProjectsPage` identificado pelo lint de hooks.
+- PostgreSQL 16 validado em container descartável, porta `55432`, `tmpfs` e sem volume persistente.
+- Aprovados `upgrade head`, `current`, `check`, smoke integrado, `downgrade base`, novo `upgrade head` e novo smoke.
+- Container descartável parado e removido; nenhum banco persistente do projeto foi alterado.
+- Backend aprovado com Ruff, `58 passed` unitários e `1 warning` upstream de Starlette/TestClient; integração PostgreSQL permaneceu separada e foi aprovada com `1 passed`; `pip check` limpo.
+- Frontend aprovado em lint, typecheck, `2 passed` Vitest e build.
+- Instalação npm reportou 0 vulnerabilidades; auditorias online explícitas locais foram bloqueadas pela política de envio de metadados e permanecem como gate remoto do Pull Request.
+- Incorporado integralmente o documento `VALIDACAO_PRODUTO_E_ESTRATEGIA_DADOS.md` recebido do usuário.
+- Criados escopo vertical/gates, C4/deployment, modelo de ameaças/autorização/LGPD, plano de qualidade/CI e sistema de marca/tokens.
+- Consolidado o fluxo canônico `sessão → cena → acontecimento → recap → pendência`.
+- Agenda completa movida para o gate opcional G4A, posterior ao vertical e condicionado à validação de H5; módulos relacionais, documentos, PDF e IA bloqueados até validação com mestres.
+- Ajustados planos, módulos, fila, status, checkpoint e READMEs para eliminar próximas fases concorrentes.
+- Figma autorizado pelo usuário, mas o conector não foi exposto nesta sessão; nenhuma alteração em arquivo Figma foi realizada.
+- Nenhum commit, Pull Request ou merge foi executado automaticamente.
+
+### 2026-07-18 - Autorização Para Publicação E Integração De G0
+
+- Gabriel autorizou explicitamente o commit das alterações, a publicação da branch e o avanço até a conclusão do G0.
+- GitHub CLI autenticado como `GabrielB-B`; repositório alvo confirmado como `GabrielB-B/nat1-rpg-engine`, base `main`.
+- O fechamento permanece condicionado a CI remoto verde, auditorias aprovadas e revisão do Pull Request.
+- O conector Figma continuou indisponível e não faz parte deste commit de segurança, qualidade e documentação.
+
+### 2026-07-18 - Pull Request, Correção De Auditoria E Aprovação Técnica De G0
+
+- Criado o commit `65b9f34` com a baseline de segurança, arquitetura, produto, qualidade e identidade visual documentada.
+- Publicada a branch `security/baseline-hardening` e aberto o PR [#13](https://github.com/GabrielB-B/nat1-rpg-engine/pull/13) contra `main`.
+- A primeira execução remota aprovou o frontend, PostgreSQL, migrations, lint e testes, mas o `pip-audit` bloqueou `pydantic-settings==2.14.1` e `starlette==1.2.1`.
+- Aplicado o patch mínimo: `pydantic-settings==2.14.2` no manifesto e lock, e `starlette==1.3.1` no lock; FastAPI, Pydantic, HTTPX e AnyIO permaneceram nas versões compatíveis já fixadas.
+- A correção foi registrada no commit `569e9e1`; localmente, `pip check`, Ruff e `58 passed` unitários foram aprovados.
+- A política local impediu o envio explícito do inventário de dependências ao serviço público de auditoria; nenhuma tentativa de contorno foi realizada.
+- A execução remota [29651420670](https://github.com/GabrielB-B/nat1-rpg-engine/actions/runs/29651420670) aprovou backend, PostgreSQL, ciclo reversível de migrations, testes, `pip-audit`, frontend, build e `npm audit`.
+- G0 ficou tecnicamente aprovado; a entrada deste registro em `main` pelo PR #13 materializa o encerramento do gate.
+
 ## Restricoes De Escopo Mantidas
 
 - Nao implementar IA/RAG no MVP 1 inicial.

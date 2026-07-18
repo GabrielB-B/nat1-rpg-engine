@@ -1,10 +1,26 @@
 from datetime import datetime
 from typing import Any
+from urllib.parse import urlparse
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from app.schemas.project_module_setting import ProjectModuleSettingRead
+
+
+def normalize_cover_image_url(value: str | None) -> str | None:
+    if value is None:
+        return value
+
+    stripped_value = value.strip()
+    if not stripped_value:
+        return None
+
+    parsed_url = urlparse(stripped_value)
+    if parsed_url.scheme not in {"http", "https"} or not parsed_url.netloc:
+        raise ValueError("cover_image_url must be a valid http or https URL")
+
+    return stripped_value
 
 
 class GameProjectCreate(BaseModel):
@@ -25,6 +41,11 @@ class GameProjectCreate(BaseModel):
         if not stripped_value:
             raise ValueError("Value is required")
         return stripped_value
+
+    @field_validator("cover_image_url")
+    @classmethod
+    def validate_cover_image_url(cls, value: str | None) -> str | None:
+        return normalize_cover_image_url(value)
 
 
 class GameProjectUpdate(BaseModel):
@@ -48,6 +69,11 @@ class GameProjectUpdate(BaseModel):
         if not stripped_value:
             raise ValueError("Value is required")
         return stripped_value
+
+    @field_validator("cover_image_url")
+    @classmethod
+    def validate_cover_image_url(cls, value: str | None) -> str | None:
+        return normalize_cover_image_url(value)
 
     @model_validator(mode="after")
     def validate_nullable_fields(self) -> "GameProjectUpdate":

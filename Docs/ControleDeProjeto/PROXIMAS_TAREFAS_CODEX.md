@@ -23,9 +23,18 @@
 | 10 | `front/game-project-list-create` | concluida | Criar listagem e cadastro inicial de Campanhas & Crônicas no frontend. | Usa hooks e API client existentes; nao altera backend. | Usuario autenticado lista e cria campanhas reais; build validado. |
 | 10.1 | `front/game-project-list-create-polish` | concluida | Refinar biblioteca de campanhas, reduzir vazio visual, adicionar empty state hibrido e arquivamento. | Usa endpoint real de arquivamento, filtro local de arquivadas, empty state condicional e lista focalizada sem painel lateral; nao altera backend. | Layout adaptativo, CTAs sem duplicidade, cards sem esticamento excessivo, fluxo para arquivadas, confirmacao de arquivamento e build validado. |
 | 10.2 | `docs/architecture-roadmap-checkpoints` | concluida | Consolidar arquitetura, módulos, checkpoints, padrões de engenharia e decisões técnicas. | Fase documental sem alteração funcional de backend, frontend, banco, dependências ou design visual. | Plano de arquitetura, mapa de módulos, checkpoints, decisões e padrões registrados; validações documentais concluídas. |
-| 11 | `front/home-master-real-data` | pendente | Conectar a Home do Mestre aos dados reais ja disponiveis. | Depende de campanhas criaveis no frontend para estado vazio e CTA terem fluxo completo. | Home exibe dados reais, loading, erro e vazio sem CRUD completo. |
-| 12 | `front/game-project-dashboard-shell` | pendente | Criar shell interna da campanha com contexto do projeto ativo. | Usa `GameProjectSummary` e `ProjectModuleSettings`. | Dashboard de campanha exige autenticacao e respeita modulos ativos. |
-| 13 | `back/session-scene-foundation` | pendente | Criar fundacao backend de Sessoes e Cenas. | Definir entidades, endpoints protegidos e relacao com `GameProject`. | Migration, testes e documentacao atualizados. |
+| 10.3 / G0 | `security/baseline-hardening` | concluida | Fechar a baseline com PostgreSQL real, migrations, CI e revisão. | PR #13 integrado com CI remota aprovada. | PostgreSQL descartável `up/test/down/up`, backend, lint, frontend, build e CI comprovados; PR verde e integrado. |
+| 11 / G1 | `docs/professional-foundation` | concluida | Consolidar produto, métricas, não objetivos, C4/deployment, ameaças, autorização, LGPD e qualidade. | Documentos canônicos integrados junto ao fechamento de G0 por solicitação explícita. | Hierarquia documental única, links revisados e nenhuma próxima fase concorrente. |
+| 12 / G1 | `front/cartographer-brand-tokens` | pendente | Consolidar marca Cartógrafo, tipografia, tokens semânticos, contraste e QA visual. | Preservar geometria do logo entre temas; produzir SVG mestre e micro marca. | Ativos aprovados, tokens AA, foco/reduced motion e QA nos breakpoints. |
+| 13 / G2 | `front/home-master-real-data` | pendente | Substituir a Home fictícia por dados reais e estados honestos. | Remover NPCs/mapas/notas/sessões mockadas e CTAs inertes. | Home real com loading, erro, vazio, sucesso e rotas funcionais. |
+| 14 / G2 | `front/game-project-dashboard-shell` | pendente | Criar shell contextual da campanha. | Navegação inicial restrita a Resumo e Sessões; aplica tema da campanha. | `/campaigns/:projectId` protegido, profundo, responsivo e acessível. |
+| 15 / G3 | `back/session-continuity-vertical` | pendente | Implementar Session, Scene, SessionOccurrence, SessionRecap e PendingItem. | Exige modelagem, migration PostgreSQL, autorização por campanha, services e repositories. | API e regras de domínio completas, testes IDOR e migration reversível. |
+| 16 / G3 | `front/session-continuity-vertical` | pendente | Entregar o workspace sessão → cena → acontecimento → recap → pendência. | Consumir contratos reais; cenas pertencem ao workspace da sessão. | Fluxo persistido de ponta a ponta, estados assíncronos, testes e E2E crítico. |
+| 17 / G4 | `research/gm-vertical-pilot` | pendente | Validar o vertical com mestres reais. | Entrevistas de problema podem começar antes; expansão funcional aguarda a decisão. | Evidências, métricas, achados e decisão `avançar`, `revisar` ou `parar`. |
+| 17.1 / G4A | `back/calendar-scheduling-foundation` | bloqueada | Implementar Agenda completa somente se H5 for validada. | Gate opcional posterior ao vertical e ao piloto; depende de Sessions reais e evidência sobre conflitos/indisponibilidades. | H5 validada, escopo próprio aprovado e agenda real separada de timeline fictícia. |
+| 18 / pré-beta | `security/public-auth-session-hardening` | pendente | Preparar autenticação e operação para exposição pública. | Rate limiting, estratégia de cookie/refresh, revogação, CORS HTTPS/não-loopback no domínio real, observabilidade e incidente. | Threat model revisado e checklist público aprovado. |
+| 19 / G5 | `back/relational-modules-foundation` | bloqueada | Expandir personagens, locais, facções e relações. | Bloqueada até G4. | Só entra na fila após evidência do piloto. |
+| 20 / G6 | `back/content-ai-foundation` | bloqueada | Evoluir documentos, exportação/importação, PDF e IA aprovada pelo mestre. | Bloqueada até valor sem IA, segurança e governança de dados. | Só entra após gates e decisão própria de risco/custo. |
 
 ## Regras De Execucao
 
@@ -48,7 +57,10 @@
 - `front/game-project-list-create` permanece concluida com listagem e criacao real de campanhas.
 - `front/game-project-list-create-polish` permanece concluida com biblioteca adaptativa, empty state condicional, CTAs sem duplicidade, lista focalizada sem painel lateral e arquivamento via API real.
 - `docs/architecture-roadmap-checkpoints` consolida arquitetura, módulos, checkpoints, padrões e decisões sem alterar código funcional.
-- A proxima expansao recomendada e `front/home-master-real-data`, conectando a Home do Mestre aos dados reais sem implementar CRUD visual completo dos modulos internos.
+- `security/baseline-hardening` foi integrado com checks locais e CI remota aprovados no PR #13.
+- A próxima ação é concluir G1 visual em `front/cartographer-brand-tokens` e então executar Home e shell em branches próprias.
+- A única expansão funcional aprovada antes do piloto é o vertical de continuidade.
+- Personagens, locais, facções, relações, documentos, PDF e IA permanecem bloqueados.
 
 ## Padrão Obrigatório Para Próximas Fases
 

@@ -2,9 +2,14 @@
 
 Projeto: Nat 1 RPG Engine
 
-Data de referencia: 2026-06-21
+Data de referencia original: 2026-06-21
+
+Última atualização: 2026-07-18
 
 Fase relacionada: `docs/architecture-roadmap-checkpoints`
+
+Complemento canônico para qualidade automatizada, PostgreSQL e CI:
+`PLANO_DE_QUALIDADE_E_CI.md`.
 
 ## Objetivo
 
@@ -107,12 +112,15 @@ Validações recomendadas por tipo de fase:
 
 | Tipo de fase | Validações mínimas |
 | --- | --- |
-| Backend | `pytest`, `ruff check .`, migrações quando aplicável. |
-| Frontend | `npm.cmd run build`, `npm.cmd run dev` quando houver alteração visual ou de rota. |
+| Backend sem banco | Ruff, testes unitários, `pip check` e auditoria de dependências. |
+| Backend com model/migration | Gate backend completo, PostgreSQL real descartável, `alembic check` e ciclo `upgrade → teste → downgrade → upgrade`. |
+| Frontend | ESLint sem warnings, typecheck, Vitest, build, auditoria e QA responsivo; dev server quando houver alteração visual ou de rota. |
 | Documentação | `git diff --check`, varredura de tom documental, revisão de links e `git status`. |
-| Full stack | Backend, frontend, API local e fluxo manual mínimo. |
+| Full stack | Todos os gates anteriores, contratos, API local, smoke manual e E2E crítico quando aplicável. |
+| Auth/autorização | Backend completo, IDOR por ação, configuração por ambiente e revisão do threat model. |
 
 Quando uma validação não for aplicável, o motivo deve ser documentado.
+Os comandos e critérios detalhados permanecem em `PLANO_DE_QUALIDADE_E_CI.md`.
 
 ## Padrão Obrigatório Para Próximas Fases
 

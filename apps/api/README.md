@@ -6,8 +6,8 @@ This stage provides the FastAPI base, health check, settings, SQLAlchemy session
 
 ## Requirements
 
-- Python 3.12+
-- PostgreSQL for future database-backed features
+- Python 3.12.13 (baseline de CI com security patches atuais)
+- PostgreSQL 16 as the production dialect and migration gate
 
 ## Setup
 
@@ -16,7 +16,7 @@ cd apps/api
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-pip install -r requirements.txt -r requirements-dev.txt
+pip install -r requirements.lock
 ```
 
 Create a local environment file:
@@ -53,7 +53,7 @@ Expected response:
 1. Na raiz do projeto, suba o PostgreSQL local:
 
 ```powershell
-docker compose up -d
+docker compose up -d --wait
 ```
 
 2. Em `apps/api`, crie o arquivo `.env` local:
@@ -67,6 +67,11 @@ Copy-Item .env.example .env
 ```env
 DATABASE_URL=postgresql+psycopg://nat1_user:nat1_password@localhost:5432/nat1_db
 ```
+
+This URL and its credentials are for local development only. `ENVIRONMENT`,
+`DATABASE_URL` and `SECRET_KEY` are mandatory, and the API rejects this documented local
+database URL outside local/test environments. Non-local CORS origins must use HTTPS and
+non-loopback hosts.
 
 4. Ative a virtualenv:
 
@@ -280,6 +285,19 @@ Workspace notes:
 pytest
 ```
 
+Unit tests remain fast with SQLite where appropriate. They do not replace the real
+PostgreSQL migration gate. To run the disposable integration suite after applying
+migrations to an isolated database:
+
+```powershell
+$env:DATABASE_URL="postgresql+psycopg://USER:PASSWORD@localhost:55432/DB"
+$env:RUN_POSTGRES_INTEGRATION="1"
+pytest tests/integration
+```
+
+Never run `alembic downgrade base` against the persistent local database as an automated
+check. Reversibility must use an empty disposable database.
+
 ## Database Migrations
 
 Create a new migration after model changes:
@@ -300,7 +318,7 @@ Rollback the latest migration, if needed:
 alembic downgrade -1
 ```
 
-Return to an empty schema, if needed:
+Return to an empty schema only in an explicitly configured disposable validation database:
 
 ```powershell
 alembic downgrade base
@@ -310,6 +328,8 @@ alembic downgrade base
 
 ```powershell
 ruff check .
+python -m pip check
+python -m pip_audit -r requirements.lock
 ```
 
 ## Architecture Documentation
@@ -323,6 +343,9 @@ Docs/ControleDeProjeto/
   CHECKPOINTS.md
   PADROES_DE_ENGENHARIA.md
   DECISOES_TECNICAS.md
+  ARQUITETURA_C4_E_DEPLOYMENT.md
+  MODELO_DE_AMEACAS_AUTORIZACAO_E_LGPD.md
+  PLANO_DE_QUALIDADE_E_CI.md
 ```
 
 Backend changes should preserve the endpoint, service, repository, model and schema boundaries documented there.

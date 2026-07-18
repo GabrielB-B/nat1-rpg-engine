@@ -2,7 +2,17 @@
 
 Projeto: Nat 1 RPG Engine
 
-Data de referencia: 2026-06-05
+Data de referencia original: 2026-06-05
+
+Última atualização: 2026-07-18
+
+Status: referência histórica, subordinada aos documentos canônicos de 2026-07-18.
+
+Autoridade atual:
+
+- estratégia e métricas: `VALIDACAO_PRODUTO_E_ESTRATEGIA_DADOS.md`;
+- recorte e gates: `ESCOPO_MVP_VERTICAL_E_GATES.md`;
+- fila executável: `PROXIMAS_TAREFAS_CODEX.md`.
 
 Documentos complementares:
 
@@ -20,12 +30,13 @@ O produto deve atender primeiro o mestre, com foco em preparar, organizar, consu
 
 ## Direcao Estrategica
 
-1. Entregar primeiro a Home do Mestre.
+1. Concluir a fundação de segurança, PostgreSQL, migrations e CI.
 2. Consolidar Campanhas & Crônicas como unidade principal de trabalho.
-3. Criar modulos internos relacionais dentro de cada campanha.
-4. Manter Mundo / Cenario como camada ampla de worldbuilding, separada da campanha.
-5. Manter Sistema / Template separado do mundo, permitindo campanhas com regras e estruturas diferentes.
-6. Preparar IA e PDF inteligente como camadas futuras de assistencia, nao como substituto da decisao do mestre.
+3. Entregar Home real e shell contextual sem dados ou controles fictícios.
+4. Provar o vertical sessão → cena → acontecimento → recap → pendência.
+5. Validar o fluxo com mestres reais antes de módulos relacionais.
+6. Manter Mundo / Cenário e Sistema / Template como conceitos separados.
+7. Preparar personagens, locais, relações, documentos, PDF e IA apenas após os gates.
 
 ## Referencias De Produto
 
@@ -62,48 +73,29 @@ O produto deve atender primeiro o mestre, com foco em preparar, organizar, consu
 
 ## Roadmap Direcional
 
-| Ordem | Fase Recomendada | Objetivo | Resultado Esperado |
-| --- | --- | --- | --- |
-| 1 | `front/game-project-list-create` | Criar listagem e cadastro inicial de Campanhas & Crônicas no frontend. | Primeiro fluxo real: login, listar campanhas e criar campanha. |
-| 2 | `docs/architecture-roadmap-checkpoints` | Consolidar arquitetura, módulos, checkpoints, padrões e decisões técnicas. | Projeto retomável sem perda de contexto entre fases. |
-| 3 | `front/home-master-real-data` | Conectar a Home do Mestre aos dados reais ja disponiveis. | Home com dados da conta, estados vazios e CTA funcional. |
-| 4 | `front/game-project-dashboard-shell` | Criar shell interna da campanha com contexto do projeto ativo. | Entrada clara para modulos, summary e navegacao por campanha. |
-| 5 | `back/session-scene-foundation` | Criar fundacao backend de sessoes e cenas. | Primeiros modulos internos do MVP com CRUD testado. |
-| 6 | `front/session-scene-foundation` | Criar telas iniciais de sessoes e cenas. | Mestre registra sessoes e organiza cenas dentro da campanha. |
-| 7 | `back/relational-modules-foundation` | Expandir entidades centrais: personagens, locais, organizacoes, documentos, notas e relacoes. | Base relacional para worldbuilding e campanha. |
-| 8 | `front/relational-modules-shell` | Criar navegacao e shells para os modulos relacionais. | Experiencia modular consistente sem depender de CRUD completo em todos os modulos. |
-| 9 | `back/document-ingestion-foundation` | Preparar upload controlado de PDFs e documentos. | Materiais podem ser enviados, armazenados, indexados e revisados sem IA generativa obrigatoria. |
-| 10 | `back/ai-assist-foundation` | Criar assistencia inicial de IA com aprovacao do mestre. | Sugestoes, classificacoes e resumos nao alteram dados oficiais sem aprovacao. |
-| 11 | `front/ai-review-workbench` | Criar bancada de revisao de sugestoes da IA. | Mestre aprova, edita ou rejeita organizacoes propostas. |
+O roadmap operacional deixou de ser mantido neste documento para evitar direções
+concorrentes. A única fila executável é `PROXIMAS_TAREFAS_CODEX.md`, organizada pelos
+gates definidos em `ESCOPO_MVP_VERTICAL_E_GATES.md`.
 
 ## Proxima Fase Recomendada
 
-Fase: `front/home-master-real-data`
-
-Objetivo: conectar a Home do Mestre aos dados reais ja disponiveis, usando a listagem e criacao de campanhas implementadas no frontend.
+Fase: encerrar G0 por revisão e integração aprovada da branch
+`security/baseline-hardening`.
 
 ## Escopo Da Proxima Fase
 
-- Consumir campanhas reais na Home do Mestre.
-- Exibir estado vazio quando a conta ainda nao tiver campanhas.
-- Destacar campanha recente ou principal quando existir dado real.
-- Ajustar CTAs da Home para apontar para `/campaigns`.
-- Preservar a Home visualmente alinhada ao tema `cartographer`.
-- Manter CRUD visual completo de modulos internos fora do escopo.
-- Manter edicao, arquivamento, upload, PDF e IA fora do escopo.
-- Atualizar documentacao e validar build/dev server.
+- revisar diff e evidências de PostgreSQL real;
+- obter autorização de commit e abrir Pull Request;
+- integrar somente após CI verde;
+- iniciar G1/G2 em branches próprias após a integração.
 
 ## Criterios De Aceite Da Proxima Fase
 
-- Usuario autenticado acessa a Home do Mestre com dados reais basicos.
-- Usuario anonimo continua sendo redirecionado para `/login`.
-- Campanhas reais influenciam os cards e CTAs principais da Home.
-- Estado vazio orienta a criacao da primeira campanha em `/campaigns`.
-- Erros da API aparecem com mensagem controlada sem stack trace.
-- Layout respeita o tema `cartographer` e o design system existente.
-- `npm.cmd run build` passa.
-- `npm.cmd run dev` funciona.
-- Backend, banco e migrations nao sao alterados.
+- PostgreSQL 16 descartável aprovado em `upgrade → teste → downgrade → upgrade`;
+- backend, lint, frontend, build e testes aprovados;
+- CI versionado e revisado;
+- status/checkpoint refletem integração pendente, sem declarar merge inexistente;
+- commit e PR continuam dependentes de aprovação de Gabriel.
 
 ## Fontes Consultadas
 

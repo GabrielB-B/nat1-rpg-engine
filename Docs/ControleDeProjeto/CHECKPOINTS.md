@@ -2,7 +2,9 @@
 
 Projeto: Nat 1 RPG Engine
 
-Data de referencia: 2026-06-21
+Data de referencia original: 2026-06-21
+
+Última atualização: 2026-07-18
 
 ## Objetivo
 
@@ -26,7 +28,7 @@ Registrar checkpoints por fase para permitir retomada técnica do projeto sem pe
 - Branch: `back/auth-foundation`
 - Status: concluído
 - Objetivo: implementar autenticação inicial.
-- Entregas concluídas: cadastro, login, usuário atual, hash de senha com bcrypt e JWT Bearer token.
+- Entregas concluídas: cadastro, login, usuário atual, hash primário `bcrypt_sha256`, migração de bcrypt legado e JWT Bearer token.
 - Validações executadas: testes de autenticação e validação manual via Swagger.
 - Pendências: refresh token, recuperação de senha, OAuth externo e permissões avançadas.
 - Próxima fase recomendada: `back/game-project-crud`.
@@ -153,6 +155,24 @@ Registrar checkpoints por fase para permitir retomada técnica do projeto sem pe
 - Pendências: manter checkpoints atualizados nas próximas fases.
 - Próxima fase recomendada: `front/home-master-real-data`.
 - Riscos identificados: documentação pode se desatualizar se fases futuras não atualizarem os checkpoints.
+
+## CP-013 - Security Baseline Hardening
+
+- Fase: `security/baseline-hardening`
+- Branch: `security/baseline-hardening`
+- Início: 2026-06-21
+- Última validação: 2026-07-18
+- Status: concluído pela integração do PR #13 em `main`
+- Objetivo: revisar baseline de segurança do MVP atual sem ampliar escopo de produto.
+- Entregas técnicas: relatório de segurança, reforço de `.gitignore`, validação de `SECRET_KEY`, CORS e expiração, headers baseline, mitigação temporal de enumeração no login, validação backend de `cover_image_url`, testes de token/IDOR, dependências Python fixadas, lock, lint/teste frontend e workflow de CI.
+- PostgreSQL real: container 16 descartável `nat1_postgres_validation`, porta isolada `55432` e armazenamento `tmpfs`; `upgrade head`, `current`, `check`, smoke de autenticação/CRUD/JSONB, `downgrade base`, novo `upgrade head` e novo smoke aprovados.
+- Validações locais: Ruff aprovado; `58 passed` unitários, com `1 warning` upstream de Starlette/TestClient; integração PostgreSQL separada `1 passed`; frontend lint, typecheck, `2 passed` Vitest e build aprovados; `pip check` sem dependências quebradas.
+- Auditorias: chamadas locais explícitas a serviços externos foram bloqueadas pela política do ambiente; no PR #13, `pip-audit` e `npm audit --audit-level=high` foram aprovados na execução `29651420670` após atualização de `pydantic-settings` para `2.14.2` e Starlette para `1.3.1`.
+- CI remoto: backend/PostgreSQL/migrations aprovado em `1m22s` e frontend aprovado em `25s` no commit `569e9e1`.
+- Encerramento: a entrada deste checkpoint em `main` pelo PR #13 materializa a integração; não restam pendências técnicas de G0.
+- Pendências antes de beta público: política de sessão/cookies, refresh/revogação, rate limiting, CORS HTTPS/não-loopback validado no domínio real, secrets gerenciados e observabilidade.
+- Próxima ação: criar `front/cartographer-brand-tokens` e concluir a fundação visual em branch própria.
+- Riscos identificados: expor publicamente a autenticação baseline antes do hardening pré-beta ou ampliar o escopo antes do piloto.
 
 ## Padrão De Atualização
 
