@@ -162,16 +162,17 @@ Registrar checkpoints por fase para permitir retomada técnica do projeto sem pe
 - Branch: `security/baseline-hardening`
 - Início: 2026-06-21
 - Última validação: 2026-07-18
-- Status: publicação autorizada; commit, Pull Request, CI remoto e integração em execução
+- Status: concluído pela integração do PR #13 em `main`
 - Objetivo: revisar baseline de segurança do MVP atual sem ampliar escopo de produto.
 - Entregas técnicas: relatório de segurança, reforço de `.gitignore`, validação de `SECRET_KEY`, CORS e expiração, headers baseline, mitigação temporal de enumeração no login, validação backend de `cover_image_url`, testes de token/IDOR, dependências Python fixadas, lock, lint/teste frontend e workflow de CI.
 - PostgreSQL real: container 16 descartável `nat1_postgres_validation`, porta isolada `55432` e armazenamento `tmpfs`; `upgrade head`, `current`, `check`, smoke de autenticação/CRUD/JSONB, `downgrade base`, novo `upgrade head` e novo smoke aprovados.
 - Validações locais: Ruff aprovado; `58 passed` unitários, com `1 warning` upstream de Starlette/TestClient; integração PostgreSQL separada `1 passed`; frontend lint, typecheck, `2 passed` Vitest e build aprovados; `pip check` sem dependências quebradas.
-- Auditorias: `npm install` reportou `0 vulnerabilities`; chamadas locais explícitas a serviços externos de auditoria foram bloqueadas pela política do ambiente. Os gates `pip-audit` e `npm audit` estão configurados no CI e precisam ficar verdes no Pull Request.
-- Pendências de integração: publicar commit e Pull Request autorizados, comprovar CI remoto verde e integrar após revisão final.
+- Auditorias: chamadas locais explícitas a serviços externos foram bloqueadas pela política do ambiente; no PR #13, `pip-audit` e `npm audit --audit-level=high` foram aprovados na execução `29651420670` após atualização de `pydantic-settings` para `2.14.2` e Starlette para `1.3.1`.
+- CI remoto: backend/PostgreSQL/migrations aprovado em `1m22s` e frontend aprovado em `25s` no commit `569e9e1`.
+- Encerramento: a entrada deste checkpoint em `main` pelo PR #13 materializa a integração; não restam pendências técnicas de G0.
 - Pendências antes de beta público: política de sessão/cookies, refresh/revogação, rate limiting, CORS HTTPS/não-loopback validado no domínio real, secrets gerenciados e observabilidade.
-- Próxima ação: integrar G0; depois concluir a fundação profissional e visual em branch própria.
-- Riscos identificados: declarar a fase concluída antes de CI/merge ou expor publicamente a autenticação baseline.
+- Próxima ação: criar `front/cartographer-brand-tokens` e concluir a fundação visual em branch própria.
+- Riscos identificados: expor publicamente a autenticação baseline antes do hardening pré-beta ou ampliar o escopo antes do piloto.
 
 ## Padrão De Atualização
 

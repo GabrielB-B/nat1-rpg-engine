@@ -386,6 +386,17 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 - O fechamento permanece condicionado a CI remoto verde, auditorias aprovadas e revisão do Pull Request.
 - O conector Figma continuou indisponível e não faz parte deste commit de segurança, qualidade e documentação.
 
+### 2026-07-18 - Pull Request, Correção De Auditoria E Aprovação Técnica De G0
+
+- Criado o commit `65b9f34` com a baseline de segurança, arquitetura, produto, qualidade e identidade visual documentada.
+- Publicada a branch `security/baseline-hardening` e aberto o PR [#13](https://github.com/GabrielB-B/nat1-rpg-engine/pull/13) contra `main`.
+- A primeira execução remota aprovou o frontend, PostgreSQL, migrations, lint e testes, mas o `pip-audit` bloqueou `pydantic-settings==2.14.1` e `starlette==1.2.1`.
+- Aplicado o patch mínimo: `pydantic-settings==2.14.2` no manifesto e lock, e `starlette==1.3.1` no lock; FastAPI, Pydantic, HTTPX e AnyIO permaneceram nas versões compatíveis já fixadas.
+- A correção foi registrada no commit `569e9e1`; localmente, `pip check`, Ruff e `58 passed` unitários foram aprovados.
+- A política local impediu o envio explícito do inventário de dependências ao serviço público de auditoria; nenhuma tentativa de contorno foi realizada.
+- A execução remota [29651420670](https://github.com/GabrielB-B/nat1-rpg-engine/actions/runs/29651420670) aprovou backend, PostgreSQL, ciclo reversível de migrations, testes, `pip-audit`, frontend, build e `npm audit`.
+- G0 ficou tecnicamente aprovado; a entrada deste registro em `main` pelo PR #13 materializa o encerramento do gate.
+
 ## Restricoes De Escopo Mantidas
 
 - Nao implementar IA/RAG no MVP 1 inicial.

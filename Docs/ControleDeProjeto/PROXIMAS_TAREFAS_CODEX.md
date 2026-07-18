@@ -23,8 +23,8 @@
 | 10 | `front/game-project-list-create` | concluida | Criar listagem e cadastro inicial de Campanhas & Crônicas no frontend. | Usa hooks e API client existentes; nao altera backend. | Usuario autenticado lista e cria campanhas reais; build validado. |
 | 10.1 | `front/game-project-list-create-polish` | concluida | Refinar biblioteca de campanhas, reduzir vazio visual, adicionar empty state hibrido e arquivamento. | Usa endpoint real de arquivamento, filtro local de arquivadas, empty state condicional e lista focalizada sem painel lateral; nao altera backend. | Layout adaptativo, CTAs sem duplicidade, cards sem esticamento excessivo, fluxo para arquivadas, confirmacao de arquivamento e build validado. |
 | 10.2 | `docs/architecture-roadmap-checkpoints` | concluida | Consolidar arquitetura, módulos, checkpoints, padrões de engenharia e decisões técnicas. | Fase documental sem alteração funcional de backend, frontend, banco, dependências ou design visual. | Plano de arquitetura, mapa de módulos, checkpoints, decisões e padrões registrados; validações documentais concluídas. |
-| 10.3 / G0 | `security/baseline-hardening` | em andamento | Fechar a baseline com PostgreSQL real, migrations, CI e revisão. | Publicação e integração autorizadas; commit, PR e CI remoto estão em execução. | PostgreSQL descartável `up/test/down/up`, backend, lint, frontend, build e CI comprovados; PR verde e integrado. |
-| 11 / G1 | `docs/professional-foundation` | em andamento | Consolidar produto, métricas, não objetivos, C4/deployment, ameaças, autorização, LGPD e qualidade. | Documentos canônicos foram preparados junto ao G0 por solicitação explícita; integração ainda pendente. | Hierarquia documental única, links revisados e nenhuma próxima fase concorrente. |
+| 10.3 / G0 | `security/baseline-hardening` | concluida | Fechar a baseline com PostgreSQL real, migrations, CI e revisão. | PR #13 integrado com CI remota aprovada. | PostgreSQL descartável `up/test/down/up`, backend, lint, frontend, build e CI comprovados; PR verde e integrado. |
+| 11 / G1 | `docs/professional-foundation` | concluida | Consolidar produto, métricas, não objetivos, C4/deployment, ameaças, autorização, LGPD e qualidade. | Documentos canônicos integrados junto ao fechamento de G0 por solicitação explícita. | Hierarquia documental única, links revisados e nenhuma próxima fase concorrente. |
 | 12 / G1 | `front/cartographer-brand-tokens` | pendente | Consolidar marca Cartógrafo, tipografia, tokens semânticos, contraste e QA visual. | Preservar geometria do logo entre temas; produzir SVG mestre e micro marca. | Ativos aprovados, tokens AA, foco/reduced motion e QA nos breakpoints. |
 | 13 / G2 | `front/home-master-real-data` | pendente | Substituir a Home fictícia por dados reais e estados honestos. | Remover NPCs/mapas/notas/sessões mockadas e CTAs inertes. | Home real com loading, erro, vazio, sucesso e rotas funcionais. |
 | 14 / G2 | `front/game-project-dashboard-shell` | pendente | Criar shell contextual da campanha. | Navegação inicial restrita a Resumo e Sessões; aplica tema da campanha. | `/campaigns/:projectId` protegido, profundo, responsivo e acessível. |
@@ -57,9 +57,8 @@
 - `front/game-project-list-create` permanece concluida com listagem e criacao real de campanhas.
 - `front/game-project-list-create-polish` permanece concluida com biblioteca adaptativa, empty state condicional, CTAs sem duplicidade, lista focalizada sem painel lateral e arquivamento via API real.
 - `docs/architecture-roadmap-checkpoints` consolida arquitetura, módulos, checkpoints, padrões e decisões sem alterar código funcional.
-- `security/baseline-hardening` possui baseline preparada e checks locais executáveis aprovados; publicação e integração foram autorizadas.
-- A próxima ação não é iniciar uma feature: é publicar, comprovar o CI e integrar G0.
-- Depois da integração, concluir G1 visual e então executar Home e shell em branches próprias.
+- `security/baseline-hardening` foi integrado com checks locais e CI remota aprovados no PR #13.
+- A próxima ação é concluir G1 visual em `front/cartographer-brand-tokens` e então executar Home e shell em branches próprias.
 - A única expansão funcional aprovada antes do piloto é o vertical de continuidade.
 - Personagens, locais, facções, relações, documentos, PDF e IA permanecem bloqueados.
 

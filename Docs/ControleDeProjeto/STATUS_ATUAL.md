@@ -4,11 +4,11 @@ Projeto: Nat 1 RPG Engine
 
 Data da última atualização: 2026-07-18
 
-Fase atual: G0 — `security/baseline-hardening`
+Fase atual após esta integração: G1 — `front/cartographer-brand-tokens`
 
-Branch: `security/baseline-hardening`
+Branch de fechamento de G0: `security/baseline-hardening`
 
-Status: publicação autorizada; commit, Pull Request, CI remoto e integração em execução
+Status canônico em `main`: G0 concluído pela integração do PR #13
 
 ## Regra de leitura
 
@@ -35,6 +35,7 @@ Status: publicação autorizada; commit, Pull Request, CI remoto e integração 
 - entrada acima de 128 caracteres ou bcrypt legado acima de 72 bytes recebe erro genérico; o segundo caso requer futuro reset de senha;
 - dependências diretas Python foram fixadas;
 - `requirements.lock` registra o ambiente reproduzível;
+- `pydantic-settings` foi atualizado para `2.14.2` e Starlette para `1.3.1` após o primeiro `pip-audit` remoto identificar versões vulneráveis;
 - `python-jose` foi substituída por `PyJWT==2.13.0` sem extra criptográfico: o projeto usa somente `HS256` e removeu `ecdsa` vulnerável e dependências assimétricas não utilizadas;
 - `pip-audit` foi incluído no gate de CI.
 
@@ -60,6 +61,8 @@ Status: publicação autorizada; commit, Pull Request, CI remoto e integração 
 - criado smoke test do componente `Button`;
 - warning real de dependência instável em `GameProjectsPage` foi corrigido com fallback estável;
 - export intencional `useAuth` foi documentado na regra de Fast Refresh.
+- PR [#13](https://github.com/GabrielB-B/nat1-rpg-engine/pull/13) executou os jobs canônicos de backend e frontend;
+- execução [29651420670](https://github.com/GabrielB-B/nat1-rpg-engine/actions/runs/29651420670) aprovou PostgreSQL, migrations, Ruff, Pytest, `pip-audit`, lint, typecheck, Vitest, build e `npm audit`.
 
 ### Produto, arquitetura e governança
 
@@ -77,10 +80,10 @@ Status: publicação autorizada; commit, Pull Request, CI remoto e integração 
 - Agenda completa ficou no gate opcional G4A, posterior ao vertical e condicionada à validação de H5;
 - personagens, locais, facções, relações, documentos, PDF e IA ficaram bloqueados até o piloto.
 
-## Estado técnico implementado em `main`
+## Estado funcional preservado
 
-Esta branch partiu do commit `7cd56d7` de `main`. Enquanto o Pull Request não for
-integrado, os fatos abaixo representam o produto já versionado antes desta branch:
+Esta entrega partiu do commit `7cd56d7` de `main` e reforçou segurança, qualidade e
+governança sem ampliar os módulos funcionais. Os fatos de produto abaixo permanecem válidos:
 
 ### Backend
 
@@ -135,12 +138,10 @@ Não implementado:
 - frontend Vitest: `2 passed`;
 - frontend build: aprovado;
 - instalação npm: `314 packages`, `0 vulnerabilities` reportadas;
-- backend local executado em Python `3.12.6`; a baseline canônica usa `3.12.13` e
-  depende do CI remoto para comprovação nesse patch runtime;
-- frontend local executado em Node `22.16.0`; a baseline canônica usa `22.23.1` e
-  depende do CI remoto para comprovação nesse patch LTS;
+- backend local executado em Python `3.12.6`; a execução remota aprovou a baseline canônica em Python `3.12.13`;
+- frontend local executado em Node `22.16.0`; a execução remota aprovou a baseline canônica em Node `22.23.1`;
 - auditorias online explícitas locais: não executadas porque o ambiente bloqueou o envio de metadados de dependência a serviço externo;
-- auditorias remotas: configuradas e pendentes de comprovação no Pull Request.
+- auditorias remotas: `pip-audit` e `npm audit --audit-level=high` aprovados no PR #13 após a correção do lock.
 
 Warnings conhecidos:
 
@@ -160,12 +161,10 @@ Warnings conhecidos:
 
 ## Pendências e bloqueios
 
-### Para concluir G0
+### Encerramento de G0
 
-- criar e publicar o commit autorizado por Gabriel;
-- abrir o Pull Request;
-- comprovar CI remoto, inclusive auditorias;
-- integrar após CI verde e revisão final.
+- a integração deste registro pelo PR #13 materializa o encerramento de G0;
+- não restam pendências técnicas do gate; os itens de exposição pública permanecem separados abaixo.
 
 ### Antes de beta público
 
@@ -186,14 +185,13 @@ bloquear o gate. Ativos vetoriais e aplicação visual permanecem para branch pr
 
 ## Próxima ação obrigatória
 
-Não iniciar Home, shell ou vertical nesta branch.
+Não iniciar Home, shell ou vertical sem primeiro abrir a branch visual própria.
 
-1. publicar e integrar G0 conforme autorização concedida;
-2. concluir a marca/tokens em branch visual;
-3. implementar Home real;
-4. implementar shell contextual;
-5. entregar o vertical;
-6. validar com mestres;
-7. somente então avaliar expansão.
+1. criar `front/cartographer-brand-tokens` e concluir marca/tokens;
+2. implementar Home real;
+3. implementar shell contextual;
+4. entregar o vertical;
+5. validar com mestres;
+6. somente então avaliar expansão.
 
 Gabriel autorizou explicitamente a publicação e a conclusão do G0 em 2026-07-18.
