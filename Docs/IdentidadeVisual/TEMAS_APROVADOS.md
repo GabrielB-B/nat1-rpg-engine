@@ -1,5 +1,12 @@
 # Nat 1 - Temas Visuais Aprovados
 
+Complemento técnico proposto de marca, tipografia, contraste e tokens semânticos:
+`Docs/IdentidadeVisual/SISTEMA_DE_MARCA_E_DESIGN_TOKENS.md`.
+
+As paletas deste arquivo continuam como matéria-prima dos temas. Pares de texto e ação
+devem usar os tokens semânticos e contrastes recomendados no complemento; uma cor decorativa
+não é automaticamente adequada como fundo de botão.
+
 ## Estado do projeto
 
 Esta documentacao foi consolidada na branch `docs/fix-approved-visual-themes`, antes da fase `front/setup-foundation`.
@@ -12,13 +19,17 @@ A UX base deve permanecer consistente entre os temas. Os temas mudam atmosfera, 
 
 A estrutura base aprovada para dashboard inclui menu lateral, cards, busca no topo, campanha ativa, notas rapidas e visao organizada.
 
+Essa composição é uma referência visual histórica. Na Home funcional, cards e atalhos só
+podem representar dados reais e módulos liberados pelo gate vigente; notas rápidas, NPCs,
+mapas ou sessões mockadas não fazem parte do contrato do MVP.
+
 ## Tema 1 - Cartografo / Modelo C
 
 - Chave tecnica: `cartographer`
 - Papel: tema principal/original e padrao inicial do produto.
 - Uso: fantasia, medieval, exploracao, campanha classica e worldbuilding.
 - Direcao visual: claro, cartografico, pergaminho, verde cartografico, dourado, mapas, jornada, campanha e mundo vivo.
-- UX base: menu lateral, cards, busca no topo, campanha ativa, notas rapidas e dashboard organizado.
+- UX base: menu lateral, cards, busca no topo, campanha ativa e dashboard organizado; conteúdo funcional respeita dados reais e gates.
 - Personalidade: ferramenta moderna de campanha, nao sistema administrativo generico.
 
 ### Paleta resumida
@@ -141,7 +152,7 @@ A estrutura base aprovada para dashboard inclui menu lateral, cards, busca no to
 - Criar tokens por tema desde o inicio.
 - Nao prender componentes ao tema Cartografo.
 - A navegacao deve ser compartilhada entre temas.
-- O frontend deve aceitar troca de tema por `theme_key`.
+- O frontend deve aceitar troca de tema pelo campo persistido `theme`; `theme_key` não é um segundo contrato.
 - O tema Cartografo sera o primeiro implementado funcionalmente.
 - Sombrio/Terror e Futurista Humanista devem nascer previstos nos tokens.
 - Evitar repetir paleta do Cartografo no Futurista Humanista.

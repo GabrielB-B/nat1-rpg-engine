@@ -132,6 +132,63 @@ def test_user_cannot_access_another_users_game_project(client: TestClient) -> No
     assert response.status_code == 404
 
 
+def test_user_cannot_update_another_users_game_project(client: TestClient) -> None:
+    owner_token = register_and_login_user(client, email="owner@example.com")
+    other_token = register_and_login_user(client, email="other@example.com")
+    other_project = create_game_project(
+        client,
+        token=other_token,
+        name="Projeto Privado",
+    )
+
+    response = client.patch(
+        f"/api/v1/game-projects/{other_project['id']}",
+        json={"name": "Tentativa de Acesso"},
+        headers=auth_headers(owner_token),
+    )
+
+    assert response.status_code == 404
+
+
+def test_user_cannot_archive_another_users_game_project(client: TestClient) -> None:
+    owner_token = register_and_login_user(client, email="owner@example.com")
+    other_token = register_and_login_user(client, email="other@example.com")
+    other_project = create_game_project(
+        client,
+        token=other_token,
+        name="Projeto Privado",
+    )
+
+    response = client.post(
+        f"/api/v1/game-projects/{other_project['id']}/archive",
+        headers=auth_headers(owner_token),
+    )
+
+    assert response.status_code == 404
+
+
+def test_user_cannot_restore_another_users_game_project(client: TestClient) -> None:
+    owner_token = register_and_login_user(client, email="owner@example.com")
+    other_token = register_and_login_user(client, email="other@example.com")
+    other_project = create_game_project(
+        client,
+        token=other_token,
+        name="Projeto Privado",
+    )
+    archive_response = client.post(
+        f"/api/v1/game-projects/{other_project['id']}/archive",
+        headers=auth_headers(other_token),
+    )
+
+    response = client.post(
+        f"/api/v1/game-projects/{other_project['id']}/restore",
+        headers=auth_headers(owner_token),
+    )
+
+    assert archive_response.status_code == 200
+    assert response.status_code == 404
+
+
 def test_update_game_project_for_owner(client: TestClient) -> None:
     token = register_and_login_user(client, email="owner@example.com")
     project = create_game_project(client, token=token, name="Nome Inicial")
@@ -154,6 +211,29 @@ def test_update_game_project_for_owner(client: TestClient) -> None:
     assert data["description"] == "Descricao revisada."
     assert data["status"] == "active"
     assert data["metadata_json"] == {"display_labels": {"project": "Cronica"}}
+
+
+def test_game_project_rejects_unsafe_cover_image_url(client: TestClient) -> None:
+    token = register_and_login_user(client, email="owner@example.com")
+
+    create_response = client.post(
+        "/api/v1/game-projects",
+        json={
+            "name": "URL Perigosa",
+            "format": "Campanha",
+            "cover_image_url": "javascript:alert(1)",
+        },
+        headers=auth_headers(token),
+    )
+    project = create_game_project(client, token=token, name="Projeto Seguro")
+    update_response = client.patch(
+        f"/api/v1/game-projects/{project['id']}",
+        json={"cover_image_url": "javascript:alert(1)"},
+        headers=auth_headers(token),
+    )
+
+    assert create_response.status_code == 422
+    assert update_response.status_code == 422
 
 
 def test_archive_hides_project_from_default_list(client: TestClient) -> None:

@@ -2,9 +2,18 @@
 
 Projeto: Nat 1 RPG Engine
 
-Data de referencia: 2026-06-21
+Data de referencia original: 2026-06-21
+
+Última atualização: 2026-07-18
 
 Fase relacionada: `docs/architecture-roadmap-checkpoints`
+
+Status: descrição da implementação existente. Para diagramas, deployment, trust
+boundaries e arquitetura alvo, prevalecem:
+
+- `ARQUITETURA_C4_E_DEPLOYMENT.md`;
+- `MODELO_DE_AMEACAS_AUTORIZACAO_E_LGPD.md`;
+- `ESCOPO_MVP_VERTICAL_E_GATES.md`.
 
 ## Objetivo
 
@@ -157,6 +166,10 @@ Itens atuais:
 - `.gitignore` cobrindo `.env`, ambientes virtuais, caches, builds e artefatos locais.
 - Branches por fase.
 - Pull Requests para integração na branch principal.
+
+CI versionado em `.github/workflows/ci.yml` executa backend, PostgreSQL 16, migrations,
+frontend, lint, testes, build e auditorias. A branch atual ainda depende de revisão,
+commit e integração aprovados para que esse estado exista em `main`.
 
 Comandos principais:
 

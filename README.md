@@ -1,8 +1,11 @@
 # Nat 1 RPG Engine
 
-Nat 1 RPG Engine is a web application for RPG masters and narrators to organize campaigns, chronicles, worlds, sessions, scenes, characters, creatures, locations, factions, documents, notes, and relationships.
+Nat 1 RPG Engine is a web application for RPG masters and narrators to preserve the
+operation and continuity of tabletop RPG campaigns.
 
-The MVP 1 is organizational only. It does not include AI/RAG, player access, chat, or advanced interactive maps in this stage.
+The current MVP is intentionally vertical: campaign → session → scenes → occurrences →
+recap → pending items. Characters, locations, relationships, documents, players, PDF,
+AI/RAG, chat and advanced maps remain behind later validation gates.
 
 ## Official Documentation
 
@@ -12,7 +15,16 @@ The product, architecture, roadmap and visual decisions live in:
 - `Docs/Documento_tecnico/`
 - `Docs/IdentidadeVisual/`
 
-These documents are the source of truth for product scope, business rules, non-functional requirements, architecture, checkpoints, data modeling, engineering standards and visual identity.
+Document authority is explicit:
+
+- `Docs/ControleDeProjeto/STATUS_ATUAL.md` records verified current facts;
+- `Docs/ControleDeProjeto/PROXIMAS_TAREFAS_CODEX.md` is the only executable queue;
+- `Docs/ControleDeProjeto/VALIDACAO_PRODUTO_E_ESTRATEGIA_DADOS.md` and
+  `Docs/ControleDeProjeto/ESCOPO_MVP_VERTICAL_E_GATES.md` govern product and scope;
+- `Docs/ControleDeProjeto/ARQUITETURA_C4_E_DEPLOYMENT.md` and
+  `Docs/ControleDeProjeto/MODELO_DE_AMEACAS_AUTORIZACAO_E_LGPD.md` govern the architecture baseline;
+- checkpoints, history and PDFs preserve earlier decisions but do not override newer,
+  dated addenda.
 
 ## Current Stage
 
@@ -25,7 +37,7 @@ This repository currently contains the backend foundation in `apps/api`, using:
 - Alembic
 - Pydantic Settings
 - JWT authentication
-- bcrypt password hashing
+- `bcrypt_sha256` password hashing with opportunistic legacy bcrypt migration
 - protected Game Project, World and System Template endpoints
 
 The frontend foundation is active in `apps/web`, using:
@@ -37,7 +49,14 @@ The frontend foundation is active in `apps/web`, using:
 - React Router
 - TanStack Query
 
-The current frontend includes the Cartographer design system foundation, login/register routes, protected routing, API integration and the first real Campanhas & Crônicas screen. The Home do Mestre is still a mocked visual shell and is scheduled to consume real account data in `front/home-master-real-data`.
+The current frontend includes the Cartographer foundation, login/register, protected
+routing, API integration and the first real Campanhas & Crônicas screen. The Home do
+Mestre is still a visual mock and must be replaced with real data after the current
+security branch is reviewed and integrated.
+
+The active branch `security/baseline-hardening` now contains PostgreSQL integration
+coverage and CI configuration, but the project protocol requires Gabriel's approval
+before commit, Pull Request and integration.
 
 ## Backend Commands
 
@@ -46,9 +65,11 @@ cd apps/api
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-pip install -r requirements.txt -r requirements-dev.txt
+Copy-Item .env.example .env
+pip install -r requirements.lock
 uvicorn app.main:app --reload
 pytest
+ruff check .
 ```
 
 Health check:
@@ -61,9 +82,11 @@ GET http://127.0.0.1:8000/api/v1/health
 
 ```powershell
 cd apps/web
-npm install
+npm ci
 Copy-Item .env.example .env
 npm run dev
+npm run lint
+npm test
 npm run typecheck
 npm run build
 ```
@@ -79,13 +102,13 @@ http://127.0.0.1:5173
 Start the local PostgreSQL database:
 
 ```powershell
-docker compose up -d
+docker compose up -d --wait
 ```
 
 Check whether the container is running:
 
 ```powershell
-docker ps
+docker compose ps
 ```
 
 Stop the local database:

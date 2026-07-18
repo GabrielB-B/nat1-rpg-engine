@@ -1,5 +1,8 @@
 # Plano De Trabalho
 
+Status: histórico de fases. Para execução atual, prevalecem
+`PROXIMAS_TAREFAS_CODEX.md` e `ESCOPO_MVP_VERTICAL_E_GATES.md`.
+
 Documento complementar de direção de produto: `Docs/ControleDeProjeto/PLANO_PRODUTO_E_REFERENCIAS.md`.
 
 Documentos complementares de arquitetura e continuidade:
@@ -12,14 +15,15 @@ Documentos complementares de arquitetura e continuidade:
 
 ## Prioridade Direcional Atual
 
-1. Home do Mestre.
-2. Campanhas & Crônicas.
-3. Modulos relacionais dentro da campanha.
-4. Mundo / Cenario amplo para worldbuilding.
-5. Sistema / Template separado de mundo.
-6. IA e PDF inteligente com aprovacao do mestre.
+1. Fechar segurança, PostgreSQL, migrations e CI.
+2. Consolidar produto, C4/deployment, ameaças, LGPD e marca.
+3. Implementar Home real e shell contextual.
+4. Entregar sessão → cena → acontecimento → recap → pendência.
+5. Validar com mestres reais.
+6. Expandir módulos relacionais somente após o gate de validação.
+7. Manter documentos, PDF e IA para gates posteriores.
 
-Próxima fase recomendada: `front/home-master-real-data`.
+Próxima ação: revisão e integração aprovada de `security/baseline-hardening`.
 
 Este plano organiza as fases práticas do Nat 1 RPG Engine para manter escopo, validação e continuidade entre tarefas.
 
@@ -231,7 +235,11 @@ Critérios de aceite:
 
 ## Fase I - Módulos Internos Essenciais
 
-Objetivo: implementar os módulos centrais do MVP 1 por etapas.
+Esta definição foi substituída em 2026-07-18 pelo vertical descrito em
+`ESCOPO_MVP_VERTICAL_E_GATES.md`. A lista abaixo permanece apenas como registro do
+roadmap anterior e não autoriza implementação.
+
+Objetivo histórico: implementar os módulos centrais do MVP 1 por etapas.
 
 Entregáveis:
 - Sessões.

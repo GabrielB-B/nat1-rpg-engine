@@ -10,14 +10,14 @@ The visual shell uses `lucide-react` for lightweight interface icons.
 
 ## Requirements
 
-- Node.js 22+
+- Node.js `>=22.23.1 <23` (linha LTS 22 com correções de segurança)
 - npm 10+
 
 ## Setup
 
 ```powershell
 cd apps/web
-npm install
+npm ci
 Copy-Item .env.example .env
 ```
 
@@ -39,10 +39,12 @@ Default local URL:
 http://127.0.0.1:5173
 ```
 
-## Build And Typecheck
+## Quality, Tests And Build
 
 ```powershell
+npm run lint
 npm run typecheck
+npm test
 npm run build
 ```
 
@@ -191,7 +193,11 @@ src/data/mockWorkspace.ts
 
 This file is intentionally isolated so future API integration can replace mock data without reshaping the dashboard components.
 
-The current sidebar menu is a visual mock for the global Home do Mestre. The future campaign-internal menu should be generated from backend `ProjectModuleSettings`, using the real campaign modules: Resumo, Sessoes, Cenas, Personagens & Criaturas, Locais / Atlas, Organizacoes & Faccoes, Documentos, Notas, Relacoes and Configuracoes.
+The current sidebar menu is a visual mock for the global Home do Mestre. It must not be
+treated as implemented navigation. The first campaign shell is restricted to `Resumo`
+and `Sessões`; scenes, occurrences, recap and pending items live inside the session
+workspace. Characters, locations, factions, documents and relationships remain hidden
+until the validation gate authorizes expansion.
 
 ## Domain API Modules
 
@@ -274,8 +280,10 @@ Permanent deletion remains out of scope. Active player count and next-session da
 - Sidebar buttons, search and dashboard actions are visual only in this stage.
 - Auth pages and `/campaigns` consume the real local API; the dashboard still does not consume real API data.
 - Domain hooks are implemented and `/campaigns` uses the Game Projects, Worlds and System Templates read paths.
-- The Cartographer dashboard is intentionally compact and should stay close to the approved reference: narrow sidebar, small stats, horizontal active campaign card, side sessions and lower NPC/map/notes cards.
-- ESLint is intentionally left for a later frontend quality pass.
+- The Cartographer reference still governs density, typography and visual hierarchy. Its
+  historical module composition does not authorize fake NPC, map, note or session data:
+  the functional Home must render only real capabilities released by the current gate.
+- ESLint and Vitest are part of the current quality gate.
 
 ## Architecture Documentation
 
@@ -288,6 +296,8 @@ Docs/ControleDeProjeto/
   CHECKPOINTS.md
   PADROES_DE_ENGENHARIA.md
   DECISOES_TECNICAS.md
+  ESCOPO_MVP_VERTICAL_E_GATES.md
+  PLANO_DE_QUALIDADE_E_CI.md
 ```
 
 Frontend changes should preserve feature boundaries, protected routing, domain hooks, API client conventions and theme token usage documented there.

@@ -13,6 +13,7 @@ import { useSystemTemplates } from "../features/system-templates/hooks/useSystem
 import { useWorlds } from "../features/worlds/hooks/useWorlds";
 
 const ICON_STROKE = 1.75;
+const EMPTY_PROJECTS: GameProjectListItem[] = [];
 type LibraryView = "active" | "archived";
 type FeedbackState = {
   message: string;
@@ -43,7 +44,7 @@ export function GameProjectsPage() {
     [worldsQuery.data]
   );
 
-  const allProjects = gameProjectsQuery.data ?? [];
+  const allProjects = gameProjectsQuery.data ?? EMPTY_PROJECTS;
   const activeProjects = useMemo(
     () => allProjects.filter((project) => !project.archived_at),
     [allProjects]

@@ -12,18 +12,26 @@ __pycache__/
 
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
+.cache/
 .coverage
+.coverage.*
 htmlcov/
+coverage/
 
 node_modules/
 dist/
 build/
+test-results/
+playwright-report/
 
 *.log
 *.tmp
 *.temp
 *.bak
 *.swp
+tmp/
+temp/
 
 .DS_Store
 Thumbs.db
@@ -31,6 +39,9 @@ Thumbs.db
 uploads/
 local_uploads/
 apps/api/uploads/
+*.sqlite
+*.sqlite3
+*.db
 
 # TypeScript build cache
 *.tsbuildinfo

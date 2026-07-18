@@ -8,4 +8,4 @@ class Token(BaseModel):
 
 class TokenPayload(BaseModel):
     sub: str
-    exp: int | None = None
+    exp: int
