@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 
 import { App } from "./app/App";
 import { AppProviders } from "./app/providers";
+import "./styles/fonts.css";
 import "./styles/globals.css";
 import "./styles/themes.css";
 

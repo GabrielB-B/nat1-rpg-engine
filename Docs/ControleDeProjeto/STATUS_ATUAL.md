@@ -4,7 +4,7 @@ Projeto: Nat 1 RPG Engine
 
 Data da última atualização: 2026-07-18
 
-Fase atual após esta integração: G1 — `front/cartographer-brand-tokens`
+Fase atual: G1 em andamento — `front/cartographer-brand-tokens`
 
 Branch de fechamento de G0: `security/baseline-hardening`
 
@@ -100,6 +100,10 @@ governança sem ampliar os módulos funcionais. Os fatos de produto abaixo perma
 - login/cadastro e rotas protegidas;
 - biblioteca real de campanhas com criação e arquivamento;
 - tema Cartógrafo como fundação visual;
+- fundação candidata de marca em elaboração com símbolo, micro marca, favicon, componente
+  `BrandMark`, fontes self-hosted e tokens semânticos para os três temas;
+- os ativos desta branch são provisórios e ainda não constituem marca final ou liberada
+  comercialmente;
 - Home ainda integralmente mockada;
 - nenhuma shell contextual de campanha;
 - nenhum domínio de sessão/cena implementado.
@@ -112,12 +116,14 @@ Implementado:
 - biblioteca de Campanhas & Crônicas;
 - fundações de mundo, template e módulos;
 - integração frontend/API;
-- identidade Cartógrafo inicial.
+- identidade Cartógrafo inicial;
+- implementação candidata/provisória da fundação visual de G1, com QA técnico aprovado
+  e QA visual parcial, ainda sujeita às pendências registradas e à aprovação explícita.
 
 Não implementado:
 
 - Home real;
-- logo final e ativos vetoriais padronizados;
+- logo final, aprovação comercial e família completa de ativos finais;
 - troca real de tema por campanha;
 - shell `/campaigns/:projectId`;
 - Session, Scene, SessionOccurrence, SessionRecap e PendingItem;
@@ -126,7 +132,12 @@ Não implementado:
 - personagens, locais, facções, relações, documentos, PDF e IA;
 - deployment público e observabilidade.
 
-## Validações executadas em 2026-07-18
+## Validações de baseline/G0 executadas em 2026-07-18
+
+Este bloco registra a integração de segurança e infraestrutura anterior ao G1. As
+validações atuais da fundação visual (3 arquivos/15 testes após o reforço do contrato,
+build e QA por viewport) estão consolidadas em
+`Docs/IdentidadeVisual/RELATORIO_QA_VISUAL_G1.md`.
 
 - backend Ruff: aprovado;
 - backend unitário: `58 passed`, com `1 warning` upstream de Starlette/TestClient;
@@ -156,6 +167,8 @@ Warnings conhecidos:
 - `MODELO_DE_AMEACAS_AUTORIZACAO_E_LGPD.md`
 - `PLANO_DE_QUALIDADE_E_CI.md`
 - `Docs/IdentidadeVisual/SISTEMA_DE_MARCA_E_DESIGN_TOKENS.md`
+- `Docs/IdentidadeVisual/INVENTARIO_DE_ATIVOS.md`
+- `Docs/IdentidadeVisual/RELATORIO_QA_VISUAL_G1.md`
 - `PROXIMAS_TAREFAS_CODEX.md`
 - `STATUS_ATUAL.md`
 
@@ -179,19 +192,38 @@ Warnings conhecidos:
 
 ### Ferramentas de design
 
-A instalação/liberação do Figma foi solicitada pelo usuário, porém o conector não ficou
-exposto entre as ferramentas desta sessão. A especificação de marca foi consolidada sem
-bloquear o gate. Ativos vetoriais e aplicação visual permanecem para branch própria.
+O plugin Figma e o MCP remoto foram habilitados na configuração global do Codex em
+2026-07-18. O OAuth foi concluído anteriormente no host; a revalidação desta rodada ficou
+inconclusiva porque o runner isolado não alcança o endpoint externo. As ferramentas não
+são carregadas dinamicamente na thread já aberta: é necessário reiniciar a extensão e
+continuar em uma nova thread. Nenhum arquivo Figma foi alterado nesta etapa e
+o estado do conector não substitui QA nem aprovação visual.
+
+### Saída de G1
+
+G1 permanece em andamento. A fundação documental já existe e a implementação candidata
+está nesta branch. O QA técnico passou e há evidências responsivas/temáticas de autenticação,
+porém o gate exige cumulativamente:
+
+1. especificação coerente;
+2. ativos/tokens aplicados e inventariados;
+3. QA técnico e visual com evidências;
+4. aprovação explícita de Gabriel.
+
+A liberação comercial da marca é uma decisão posterior e continua condicionada a
+proveniência, originalidade, licenças, similaridade e pesquisa marcária.
 
 ## Próxima ação obrigatória
 
-Não iniciar Home, shell ou vertical sem primeiro abrir a branch visual própria.
+Não iniciar Home, shell ou vertical antes do encerramento formal de G1.
 
-1. criar `front/cartographer-brand-tokens` e concluir marca/tokens;
-2. implementar Home real;
-3. implementar shell contextual;
-4. entregar o vertical;
-5. validar com mestres;
-6. somente então avaliar expansão.
+1. reiniciar a extensão e produzir no Figma a prancha 16/24/32, lockup vertical e
+   revisão de sidebar/empty state;
+2. fechar as ressalvas do relatório visual e obter decisão explícita de Gabriel;
+3. implementar Home real;
+4. implementar shell contextual;
+5. entregar o vertical;
+6. validar com mestres;
+7. somente então avaliar expansão.
 
 Gabriel autorizou explicitamente a publicação e a conclusão do G0 em 2026-07-18.

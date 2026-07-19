@@ -1,5 +1,6 @@
 import { Archive, BookOpenCheck, Compass, Plus } from "lucide-react";
 
+import { BrandMark } from "../../../components/brand/BrandMark";
 import { Button } from "../../../components/ui/Button";
 
 const ICON_STROKE = 1.75;
@@ -71,7 +72,11 @@ export function GameProjectsEmptyState({
         ) : null}
       </div>
       <div className="projects-empty-visual" aria-hidden="true">
-        <span className="projects-empty-sigil">N1</span>
+        <BrandMark
+          className="projects-empty-sigil"
+          decorative
+          variant="symbol"
+        />
         <span className="projects-empty-compass">
           <Compass className="ui-icon icon-lg" strokeWidth={ICON_STROKE} />
         </span>

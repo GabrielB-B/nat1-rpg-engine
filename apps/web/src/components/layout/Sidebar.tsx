@@ -1,6 +1,7 @@
 import { Settings } from "lucide-react";
 
 import type { NavigationItem } from "../../data/mockWorkspace";
+import { BrandMark } from "../brand/BrandMark";
 import { ModuleNavItem } from "./ModuleNavItem";
 
 const ICON_STROKE = 1.75;
@@ -14,9 +15,7 @@ export function Sidebar({ items, userName }: SidebarProps) {
   return (
     <aside className="sidebar" aria-label="Navegação principal">
       <div className="sidebar-brand">
-        <span className="brand-sigil" aria-hidden="true">
-          N1
-        </span>
+        <BrandMark decorative variant="micro" />
         <div>
           <p>Nat 1</p>
         </div>

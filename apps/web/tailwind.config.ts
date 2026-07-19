@@ -5,17 +5,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        surface: "var(--surface)",
+        page: "var(--page-bg)",
+        surface: "var(--surface-1)",
+        "surface-2": "var(--surface-2)",
         "surface-raised": "var(--surface-raised)",
-        border: "var(--border)",
-        text: "var(--text)",
-        "text-muted": "var(--text-muted)",
-        primary: "var(--primary)",
-        accent: "var(--accent)",
-        danger: "var(--danger)",
-        success: "var(--success)",
-        warning: "var(--warning)"
+        border: "var(--border-default)",
+        "border-strong": "var(--border-strong)",
+        "control-border": "var(--control-border)",
+        text: "var(--text-primary)",
+        "text-secondary": "var(--text-secondary)",
+        "text-disabled": "var(--text-disabled)",
+        "action-primary": "var(--action-primary-bg)",
+        "action-primary-text": "var(--action-primary-text)",
+        "action-secondary": "var(--action-secondary-bg)",
+        "action-secondary-text": "var(--action-secondary-text)",
+        link: "var(--link)",
+        focus: "var(--focus-ring)",
+        danger: "var(--status-danger)",
+        success: "var(--status-success)",
+        warning: "var(--status-warning)"
       },
       boxShadow: {
         panel: "var(--shadow-panel)"

@@ -175,10 +175,10 @@ Registrar decisões técnicas já adotadas para reduzir ambiguidade em fases fut
 
 ## DT-024 - Geometria De Marca Invariante Entre Temas
 
-- Status: recomendada para aprovação visual.
+- Status: adotada como direção de construção; aprovação visual final pendente.
 - Contexto: os dois logos anexos possuem atmosferas diferentes e poderiam fragmentar reconhecimento.
 - Decisão: chapéu, d20, número 1 e anel cardeal preservam a mesma geometria; temas alteram paleta, textura e acabamento.
-- Consequência: Cartógrafo usa a composição clara como base, Horror deriva o acabamento escuro e Futurista mantém o símbolo em linguagem geométrica.
+- Consequência: Cartógrafo usa a composição clara como base, Horror deriva o acabamento escuro e Futurista mantém o símbolo em linguagem geométrica. A implementação atual materializa uma hipótese candidata e não converte a marca em ativo final ou comercialmente liberado.
 
 ## DT-025 - JWT Simétrico Sem Dependência ECDSA
 
@@ -186,3 +186,17 @@ Registrar decisões técnicas já adotadas para reduzir ambiguidade em fases fut
 - Contexto: `python-jose` trazia `ecdsa`, afetada por [CVE-2024-23342 / GHSA-wj6h-64fc-37mp](https://github.com/advisories/GHSA-wj6h-64fc-37mp) e sem versão corrigida; o Nat 1 usa exclusivamente `HS256`.
 - Decisão: substituir `python-jose` por `PyJWT==2.13.0`, sem extra criptográfico, manter allowlist explícita de `HS256` e exigir claims `sub` e `exp` na decodificação.
 - Consequência: `ecdsa`, `rsa` e `pyasn1` deixam o lock, a superfície de dependências diminui e uma futura adoção de algoritmo assimétrico exigirá nova decisão e threat review.
+
+## DT-026 - Gate Visual Exige Especificação, Implementação, QA E Aprovação
+
+- Status: adotada.
+- Contexto: a definição resumida de G1 permitia interpretar a especificação documental como suficiente, enquanto a fila executável exigia ativos, contraste e QA visual.
+- Decisão: G1 visual só pode ser encerrado quando especificação, implementação candidata rastreável, QA com evidências e aprovação explícita de Gabriel estiverem registrados.
+- Consequência: `front/cartographer-brand-tokens` permanece em andamento enquanto houver QA ou decisão visual pendente; presença de SVGs ou tokens no repositório, isoladamente, não autoriza declarar marca final nem iniciar G2.
+
+## DT-027 - Ornamentação E Limite Operacional Usam Contratos Distintos
+
+- Status: adotada.
+- Contexto: a borda dourada suave funcionava como decoração Cartógrafo, mas ficava abaixo de 3:1 quando reutilizada para identificar campos e botões contornados.
+- Decisão: manter `--border-default` como divisão ornamental e exigir `--control-border` opaca para limites interativos, validada contra superfície e página nos três temas.
+- Consequência: o produto preserva leveza visual sem sacrificar WCAG 1.4.11; novos controles não podem usar borda decorativa como único limite perceptível.

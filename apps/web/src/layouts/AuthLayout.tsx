@@ -1,18 +1,17 @@
 import { Outlet } from "react-router-dom";
 
+import { BrandMark } from "../components/brand/BrandMark";
+
 export function AuthLayout() {
   return (
     <main className="auth-layout">
       <div className="auth-card">
         <aside className="auth-story" aria-label="Nat 1">
           <div className="auth-brand">
-            <span className="brand-sigil" aria-hidden="true">
-              N1
-            </span>
-            <div>
-              <strong>Nat 1</strong>
-              <span>RPG Engine</span>
-            </div>
+            <BrandMark
+              className="auth-brand-mark"
+              variant="lockup-horizontal"
+            />
           </div>
           <div className="auth-story-copy">
             <p className="section-kicker">Workspace do Mestre</p>

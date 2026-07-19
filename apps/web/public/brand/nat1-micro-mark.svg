@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Micro marca Nat 1 RPG</title>
+  <path d="M32 3 57 17l-3 30-22 14L10 47 7 17 32 3Z" fill="#FFF8E8" stroke="#4A3424" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M7 17 32 28 57 17M10 47l22-19 22 19M32 3v25m0 0v33" fill="none" stroke="#B58A42" stroke-width="1.7" stroke-linejoin="round"/>
+  <path d="m27 29 9-5v21h7v8H22v-8h7V36l-5 3-3-7 6-3Z" fill="#A1533F" stroke="#4A3424" stroke-width="1" stroke-linejoin="round"/>
+</svg>

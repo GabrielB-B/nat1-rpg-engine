@@ -397,6 +397,23 @@ Este arquivo registra decisoes tecnicas e marcos relevantes do Nat 1 RPG Engine.
 - A execução remota [29651420670](https://github.com/GabrielB-B/nat1-rpg-engine/actions/runs/29651420670) aprovou backend, PostgreSQL, ciclo reversível de migrations, testes, `pip-audit`, frontend, build e `npm audit`.
 - G0 ficou tecnicamente aprovado; a entrada deste registro em `main` pelo PR #13 materializa o encerramento do gate.
 
+### 2026-07-18 - Início De G1 Visual E Recuperação Do Acesso Ao Figma
+
+- Fase: G1 — `front/cartographer-brand-tokens`.
+- Branch: `front/cartographer-brand-tokens`.
+- Corrigida a leitura do gate: G1 não é apenas documental e passa a exigir especificação, implementação candidata rastreável, QA com evidências e aprovação explícita de Gabriel.
+- Criada a primeira construção vetorial candidata do símbolo Cartógrafo, acompanhada de micro marca e favicon; esses ativos são provisórios e não representam logo final ou autorização comercial.
+- Criado componente central `BrandMark` e iniciada a substituição dos placeholders de marca nos pontos existentes do frontend.
+- Adicionadas Alegreya e Source Sans 3 em WOFF2 self-hosted, com cópias das licenças OFL e registro no inventário de ativos.
+- Consolidado contrato de tokens semânticos para Cartógrafo, Sombrio/Terror e Futurista Humanista, preservando aliases temporários para a interface existente.
+- O plugin Figma e o MCP remoto foram habilitados na configuração global do Codex. O OAuth foi concluído anteriormente no host; a revalidação externa ficou inconclusiva no runner isolado. Como ferramentas MCP não são injetadas na thread já aberta, a extensão precisa ser reiniciada e o trabalho retomado em nova thread para uso do conector.
+- Nenhum arquivo Figma foi alterado nesta etapa.
+- Separadas bordas decorativas de bordas operacionais por `--control-border`; os três temas agora possuem teste automático de contraste para texto, ações, status, foco e limites de controle.
+- SVGs cartográficos antes embutidos como data-URI foram externalizados em `public/illustrations`; gradientes e elementos DOM passaram a consumir tokens de marca/mapa, com tratamento centralizado dos SVGs por tema.
+- Adicionados testes de paridade geométrica entre `BrandMark`, SVG público, micro marca e favicon.
+- QA técnico aprovado com lint, TypeScript, 15 testes, build e XML de 9 SVGs. A autenticação foi inspecionada sem overflow em 320, 360, 390, 768 e 1440 px, com evidências Cartógrafo, Horror, Futurista e foco visível versionadas.
+- Criados `INVENTARIO_DE_ATIVOS.md` e `RELATORIO_QA_VISUAL_G1.md` para rastreabilidade. QA visual permanece parcial e a aprovação explícita de Gabriel continua pendente; G1 não foi encerrado.
+
 ## Restricoes De Escopo Mantidas
 
 - Nao implementar IA/RAG no MVP 1 inicial.

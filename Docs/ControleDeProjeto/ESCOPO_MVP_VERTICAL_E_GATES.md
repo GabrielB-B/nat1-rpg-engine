@@ -23,7 +23,7 @@ continuidade na sessão seguinte.
 | Gate | Resultado esperado | Condição de saída |
 | --- | --- | --- |
 | G0 — Segurança e integração | Branch baseline tecnicamente confiável | PostgreSQL real descartável, migration `up/down/up`, testes, lint, builds, auditorias configuradas, revisão e integração aprovada |
-| G1 — Fundação profissional | Decisões de produto e engenharia sem ambiguidade | Estratégia canônica, não objetivos, C4/deployment, ameaças/LGPD, CI e especificação de marca/tokens |
+| G1 — Fundação profissional | Decisões de produto, engenharia e identidade visual sem ambiguidade | Estratégia canônica, não objetivos, C4/deployment, ameaças/LGPD e CI; especificação visual implementada como candidato rastreável; tokens semânticos, tipografia e acessibilidade validados; QA visual registrado e aprovação explícita de Gabriel |
 | G2 — Entrada operacional | Produto deixa de apresentar dados fictícios | Home real, estados assíncronos e shell contextual de campanha |
 | G3 — Vertical funcional | Um ciclo narrativo persiste de ponta a ponta | API, migration, autorização, UI e testes para o fluxo completo |
 | G4 — Validação | Evidência com mestres reais | Entrevistas, piloto, métricas de ativação/sucesso e decisão `avançar`, `revisar` ou `parar` |
@@ -33,6 +33,21 @@ continuidade na sessão seguinte.
 
 Nenhum gate posterior autoriza pular os anteriores. Entrevistas de problema podem
 ocorrer em paralelo, mas novos módulos permanecem bloqueados até G4.
+
+### Leitura operacional de G1
+
+G1 é composto por quatro partes inseparáveis:
+
+1. **especificação:** direção de marca, tipografia, tokens, contraste e regras de uso;
+2. **implementação:** ativos candidatos versionados e aplicação por componentes/tokens;
+3. **verificação:** testes técnicos e QA visual com evidências nos breakpoints e estados definidos;
+4. **aprovação:** decisão explícita de Gabriel sobre a direção visual apresentada.
+
+Documentação isolada não encerra G1. Da mesma forma, um SVG presente no repositório não
+se torna automaticamente logo final. A saída do gate exige as quatro partes registradas.
+Mesmo após a aprovação visual de G1, uso comercial da marca continua condicionado à
+proveniência dos anexos, originalidade da reconstrução, licenças, pesquisa de similaridade
+e pesquisa marcária descritas no sistema de marca.
 
 ## Entidades do vertical
 

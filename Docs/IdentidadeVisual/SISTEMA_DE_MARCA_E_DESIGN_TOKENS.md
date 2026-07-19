@@ -1,9 +1,36 @@
 # Sistema de Marca e Design Tokens
 
 - Projeto: Nat 1 RPG Engine
-- Versão: 1.0 — recomendação para aprovação visual
+- Versão: 1.1 — fundação candidata para QA e aprovação visual
 - Data: 2026-07-18
-- Status: especificação; ativos vetoriais e aplicação no frontend dependem de aprovação
+- Status: especificação e implementação candidata/provisória; marca final e uso comercial não aprovados
+
+## Estado da implementação de G1
+
+A branch `front/cartographer-brand-tokens` materializa esta especificação em uma primeira
+fundação técnica, sem antecipar a decisão visual de Gabriel:
+
+- símbolo Cartógrafo candidato em SVG;
+- micro marca e favicon candidatos;
+- componente reutilizável `BrandMark` para símbolo, micro marca e lockups;
+- Alegreya e Source Sans 3 self-hosted, com licenças OFL preservadas;
+- contrato de tokens semânticos para `cartographer`, `dark_horror` e
+  `humanist_futuristic`;
+- foco visível, preferência de movimento reduzido e testes automatizados como parte do
+  gate técnico.
+
+Os arquivos e licenças estão relacionados em `INVENTARIO_DE_ATIVOS.md`. O primeiro ciclo
+de renderização, breakpoints e estados está registrado em `RELATORIO_QA_VISUAL_G1.md`, com
+QA técnico aprovado e QA visual parcial. Enquanto as pendências desse relatório e a
+aprovação explícita de Gabriel permanecerem abertas, todos os ativos continuam
+**candidatos**. Eles não devem ser apresentados como logo final ou ativo liberado para uso
+comercial.
+
+O plugin Figma e o MCP remoto estão habilitados na configuração global do Codex. O OAuth
+foi concluído anteriormente no host, mas a revalidação remota não pode ser repetida pelo
+runner isolado desta thread, que não possui saída de rede. A extensão precisa ser
+reiniciada e o trabalho retomado em nova thread para carregar as ferramentas. Nenhum
+arquivo Figma foi modificado durante esta implementação local.
 
 ## Direção de marca
 
@@ -70,7 +97,7 @@ completo não for legível.
 
 ## Família de logotipos
 
-Ativos obrigatórios:
+Família final desejada:
 
 | Ativo | Uso |
 | --- | --- |
@@ -81,6 +108,11 @@ Ativos obrigatórios:
 | Monocromática tinta | impressão simples e fundos claros |
 | Reversa marfim | fundos escuros |
 | Variante por tema | Cartógrafo, Horror e Futurista com geometria idêntica |
+
+A implementação atual cobre uma candidata técnica do símbolo, micro marca e lockups
+compostos pelo componente `BrandMark`. Isso não equivale à entrega da família final: o
+wordmark vetorial mestre, variantes monocromática/reversa, exportações raster e arquivos
+fonte editáveis permanecem condicionados a QA e aprovação.
 
 O wordmark deve ser desenhado ou convertido em vetor final. Texto produzido em imagem
 gerativa serve apenas como conceito, nunca como arquivo mestre.
@@ -107,8 +139,8 @@ registradas em um inventário de ativos.
 
 - fundo: carvão `#111111` ou transparente;
 - linha/preenchimento: osso antigo `#D8C7A5`;
-- d20 e órbita: bronze velho `#8A6A3C`;
-- `1`: sangue seco `#6E1E1A` com contraste reforçado por contorno;
+- d20 e órbita: bronze velho `#B58A50`;
+- `1`: sangue seco `#A8483F` com contraste reforçado por contorno;
 - textura: gravura/dossiê controlada;
 - não usar símbolos demoníacos como identidade central.
 
@@ -143,7 +175,7 @@ Definir `x` como a largura da face central do número `1` no d20.
 - gerar uma nova forma de logo a cada campanha;
 - copiar símbolos, lettering ou composição proprietária de outra marca.
 
-## Tipografia recomendada
+## Tipografia da fundação candidata
 
 ### Interface
 
@@ -151,8 +183,10 @@ Definir `x` como a largura da face central do número `1` no d20.
 - corpo e controles: **Source Sans 3**, pesos 400–700;
 - fallbacks: Georgia para display; `Segoe UI`, system-ui e sans-serif para corpo.
 
-As fontes devem ser self-hosted em WOFF2 após validação de licença e subset Latin. O
-wordmark não depende da fonte de interface: ele terá desenho vetorial próprio.
+As fontes estão self-hosted em WOFF2 com subset Latin e cópias das licenças OFL no
+repositório. O inventário registra pacote, versão e caminho. O wordmark candidato em
+interface pode compor os tipos durante G1, mas o wordmark final não deve depender da fonte
+de interface: ele terá desenho vetorial próprio após aprovação.
 
 Critérios:
 
@@ -171,8 +205,10 @@ Componentes não devem consumir `gold`, `moss` ou `cyan` diretamente. A API visu
 --surface-1
 --surface-2
 --surface-raised
+--surface-inset
 --border-default
 --border-strong
+--control-border
 --text-primary
 --text-secondary
 --text-disabled
@@ -192,12 +228,21 @@ Componentes não devem consumir `gold`, `moss` ou `cyan` diretamente. A API visu
 --disabled-text
 ```
 
+`--border-default` permanece sutil e decorativo. Limites que identificam campos,
+busca e botões contornados devem consumir `--control-border`, validado em pelo menos
+3:1 contra `--surface-1` e `--page-bg`. `--border-strong` fica reservado a ênfase,
+seleção e composição de marca.
+
+O contrato também exige os tokens de marca e ilustração `--brand-*`, `--art-line`,
+`--map-land`, `--map-water`, `--map-route` e `--texture-opacity`. Geometria não muda
+entre temas; somente cor, tipografia display e tratamento de textura podem variar.
+
 Pares interativos recomendados, calculados segundo WCAG:
 
 | Tema/uso | Fundo | Texto | Contraste aproximado |
 | --- | --- | --- | --- |
 | Cartógrafo primário | `#3F573B` | `#FFF8E8` | 7,52:1 |
-| Cartógrafo dourado | `#B68A3F` | `#382717` | 4,55:1 |
+| Cartógrafo secundário | `#EAD6A6` | `#382717` | 9,97:1 |
 | Cartógrafo danger | `#8A3F32` | `#FFF8E8` | 6,99:1 |
 | Horror ouro | `#B58A50` | `#111111` | 6,04:1 |
 | Horror secundário | `#263F3B` | `#E2D4B8` | 7,73:1 |
@@ -213,10 +258,17 @@ O dourado e o ciano podem continuar ornamentais, mas texto claro sobre eles é p
 - `prefers-reduced-motion` remove movimento não essencial;
 - uma entrada orquestrada vale mais que animações dispersas;
 - textura nunca reduz contraste de texto ou foco;
-- padrões cartográficos devem usar máscara/token de cor, evitando marrom hardcoded nos outros temas;
+- gradientes e elementos cartográficos em CSS devem consumir tokens, evitando marrom hardcoded nos outros temas;
+- SVGs decorativos legados foram externalizados em `public/illustrations` e recebem
+  tratamento temático centralizado; a conversão final para máscaras monocromáticas
+  continua pendente antes de liberar o pacote comercial;
 - glow futurista é restrito a foco, status ou destaque operacional.
 
 ## QA visual obrigatório
+
+Esta lista é condição de saída de G1, não recomendação opcional. Evidências e resultados
+devem ser registrados em `RELATORIO_QA_VISUAL_G1.md`; a ausência de evidência mantém o item
+pendente.
 
 - lockups em fundo claro, escuro, fotográfico e uma cor;
 - símbolo em 16, 24, 32, 48, 96 e 256 px;
@@ -240,3 +292,12 @@ O dourado e o ciano podem continuar ornamentais, mas texto claro sobre eles é p
 7. registrar fonte mestre, licença, grid e versões;
 8. executar gate de originalidade, proveniência e pesquisa marcária;
 9. integrar por componente `BrandMark`, nunca por imagem hardcoded em cada tela.
+
+### Estado do processo nesta branch
+
+- etapas 2, 3 e 9 possuem uma implementação **candidata**, sujeita a correções;
+- etapas 5 e o QA operacional estão em andamento;
+- etapas 1, 4, 6, 7 e 8 não podem ser presumidas concluídas;
+- nenhuma etapa substitui a aprovação explícita de Gabriel;
+- a aprovação de G1 não substitui a liberação comercial condicionada à proveniência,
+  originalidade, licenças, similaridade e pesquisa marcária.
