@@ -13,17 +13,18 @@ Documentos complementares de arquitetura e continuidade:
 - `Docs/ControleDeProjeto/PADROES_DE_ENGENHARIA.md`
 - `Docs/ControleDeProjeto/DECISOES_TECNICAS.md`
 
-## Prioridade Direcional Atual
+## Sequência Direcional De Referência
 
-1. Fechar segurança, PostgreSQL, migrations e CI.
-2. Consolidar produto, C4/deployment, ameaças, LGPD e marca.
-3. Implementar Home real e shell contextual.
+1. Fechar segurança, PostgreSQL, migrations e CI — concluído em G0 pela PR #13.
+2. Consolidar produto, C4/deployment, ameaças e LGPD — documentação-base concluída; fundação visual em andamento no G1.
+3. Implementar Home real e shell contextual em G2.
 4. Entregar sessão → cena → acontecimento → recap → pendência.
 5. Validar com mestres reais.
 6. Expandir módulos relacionais somente após o gate de validação.
 7. Manter documentos, PDF e IA para gates posteriores.
 
-Próxima ação: revisão e integração aprovada de `security/baseline-hardening`.
+Próxima ação: fechar as pendências ópticas do G1 no Figma, obter aprovação visual explícita
+de Gabriel e somente então iniciar G2.
 
 Este plano organiza as fases práticas do Nat 1 RPG Engine para manter escopo, validação e continuidade entre tarefas.
 

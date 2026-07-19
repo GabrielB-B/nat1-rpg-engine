@@ -10,7 +10,11 @@ Fase: `security/baseline-hardening`
 
 Branch: `security/baseline-hardening`
 
-Status: baseline preparada e checks locais executáveis aprovados; auditorias online, revisão, CI remoto e integração pendentes
+Status: G0 concluído e integrado pela PR #13; CI remoto e auditorias aprovados
+
+Encerramento: em 2026-07-18, a PR #13 foi revisada, aprovada pelo CI e integrada. As
+menções a pendências nas seções de execução abaixo preservam a fotografia anterior ao
+merge e não representam o estado atual do gate.
 
 ## Escopo Analisado
 
@@ -203,9 +207,10 @@ Status: baseline preparada e checks locais executáveis aprovados; auditorias on
 - O resultado inicial de `npm audit` acima pertence à execução de 2026-06-21. Na
   validação complementar, nenhuma auditoria online foi declarada verde localmente.
 
-## Próxima Ação Recomendada
+## Próxima Ação Recomendada À Época
 
-Fase: concluir G0 por revisão, commit autorizado, Pull Request, CI verde e integração.
+Fase registrada na execução: concluir G0 por revisão, commit autorizado, Pull Request, CI
+verde e integração. Esta ação foi concluída pela PR #13 em 2026-07-18.
 
 Antes de beta público, executar `security/public-auth-session-hardening` com rate limiting,
 estratégia de cookie/refresh, revogação, CORS HTTPS/não-loopback no domínio real,

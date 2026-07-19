@@ -7,9 +7,12 @@
 }
 
 html {
-  background: var(--background);
-  color: var(--text);
+  background: var(--page-bg);
+  color: var(--text-primary);
   font-family: var(--font-body);
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -17,13 +20,15 @@ body {
     radial-gradient(circle at 82% 8%, color-mix(in srgb, var(--surface) 78%, transparent) 0 16rem, transparent 27rem),
     radial-gradient(circle at 30% 0%, color-mix(in srgb, var(--surface-raised) 54%, transparent) 0 12rem, transparent 24rem),
     linear-gradient(180deg, color-mix(in srgb, var(--surface) 38%, var(--background)), var(--background));
+  color: var(--text-primary);
   margin: 0;
+  min-height: 100vh;
   min-width: 320px;
 }
 
 body::before {
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='980' height='980' viewBox='0 0 980 980'%3E%3Cg fill='none' stroke='%23796337' stroke-opacity='.18' stroke-width='1.35'%3E%3Cpath d='M530 30c92 68 164 80 252 52 70-22 132 4 160 56 45 85-15 157-94 168-83 12-170-25-237 27-70 54-38 144 56 158 91 13 180-20 239 39 54 54 38 141-42 182-86 44-179 7-253 48-83 46-83 134-4 181'/%3E%3Cpath d='M620 64c64 42 132 51 204 30 58-17 104 3 126 41 31 54-9 106-75 116-78 12-151-20-211 26-49 38-32 96 42 108 85 13 158-24 215 33 43 43 31 103-33 135-76 38-156 9-218 45-60 35-64 103-14 144'/%3E%3Cpath d='M700 112c46 25 92 29 147 15 42-11 75 2 90 29 23 39-9 76-56 83-67 10-125-15-169 22-35 30-23 70 32 79 65 11 124-20 167 23 31 31 22 75-25 98-59 29-120 9-167 36-47 27-49 75-13 107'/%3E%3Cpath d='M805 154c26 12 51 12 83 5 28-6 49 3 58 21 13 26-10 51-42 55-46 6-83-12-113 13-24 20-15 46 24 52 45 7 83-13 113 17 22 22 15 52-20 68-42 20-86 7-119 25'/%3E%3C/g%3E%3Cg fill='%23796337' fill-opacity='.11'%3E%3Ccircle cx='585' cy='104' r='2'/%3E%3Ccircle cx='732' cy='188' r='1.8'/%3E%3Ccircle cx='870' cy='322' r='2'/%3E%3Ccircle cx='668' cy='520' r='1.6'/%3E%3Ccircle cx='834' cy='696' r='1.7'/%3E%3C/g%3E%3C/svg%3E") right top / min(72vw, 980px) min(100vh, 980px) no-repeat,
+    url("/illustrations/topography-page-top.svg") right top / min(72vw, 980px) min(100vh, 980px) no-repeat,
     radial-gradient(circle at 20% 24%, var(--line-art) 0 1px, transparent 1.4px),
     radial-gradient(circle at 72% 18%, var(--line-art) 0 1px, transparent 1.4px);
   background-size: min(72vw, 980px) min(100vh, 980px), 52px 52px, 78px 78px;
@@ -37,9 +42,9 @@ body::before {
 
 body::after {
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='820' height='760' viewBox='0 0 820 760'%3E%3Cg fill='none' stroke='%23796337' stroke-opacity='.16' stroke-width='1.15'%3E%3Cpath d='M620 12c72 46 132 46 176 98 54 63 10 140-73 145-96 6-154-70-248-35-86 32-108 118-54 170 58 56 164 24 226 82 53 49 31 135-48 165-94 36-176-26-272 4-74 23-116 78-123 143'/%3E%3Cpath d='M675 64c48 31 98 30 128 66 38 45 3 91-57 95-74 5-118-48-188-22-62 23-79 85-39 123 46 43 123 19 172 63 40 36 22 91-39 114-70 27-132-19-203 3-52 16-84 54-90 98'/%3E%3Cpath d='M720 118c30 20 62 19 82 43 24 29 1 58-37 60-49 3-78-31-124-14-40 15-51 55-25 79 30 27 81 12 113 40 26 23 15 58-25 73-44 17-84-12-130 2-34 10-55 35-59 64'/%3E%3Cpath d='M438 36c-82 32-128 88-139 158-15 96 66 142 146 121 60-16 88-67 153-64'/%3E%3Cpath d='M378 104c-46 24-72 59-78 102-9 61 45 91 97 76 38-11 58-42 98-40'/%3E%3C/g%3E%3C/svg%3E"),
-    radial-gradient(circle, rgba(74, 52, 36, 0.11) 0 0.6px, transparent 0.8px),
-    radial-gradient(circle, rgba(181, 138, 66, 0.08) 0 0.7px, transparent 1px);
+    url("/illustrations/topography-page-bottom.svg"),
+    radial-gradient(circle, color-mix(in srgb, var(--brand-ink) 11%, transparent) 0 0.6px, transparent 0.8px),
+    radial-gradient(circle, color-mix(in srgb, var(--brand-metal) 8%, transparent) 0 0.7px, transparent 1px);
   background-position: right bottom, 0 0, 17px 23px;
   background-size: min(56vw, 820px) min(78vh, 760px), 42px 42px, 58px 58px;
   content: "";
@@ -59,10 +64,45 @@ select {
 
 button {
   color: inherit;
+  touch-action: manipulation;
 }
 
 a {
   color: inherit;
+  touch-action: manipulation;
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+:where(h1, h2, h3) {
+  text-wrap: balance;
+}
+
+:where(p, li) {
+  text-wrap: pretty;
+}
+
+.skip-link {
+  background: var(--action-primary-bg);
+  border: 2px solid var(--action-primary-text);
+  border-radius: var(--radius-sm);
+  color: var(--action-primary-text);
+  font-weight: 750;
+  left: 12px;
+  padding: 8px 12px;
+  position: fixed;
+  top: 12px;
+  transform: translateY(calc(-100% - 24px));
+  transition: transform 140ms ease;
+  z-index: 100;
+}
+
+.skip-link:focus-visible {
+  outline-color: var(--focus-ring);
+  transform: translateY(0);
 }
 
 .ui-icon {
@@ -120,23 +160,138 @@ a {
   padding: 0 6px 10px;
 }
 
-.brand-sigil {
+.brand-mark {
+  --brand-mark-size: 48px;
   align-items: center;
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--surface) 76%, var(--accent)), var(--surface));
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--surface) 72%, transparent);
-  color: var(--primary);
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  line-height: 1;
+}
+
+.brand-mark__symbol {
+  display: block;
+  height: var(--brand-mark-size);
+  overflow: visible;
+  width: var(--brand-mark-size);
+}
+
+.brand-mark__orbit {
+  stroke: var(--brand-metal);
+  stroke-width: 2.5;
+}
+
+.brand-mark__orbit-detail {
+  stroke: color-mix(in srgb, var(--brand-ink) 38%, transparent);
+  stroke-dasharray: 3 7;
+  stroke-width: 1.25;
+}
+
+.brand-mark__cardinals {
+  fill: var(--brand-seal);
+  stroke: var(--brand-metal);
+  stroke-width: 1.8;
+}
+
+.brand-mark__hat {
+  fill: var(--brand-hat);
+  stroke: var(--brand-ink);
+  stroke-width: 3;
+}
+
+.brand-mark__hat-band {
+  fill: var(--brand-hat-shadow);
+  stroke: var(--brand-ink);
+  stroke-width: 2.4;
+}
+
+.brand-mark__hat-metal {
+  stroke: var(--brand-metal);
+  stroke-width: 3;
+}
+
+.brand-mark__hat-highlight {
+  stroke: color-mix(in srgb, var(--brand-paper) 42%, transparent);
+  stroke-width: 2;
+}
+
+.brand-mark__die {
+  fill: var(--brand-paper);
+  stroke: var(--brand-ink);
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.brand-mark__facets {
+  fill: none;
+  stroke: var(--brand-metal);
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.brand-mark__one {
+  fill: var(--brand-seal);
+  stroke: var(--brand-ink);
+  stroke-linejoin: round;
+  stroke-width: 1.4;
+}
+
+.brand-mark--micro {
+  --brand-mark-size: 34px;
+}
+
+.brand-mark__symbol--micro .brand-mark__facets {
+  stroke-width: 1.7;
+}
+
+.brand-mark__symbol--micro .brand-mark__one {
+  stroke-width: 1;
+}
+
+.brand-mark--lockup-horizontal,
+.brand-mark--lockup-vertical {
+  --brand-mark-size: 64px;
+}
+
+.brand-mark--lockup-vertical {
+  flex-direction: column;
+  text-align: center;
+}
+
+.brand-mark__wordmark {
+  align-items: flex-start;
+  color: var(--text-primary);
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.brand-mark__name {
+  align-items: baseline;
   display: inline-flex;
   font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 800;
-  height: 34px;
-  justify-content: center;
-  letter-spacing: 0;
-  line-height: 1;
-  width: 34px;
+  font-size: 1.55rem;
+  font-variant-caps: small-caps;
+  font-weight: 700;
+  gap: 0.22em;
+  letter-spacing: 0.045em;
+  line-height: 0.86;
+  white-space: nowrap;
+}
+
+.brand-mark__name-one {
+  color: var(--brand-seal);
+  font-size: 1.12em;
+}
+
+.brand-mark__descriptor {
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 750;
+  letter-spacing: 0.22em;
+  margin-left: 0.14em;
+  margin-top: 0.45em;
 }
 
 .sidebar-brand p {
@@ -232,7 +387,7 @@ a.module-nav-item {
 .sidebar-avatar {
   align-items: center;
   background:
-    radial-gradient(circle at 34% 28%, rgba(255, 248, 232, 0.72), transparent 27%),
+    radial-gradient(circle at 34% 28%, color-mix(in srgb, var(--brand-paper) 72%, transparent), transparent 27%),
     color-mix(in srgb, var(--primary) 82%, var(--accent));
   border: 1px solid var(--border-strong);
   border-radius: 999px;
@@ -311,7 +466,7 @@ a.module-nav-item {
 .topbar-search {
   align-items: center;
   background: color-mix(in srgb, var(--surface) 88%, white);
-  border: 1px solid color-mix(in srgb, var(--border) 76%, transparent);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius-sm);
   color: var(--primary);
   display: grid;
@@ -328,8 +483,16 @@ a.module-nav-item {
   color: var(--text);
   font-size: 0.82rem;
   min-width: 0;
-  outline: 0;
   width: 100%;
+}
+
+.topbar-search:focus-within {
+  border-color: var(--focus-ring);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.topbar-search input:focus-visible {
+  outline: 0;
 }
 
 .topbar-search input::placeholder {
@@ -356,9 +519,9 @@ a.module-nav-item {
 }
 
 .topbar .button--primary {
-  background: var(--accent);
-  border-color: color-mix(in srgb, var(--accent) 74%, black);
-  color: var(--primary-foreground);
+  background: var(--action-primary-bg);
+  border-color: color-mix(in srgb, var(--action-primary-bg) 78%, black);
+  color: var(--action-primary-text);
 }
 
 .workspace-main {
@@ -554,10 +717,10 @@ a.module-nav-item {
 .campaign-card-map,
 .map-preview-art {
   background:
-    radial-gradient(ellipse at 17% 36%, rgba(65, 107, 61, 0.38) 0 13%, transparent 13.5%),
-    radial-gradient(ellipse at 43% 58%, rgba(181, 138, 66, 0.25) 0 11%, transparent 11.5%),
-    radial-gradient(ellipse at 73% 34%, rgba(73, 111, 78, 0.34) 0 10%, transparent 10.6%),
-    linear-gradient(158deg, rgba(119, 146, 117, 0.55), rgba(234, 218, 172, 0.95) 38%, rgba(171, 195, 160, 0.72) 72%, rgba(224, 206, 158, 0.9));
+    radial-gradient(ellipse at 17% 36%, color-mix(in srgb, var(--map-land) 38%, transparent) 0 13%, transparent 13.5%),
+    radial-gradient(ellipse at 43% 58%, color-mix(in srgb, var(--brand-metal) 25%, transparent) 0 11%, transparent 11.5%),
+    radial-gradient(ellipse at 73% 34%, color-mix(in srgb, var(--map-land) 34%, transparent) 0 10%, transparent 10.6%),
+    linear-gradient(158deg, color-mix(in srgb, var(--map-land) 55%, transparent), color-mix(in srgb, var(--brand-paper) 82%, var(--brand-metal)) 38%, color-mix(in srgb, var(--map-land) 72%, var(--brand-paper)) 72%, color-mix(in srgb, var(--brand-paper) 80%, var(--brand-metal)));
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--surface) 34%, transparent);
@@ -568,10 +731,10 @@ a.module-nav-item {
 .campaign-card-map::before,
 .map-preview-art::before {
   background:
-    linear-gradient(12deg, transparent 0 46%, rgba(74, 52, 36, 0.16) 46.2% 46.6%, transparent 46.8%),
-    linear-gradient(165deg, transparent 0 58%, rgba(74, 52, 36, 0.14) 58.2% 58.6%, transparent 58.8%),
-    repeating-linear-gradient(90deg, transparent 0 34px, rgba(74, 52, 36, 0.08) 34px 35px),
-    repeating-linear-gradient(0deg, transparent 0 30px, rgba(74, 52, 36, 0.06) 30px 31px);
+    linear-gradient(12deg, transparent 0 46%, color-mix(in srgb, var(--brand-ink) 16%, transparent) 46.2% 46.6%, transparent 46.8%),
+    linear-gradient(165deg, transparent 0 58%, color-mix(in srgb, var(--brand-ink) 14%, transparent) 58.2% 58.6%, transparent 58.8%),
+    repeating-linear-gradient(90deg, transparent 0 34px, color-mix(in srgb, var(--brand-ink) 8%, transparent) 34px 35px),
+    repeating-linear-gradient(0deg, transparent 0 30px, color-mix(in srgb, var(--brand-ink) 6%, transparent) 30px 31px);
   content: "";
   inset: 0;
   opacity: 0.72;
@@ -582,7 +745,7 @@ a.module-nav-item {
 .campaign-card-map::after,
 .map-preview-art::after {
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='230' viewBox='0 0 900 230'%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath d='M-20 142C58 112 92 166 162 131C225 100 252 51 326 74C398 96 415 151 492 130C556 112 579 67 651 73C728 80 759 134 922 98' stroke='%23437578' stroke-opacity='.5' stroke-width='13'/%3E%3Cpath d='M-15 141C68 116 103 154 166 127C232 99 255 62 321 82C394 105 419 143 487 125C548 109 580 76 648 82C731 89 772 122 920 100' stroke='%232f5d61' stroke-opacity='.48' stroke-width='1.8'/%3E%3Cpath d='M114 184C190 150 268 130 351 122C432 114 518 95 614 96C678 96 728 89 782 72' stroke='%23513a24' stroke-opacity='.36' stroke-dasharray='7 7' stroke-width='2'/%3E%3Cpath d='M616 18l-16 26h31l-18-26m35 8l-18 29h35l-20-29m38-1l-17 29h34l-19-29m38 5l-16 26h31l-18-26m36 13l-15 25h30l-17-25' stroke='%23513a24' stroke-opacity='.54' stroke-width='3'/%3E%3Cpath d='M168 56c56-28 130-35 198-17M692 154c58 21 122 22 180 3M20 53c74-31 162-35 238-10' stroke='%23513a24' stroke-opacity='.18' stroke-width='1.3'/%3E%3C/g%3E%3Cg fill='%233f6f3d' fill-opacity='.32'%3E%3Ccircle cx='88' cy='80' r='5'/%3E%3Ccircle cx='111' cy='72' r='4'/%3E%3Ccircle cx='135' cy='85' r='5'/%3E%3Ccircle cx='165' cy='74' r='4'/%3E%3Ccircle cx='195' cy='83' r='5'/%3E%3Ccircle cx='229' cy='72' r='4'/%3E%3Ccircle cx='770' cy='74' r='4'/%3E%3Ccircle cx='794' cy='68' r='5'/%3E%3Ccircle cx='825' cy='77' r='4'/%3E%3C/g%3E%3C/svg%3E") center / cover no-repeat;
+    url("/illustrations/map-wide.svg") center / cover no-repeat;
   content: "";
   inset: 0;
   opacity: 0.72;
@@ -611,7 +774,7 @@ a.module-nav-item {
 }
 
 .map-contour {
-  border: 1px solid rgba(74, 52, 36, 0.22);
+  border: 1px solid color-mix(in srgb, var(--brand-ink) 22%, transparent);
 }
 
 .map-contour-a {
@@ -642,7 +805,7 @@ a.module-nav-item {
 }
 
 .map-route {
-  border-top: 1px dashed rgba(74, 52, 36, 0.3);
+  border-top: 1px dashed color-mix(in srgb, var(--map-route) 30%, transparent);
   height: 44%;
   width: 72%;
 }
@@ -655,7 +818,7 @@ a.module-nav-item {
 }
 
 .map-route-b {
-  border-color: rgba(85, 107, 78, 0.5);
+  border-color: color-mix(in srgb, var(--map-land) 50%, transparent);
   border-style: solid;
   left: 29%;
   top: 23%;
@@ -665,8 +828,8 @@ a.module-nav-item {
 
 .map-mountains {
   background:
-    linear-gradient(135deg, transparent 0 41%, rgba(74, 52, 36, 0.5) 42% 50%, transparent 51%),
-    linear-gradient(45deg, transparent 0 41%, rgba(74, 52, 36, 0.46) 42% 50%, transparent 51%);
+    linear-gradient(135deg, transparent 0 41%, color-mix(in srgb, var(--map-route) 50%, transparent) 42% 50%, transparent 51%),
+    linear-gradient(45deg, transparent 0 41%, color-mix(in srgb, var(--map-route) 46%, transparent) 42% 50%, transparent 51%);
   background-size: 24px 28px;
   height: 32px;
   left: 49%;
@@ -679,7 +842,7 @@ a.module-nav-item {
   background: var(--accent);
   border: 2px solid color-mix(in srgb, var(--surface) 78%, transparent);
   border-radius: 999px;
-  box-shadow: 0 0 0 1px rgba(74, 52, 36, 0.36);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--map-route) 36%, transparent);
   height: 9px;
   width: 9px;
 }
@@ -695,7 +858,7 @@ a.module-nav-item {
 }
 
 .map-compass {
-  border: 1px solid rgba(74, 52, 36, 0.38);
+  border: 1px solid color-mix(in srgb, var(--map-route) 38%, transparent);
   border-radius: 999px;
   height: 52px;
   right: 18px;
@@ -713,14 +876,14 @@ a.module-nav-item {
 }
 
 .map-compass::before {
-  background: conic-gradient(from 45deg, rgba(74, 52, 36, 0.65), transparent 18%, rgba(74, 52, 36, 0.46) 25%, transparent 36%, rgba(74, 52, 36, 0.65) 50%, transparent 68%, rgba(74, 52, 36, 0.46) 75%, transparent 86%, rgba(74, 52, 36, 0.65));
+  background: conic-gradient(from 45deg, color-mix(in srgb, var(--map-route) 65%, transparent), transparent 18%, color-mix(in srgb, var(--map-route) 46%, transparent) 25%, transparent 36%, color-mix(in srgb, var(--map-route) 65%, transparent) 50%, transparent 68%, color-mix(in srgb, var(--map-route) 46%, transparent) 75%, transparent 86%, color-mix(in srgb, var(--map-route) 65%, transparent));
   clip-path: polygon(50% 0, 58% 40%, 100% 50%, 58% 60%, 50% 100%, 42% 60%, 0 50%, 42% 40%);
   height: 38px;
   width: 38px;
 }
 
 .map-compass::after {
-  background: rgba(74, 52, 36, 0.72);
+  background: color-mix(in srgb, var(--map-route) 72%, transparent);
   border-radius: 999px;
   height: 4px;
   width: 4px;
@@ -895,13 +1058,13 @@ a.module-nav-item {
   cursor: pointer;
   display: inline-flex;
   gap: 6px;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-family: var(--font-body);
   font-weight: 700;
   justify-content: center;
   line-height: 1;
-  min-height: 30px;
-  padding: 0 11px;
+  min-height: 36px;
+  padding: 0 13px;
   transition:
     background-color 140ms ease,
     border-color 140ms ease,
@@ -917,22 +1080,38 @@ a.module-nav-item {
   transform: translateY(-1px);
 }
 
+.button:active {
+  transform: translateY(0);
+}
+
 .button--primary {
-  background: var(--primary);
-  border-color: color-mix(in srgb, var(--primary) 78%, black);
-  color: var(--surface);
+  background: var(--action-primary-bg);
+  border-color: color-mix(in srgb, var(--action-primary-bg) 78%, black);
+  color: var(--action-primary-text);
+}
+
+.button--primary:hover {
+  background: color-mix(in srgb, var(--action-primary-bg) 88%, black);
 }
 
 .button--secondary {
-  background: var(--surface);
-  border-color: var(--border);
-  color: var(--text);
+  background: var(--action-secondary-bg);
+  border-color: var(--control-border);
+  color: var(--action-secondary-text);
+}
+
+.button--secondary:hover {
+  background: color-mix(in srgb, var(--action-secondary-bg) 86%, var(--surface-1));
 }
 
 .button--ghost {
   background: transparent;
-  border-color: var(--border);
-  color: var(--primary);
+  border-color: var(--control-border);
+  color: var(--link);
+}
+
+.button--ghost:hover {
+  background: color-mix(in srgb, var(--link) 9%, var(--surface-1));
 }
 
 .dashboard-section {
@@ -1029,7 +1208,7 @@ a.module-nav-item {
 .npc-avatar {
   align-items: center;
   background:
-    radial-gradient(circle at 34% 28%, rgba(255, 248, 232, 0.72), transparent 28%),
+    radial-gradient(circle at 34% 28%, color-mix(in srgb, var(--brand-paper) 72%, transparent), transparent 28%),
     color-mix(in srgb, var(--primary) 78%, var(--accent));
   border: 1px solid var(--border-strong);
   border-radius: 999px;
@@ -1134,8 +1313,19 @@ a.module-nav-item {
 }
 
 .text-link {
-  color: var(--primary);
+  color: var(--link);
   font-weight: 800;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.18em;
+  transition:
+    color 140ms ease,
+    text-decoration-color 140ms ease;
+}
+
+.text-link:hover {
+  color: color-mix(in srgb, var(--link) 84%, var(--text-primary));
+  text-decoration-color: currentColor;
 }
 
 .auth-layout,
@@ -1190,7 +1380,7 @@ a.module-nav-item {
 
 .auth-story::after {
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520' viewBox='0 0 520 520'%3E%3Cg fill='none' stroke='%23796337' stroke-opacity='.16' stroke-width='1.1'%3E%3Cpath d='M42 284c84-56 130 22 218-26 76-42 102-118 210-88'/%3E%3Cpath d='M26 366c104-78 174 12 284-51 72-42 101-101 183-87'/%3E%3Cpath d='M108 126c58 32 112 28 174-10 64-39 124-35 186 12'/%3E%3C/g%3E%3C/svg%3E") right bottom / 86% 86% no-repeat;
+    url("/illustrations/topography-auth.svg") right bottom / 86% 86% no-repeat;
   content: "";
   inset: 0;
   opacity: 0.84;
@@ -1211,20 +1401,8 @@ a.module-nav-item {
   gap: 10px;
 }
 
-.auth-brand strong,
-.auth-brand span {
-  display: block;
-}
-
-.auth-brand strong {
-  font-family: var(--font-display);
-  font-size: 1.16rem;
-  line-height: 1;
-}
-
-.auth-brand div span {
-  color: var(--text-muted);
-  font-size: 0.76rem;
+.auth-brand-mark {
+  --brand-mark-size: 62px;
 }
 
 .auth-story-copy {
@@ -1325,11 +1503,12 @@ a.module-nav-item {
 
 .auth-field input {
   background: color-mix(in srgb, var(--surface) 90%, white);
-  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius-sm);
   color: var(--text);
+  font-size: 1rem;
+  line-height: 1.5;
   min-height: 40px;
-  outline: 0;
   padding: 0 11px;
   transition:
     border-color 140ms ease,
@@ -1337,9 +1516,11 @@ a.module-nav-item {
   width: 100%;
 }
 
-.auth-field input:focus {
+.auth-field input:focus-visible {
   border-color: var(--border-strong);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+  box-shadow: none;
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .auth-field input::placeholder {
@@ -1347,10 +1528,10 @@ a.module-nav-item {
 }
 
 .auth-error {
-  background: color-mix(in srgb, var(--danger) 10%, var(--surface));
-  border: 1px solid color-mix(in srgb, var(--danger) 48%, var(--border));
+  background: color-mix(in srgb, var(--status-danger) 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--status-danger) 48%, var(--border));
   border-radius: var(--radius-sm);
-  color: var(--danger);
+  color: var(--status-danger);
   font-size: 0.8rem;
   line-height: 1.35;
   margin: 0;
@@ -1363,14 +1544,28 @@ a.module-nav-item {
 }
 
 .button:disabled {
+  background: var(--disabled-bg);
+  border-color: color-mix(in srgb, var(--disabled-text) 32%, transparent);
+  color: var(--disabled-text);
   cursor: not-allowed;
-  opacity: 0.64;
+  opacity: 1;
   transform: none;
 }
 
 .auth-form-footer a {
-  color: var(--primary);
+  color: var(--link);
   font-weight: 800;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.18em;
+  transition:
+    color 140ms ease,
+    text-decoration-color 140ms ease;
+}
+
+.auth-form-footer a:hover {
+  color: color-mix(in srgb, var(--link) 84%, var(--text-primary));
+  text-decoration-color: currentColor;
 }
 
 .projects-page {
@@ -1592,8 +1787,8 @@ a.module-nav-item {
 
 .projects-empty-state--welcome::before {
   background:
-    radial-gradient(circle, rgba(74, 52, 36, 0.14) 0 1px, transparent 1.4px),
-    radial-gradient(circle, rgba(74, 52, 36, 0.09) 0 1px, transparent 1.4px);
+    radial-gradient(circle, color-mix(in srgb, var(--brand-ink) 14%, transparent) 0 1px, transparent 1.4px),
+    radial-gradient(circle, color-mix(in srgb, var(--brand-ink) 9%, transparent) 0 1px, transparent 1.4px);
   background-position:
     0 0,
     18px 22px;
@@ -1610,7 +1805,7 @@ a.module-nav-item {
 
 .projects-empty-state--welcome::after {
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='920' height='360' viewBox='0 0 920 360'%3E%3Cg fill='none' stroke='%23513a24' stroke-linecap='round'%3E%3Cpath d='M-40 252C76 198 164 224 264 166C370 104 448 38 560 88C666 136 684 242 806 208C860 194 894 166 946 152' stroke-opacity='.22' stroke-width='2.4' stroke-dasharray='10 11'/%3E%3Cpath d='M36 74c108-44 250-54 392-18M438 314c118 26 244 20 394-20' stroke-opacity='.15' stroke-width='1.4'/%3E%3Cpath d='M642 64l-22 37h43l-24-37m54 17l-20 34h39l-22-34m50-7l-18 31h36l-20-31' stroke-opacity='.28' stroke-width='4'/%3E%3Cpath d='M70 306c92-72 210-94 346-66 132 28 250-12 396-76' stroke-opacity='.17' stroke-width='1.5'/%3E%3C/g%3E%3Cg fill='%233f6f3d' fill-opacity='.2'%3E%3Ccircle cx='104' cy='126' r='42'/%3E%3Ccircle cx='174' cy='142' r='30'/%3E%3Ccircle cx='750' cy='104' r='38'/%3E%3C/g%3E%3C/svg%3E") right center / min(68vw, 920px) auto no-repeat;
+    url("/illustrations/empty-welcome-map.svg") right center / min(68vw, 920px) auto no-repeat;
   content: "";
   inset: 0;
   opacity: 0.82;
@@ -1675,10 +1870,10 @@ a.module-nav-item {
 
 .projects-empty-visual::before {
   background:
-    linear-gradient(10deg, transparent 0 44%, rgba(74, 52, 36, 0.14) 44.2% 44.8%, transparent 45%),
-    linear-gradient(170deg, transparent 0 62%, rgba(74, 52, 36, 0.12) 62.2% 62.8%, transparent 63%),
-    repeating-linear-gradient(90deg, transparent 0 42px, rgba(74, 52, 36, 0.08) 42px 43px),
-    repeating-linear-gradient(0deg, transparent 0 38px, rgba(74, 52, 36, 0.06) 38px 39px);
+    linear-gradient(10deg, transparent 0 44%, color-mix(in srgb, var(--brand-ink) 14%, transparent) 44.2% 44.8%, transparent 45%),
+    linear-gradient(170deg, transparent 0 62%, color-mix(in srgb, var(--brand-ink) 12%, transparent) 62.2% 62.8%, transparent 63%),
+    repeating-linear-gradient(90deg, transparent 0 42px, color-mix(in srgb, var(--brand-ink) 8%, transparent) 42px 43px),
+    repeating-linear-gradient(0deg, transparent 0 38px, color-mix(in srgb, var(--brand-ink) 6%, transparent) 38px 39px);
   border: 1px solid color-mix(in srgb, var(--border) 66%, transparent);
   border-radius: var(--radius-lg);
   content: "";
@@ -1691,7 +1886,7 @@ a.module-nav-item {
   align-items: stretch;
   bottom: 13%;
   box-shadow:
-    0 18px 34px rgba(74, 52, 36, 0.12),
+    0 18px 34px color-mix(in srgb, var(--brand-ink) 12%, transparent),
     inset 0 0 0 1px color-mix(in srgb, var(--surface) 54%, transparent);
   color: var(--primary);
   display: grid;
@@ -1707,8 +1902,8 @@ a.module-nav-item {
 
 .projects-empty-page {
   background:
-    radial-gradient(ellipse at 34% 28%, rgba(65, 107, 61, 0.2) 0 15%, transparent 15.5%),
-    radial-gradient(ellipse at 70% 62%, rgba(181, 138, 66, 0.18) 0 13%, transparent 13.5%),
+    radial-gradient(ellipse at 34% 28%, color-mix(in srgb, var(--map-land) 20%, transparent) 0 15%, transparent 15.5%),
+    radial-gradient(ellipse at 70% 62%, color-mix(in srgb, var(--brand-metal) 18%, transparent) 0 13%, transparent 13.5%),
     linear-gradient(152deg, color-mix(in srgb, var(--surface) 94%, white), color-mix(in srgb, var(--surface-soft) 74%, var(--surface)));
   border: 1px solid color-mix(in srgb, var(--border-strong) 54%, var(--border));
   position: relative;
@@ -1716,9 +1911,9 @@ a.module-nav-item {
 
 .projects-empty-page::before {
   background:
-    linear-gradient(172deg, transparent 0 55%, rgba(74, 52, 36, 0.16) 55.2% 55.8%, transparent 56%),
-    radial-gradient(circle at 24% 72%, rgba(81, 104, 75, 0.2) 0 16%, transparent 17%),
-    repeating-linear-gradient(0deg, transparent 0 22px, rgba(74, 52, 36, 0.06) 22px 23px);
+    linear-gradient(172deg, transparent 0 55%, color-mix(in srgb, var(--brand-ink) 16%, transparent) 55.2% 55.8%, transparent 56%),
+    radial-gradient(circle at 24% 72%, color-mix(in srgb, var(--map-land) 20%, transparent) 0 16%, transparent 17%),
+    repeating-linear-gradient(0deg, transparent 0 22px, color-mix(in srgb, var(--brand-ink) 6%, transparent) 22px 23px);
   content: "";
   inset: 14px;
   opacity: 0.82;
@@ -1757,21 +1952,10 @@ a.module-nav-item {
 }
 
 .projects-empty-sigil {
-  align-items: center;
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--surface) 70%, var(--accent)), var(--surface));
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
-  color: var(--primary);
-  display: flex;
-  font-family: var(--font-display);
-  font-size: 0.82rem;
-  font-weight: 800;
-  height: 38px;
-  justify-content: center;
-  left: 6%;
-  top: 4%;
-  width: 38px;
+  --brand-mark-size: 82px;
+  filter: drop-shadow(0 8px 14px color-mix(in srgb, var(--brand-ink) 18%, transparent));
+  left: 2%;
+  top: -5%;
 }
 
 .projects-empty-compass {
@@ -1834,10 +2018,10 @@ a.module-nav-item {
 
 .project-cover::before {
   background:
-    linear-gradient(12deg, transparent 0 46%, rgba(74, 52, 36, 0.16) 46.2% 46.6%, transparent 46.8%),
-    linear-gradient(165deg, transparent 0 58%, rgba(74, 52, 36, 0.14) 58.2% 58.6%, transparent 58.8%),
-    repeating-linear-gradient(90deg, transparent 0 34px, rgba(74, 52, 36, 0.08) 34px 35px),
-    repeating-linear-gradient(0deg, transparent 0 30px, rgba(74, 52, 36, 0.06) 30px 31px);
+    linear-gradient(12deg, transparent 0 46%, color-mix(in srgb, var(--brand-ink) 16%, transparent) 46.2% 46.6%, transparent 46.8%),
+    linear-gradient(165deg, transparent 0 58%, color-mix(in srgb, var(--brand-ink) 14%, transparent) 58.2% 58.6%, transparent 58.8%),
+    repeating-linear-gradient(90deg, transparent 0 34px, color-mix(in srgb, var(--brand-ink) 8%, transparent) 34px 35px),
+    repeating-linear-gradient(0deg, transparent 0 30px, color-mix(in srgb, var(--brand-ink) 6%, transparent) 30px 31px);
   content: "";
   inset: 0;
   opacity: 0.72;
@@ -1917,10 +2101,10 @@ a.module-nav-item {
 
 .project-cover {
   background:
-    radial-gradient(ellipse at 17% 36%, rgba(65, 107, 61, 0.38) 0 13%, transparent 13.5%),
-    radial-gradient(ellipse at 43% 58%, rgba(181, 138, 66, 0.25) 0 11%, transparent 11.5%),
-    radial-gradient(ellipse at 73% 34%, rgba(73, 111, 78, 0.34) 0 10%, transparent 10.6%),
-    linear-gradient(158deg, rgba(119, 146, 117, 0.55), rgba(234, 218, 172, 0.95) 38%, rgba(171, 195, 160, 0.72) 72%, rgba(224, 206, 158, 0.9));
+    radial-gradient(ellipse at 17% 36%, color-mix(in srgb, var(--map-land) 38%, transparent) 0 13%, transparent 13.5%),
+    radial-gradient(ellipse at 43% 58%, color-mix(in srgb, var(--brand-metal) 25%, transparent) 0 11%, transparent 11.5%),
+    radial-gradient(ellipse at 73% 34%, color-mix(in srgb, var(--map-land) 34%, transparent) 0 10%, transparent 10.6%),
+    linear-gradient(158deg, color-mix(in srgb, var(--map-land) 55%, transparent), color-mix(in srgb, var(--brand-paper) 82%, var(--brand-metal)) 38%, color-mix(in srgb, var(--map-land) 72%, var(--brand-paper)) 72%, color-mix(in srgb, var(--brand-paper) 80%, var(--brand-metal)));
   min-height: 154px;
   overflow: hidden;
   position: relative;
@@ -1934,7 +2118,7 @@ a.module-nav-item {
 
 .project-cover::after {
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='680' height='190' viewBox='0 0 680 190'%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath d='M-18 122C42 98 78 140 130 112C184 82 218 46 280 64C342 82 358 128 421 108C476 91 496 55 558 62C614 68 636 104 698 82' stroke='%23437578' stroke-opacity='.5' stroke-width='10'/%3E%3Cpath d='M76 154C156 118 234 112 302 103C376 94 440 77 520 80C574 81 610 75 654 60' stroke='%23513a24' stroke-opacity='.34' stroke-dasharray='7 7' stroke-width='2'/%3E%3Cpath d='M492 18l-15 24h29l-16-24m31 7l-16 26h32l-18-26m36 1l-15 24h29l-16-24' stroke='%23513a24' stroke-opacity='.54' stroke-width='3'/%3E%3Cpath d='M82 54c56-23 116-28 174-13M520 138c46 17 96 18 142 4' stroke='%23513a24' stroke-opacity='.18' stroke-width='1.3'/%3E%3C/g%3E%3Cg fill='%233f6f3d' fill-opacity='.32'%3E%3Ccircle cx='64' cy='72' r='4'/%3E%3Ccircle cx='91' cy='66' r='5'/%3E%3Ccircle cx='126' cy='76' r='4'/%3E%3Ccircle cx='580' cy='66' r='4'/%3E%3Ccircle cx='606' cy='72' r='5'/%3E%3C/g%3E%3C/svg%3E") center / cover no-repeat;
+    url("/illustrations/map-card.svg") center / cover no-repeat;
   content: "";
   inset: 0;
   opacity: 0.72;
@@ -2086,7 +2270,7 @@ a.module-nav-item {
 }
 
 .project-action-menu-trigger:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--primary) 72%, transparent);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -2127,7 +2311,7 @@ a.module-nav-item {
 
 .project-form-overlay {
   align-items: stretch;
-  background: rgba(56, 39, 23, 0.34);
+  background: var(--overlay);
   display: flex;
   inset: 0;
   justify-content: flex-end;
@@ -2151,6 +2335,7 @@ a.module-nav-item {
   max-height: calc(100vh - 36px);
   max-width: 640px;
   overflow: auto;
+  overscroll-behavior: contain;
   position: relative;
   width: min(640px, 100%);
 }
@@ -2177,6 +2362,7 @@ a.module-nav-item {
   display: grid;
   gap: 14px;
   max-width: 440px;
+  overscroll-behavior: contain;
   padding: 20px;
   position: relative;
   width: min(440px, 100%);
@@ -2280,11 +2466,12 @@ a.module-nav-item {
 .form-field select,
 .form-field textarea {
   background: color-mix(in srgb, var(--surface) 90%, white);
-  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius-sm);
   color: var(--text);
+  font-size: 1rem;
+  line-height: 1.5;
   min-height: 40px;
-  outline: 0;
   padding: 0 11px;
   transition:
     border-color 140ms ease,
@@ -2299,11 +2486,13 @@ a.module-nav-item {
   resize: vertical;
 }
 
-.form-field input:focus,
-.form-field select:focus,
-.form-field textarea:focus {
+.form-field input:focus-visible,
+.form-field select:focus-visible,
+.form-field textarea:focus-visible {
   border-color: var(--border-strong);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+  box-shadow: none;
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .form-field input::placeholder,
@@ -2313,7 +2502,7 @@ a.module-nav-item {
 
 .form-field input[aria-invalid="true"],
 .form-field select[aria-invalid="true"] {
-  border-color: color-mix(in srgb, var(--danger) 72%, var(--border));
+  border-color: var(--status-danger);
 }
 
 .form-field small {
@@ -2330,8 +2519,10 @@ a.module-nav-item {
 .form-field select:disabled,
 .form-field input:disabled,
 .form-field textarea:disabled {
+  background: var(--disabled-bg);
+  color: var(--disabled-text);
   cursor: not-allowed;
-  opacity: 0.68;
+  opacity: 1;
 }
 
 .create-project-form-footer {
@@ -2348,6 +2539,54 @@ a.module-nav-item {
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+html[data-theme="dark_horror"] body::before,
+html[data-theme="dark_horror"] body::after {
+  filter: grayscale(0.72) sepia(0.2);
+  opacity: 0.24;
+}
+
+html[data-theme="dark_horror"] .auth-story::after,
+html[data-theme="dark_horror"] .campaign-card-map::after,
+html[data-theme="dark_horror"] .map-preview-art::after,
+html[data-theme="dark_horror"] .projects-empty-state--welcome::after,
+html[data-theme="dark_horror"] .project-cover::after {
+  filter: grayscale(0.58) sepia(0.22) brightness(0.78);
+}
+
+html[data-theme="humanist_futuristic"] body::before,
+html[data-theme="humanist_futuristic"] body::after {
+  filter: grayscale(0.64) hue-rotate(136deg);
+  opacity: 0.16;
+}
+
+html[data-theme="humanist_futuristic"] .auth-story::after,
+html[data-theme="humanist_futuristic"] .campaign-card-map::after,
+html[data-theme="humanist_futuristic"] .map-preview-art::after,
+html[data-theme="humanist_futuristic"] .projects-empty-state--welcome::after,
+html[data-theme="humanist_futuristic"] .project-cover::after {
+  filter: grayscale(0.28) hue-rotate(136deg) saturate(0.72);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .button:hover,
+  .card:hover,
+  .dashboard-section:hover,
+  .icon-button:hover,
+  .module-nav-item:hover,
+  .sidebar-settings:hover {
+    transform: none;
   }
 }
 
@@ -2552,6 +2791,10 @@ a.module-nav-item {
 
   .auth-card {
     border-radius: var(--radius-sm);
+  }
+
+  .auth-brand-mark {
+    --brand-mark-size: 54px;
   }
 
   .auth-feature-list {

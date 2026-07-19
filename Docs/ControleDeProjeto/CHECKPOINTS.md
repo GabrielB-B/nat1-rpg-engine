@@ -174,6 +174,21 @@ Registrar checkpoints por fase para permitir retomada técnica do projeto sem pe
 - Próxima ação: criar `front/cartographer-brand-tokens` e concluir a fundação visual em branch própria.
 - Riscos identificados: expor publicamente a autenticação baseline antes do hardening pré-beta ou ampliar o escopo antes do piloto.
 
+## CP-014 - Cartographer Brand And Semantic Tokens
+
+- Fase: G1 — fundação visual profissional.
+- Branch: `front/cartographer-brand-tokens`.
+- Início: 2026-07-18.
+- Status: em andamento; não aprovado e não concluído.
+- Objetivo: transformar a especificação Cartógrafo em uma fundação visual implementada, acessível, rastreável e apta à avaliação de Gabriel.
+- Entregas em elaboração: símbolo Cartógrafo candidato, micro marca, favicon, componente `BrandMark`, fontes self-hosted com licenças, contrato de tokens semânticos para os três temas e aplicação inicial nos pontos de marca existentes.
+- Estado da marca: todos os ativos desta branch são candidatos/provisórios; não constituem logo final nem autorização de uso comercial.
+- Figma: plugin e MCP remoto habilitados; OAuth concluído anteriormente no host, com revalidação externa inconclusiva no runner isolado. O processo atual ainda precisa de reinício da extensão e nova thread para carregar as ferramentas. Nenhum arquivo Figma foi alterado nesta etapa.
+- Validações executadas: lint, TypeScript, 15 testes, build, XML dos 9 SVGs, contrato de tokens, contraste operacional e paridade geométrica aprovados; autenticação inspecionada em 320, 360, 390, 768 e 1440 px e nos três temas. Evidências e ressalvas estão em `Docs/IdentidadeVisual/RELATORIO_QA_VISUAL_G1.md`.
+- Pendências de saída: prancha óptica 16/24/32 px, lockup vertical, captura autenticada de sidebar/empty state, simulações perceptivas, auditoria remota do CI e aprovação explícita de Gabriel.
+- Próxima ação: reiniciar a extensão, produzir no Figma as pranchas pendentes e apresentar a construção candidata para decisão de Gabriel.
+- Riscos identificados: confundir candidato com marca final, encerrar G1 apenas pela documentação ou publicar comercialmente sem proveniência, originalidade e pesquisa marcária.
+
 ## Padrão De Atualização
 
 - Cada fase concluída deve atualizar este arquivo.

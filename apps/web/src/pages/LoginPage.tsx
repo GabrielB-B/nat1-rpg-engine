@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { getAuthErrorMessage } from "../features/auth/authErrors";
@@ -12,6 +12,9 @@ type LoginLocationState = {
 };
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const formErrorId = "login-form-error";
+
+type LoginField = "email" | "password";
 
 export function LoginPage() {
   const { login } = useAuth();
@@ -20,7 +23,10 @@ export function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [invalidFields, setInvalidFields] = useState<LoginField[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const locationState = location.state as LoginLocationState | null;
   const redirectTo = locationState?.from?.pathname ?? "/";
@@ -28,14 +34,24 @@ export function LoginPage() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
+    setInvalidFields([]);
 
     if (!email.trim() || !password) {
+      const nextInvalidFields: LoginField[] = [];
+
+      if (!email.trim()) nextInvalidFields.push("email");
+      if (!password) nextInvalidFields.push("password");
+
+      setInvalidFields(nextInvalidFields);
       setError("Preencha e-mail e senha para entrar.");
+      (nextInvalidFields[0] === "email" ? emailRef : passwordRef).current?.focus();
       return;
     }
 
     if (!emailPattern.test(email.trim())) {
+      setInvalidFields(["email"]);
       setError("Informe um e-mail válido.");
+      emailRef.current?.focus();
       return;
     }
 
@@ -67,10 +83,16 @@ export function LoginPage() {
         <label className="auth-field">
           <span>E-mail</span>
           <input
+            aria-describedby={invalidFields.includes("email") ? formErrorId : undefined}
+            aria-invalid={invalidFields.includes("email")}
+            autoCapitalize="none"
             autoComplete="email"
             inputMode="email"
+            name="email"
             onChange={(event) => setEmail(event.target.value)}
             placeholder="gabriel@email.com"
+            ref={emailRef}
+            spellCheck={false}
             type="email"
             value={email}
           />
@@ -79,22 +101,26 @@ export function LoginPage() {
         <label className="auth-field">
           <span>Senha</span>
           <input
+            aria-describedby={invalidFields.includes("password") ? formErrorId : undefined}
+            aria-invalid={invalidFields.includes("password")}
             autoComplete="current-password"
+            name="password"
             onChange={(event) => setPassword(event.target.value)}
             placeholder="Sua senha"
+            ref={passwordRef}
             type="password"
             value={password}
           />
         </label>
 
         {error ? (
-          <p className="auth-error" role="alert">
+          <p className="auth-error" id={formErrorId} role="alert">
             {error}
           </p>
         ) : null}
 
         <button className="button button--primary auth-submit" disabled={isSubmitting} type="submit">
-          {isSubmitting ? "Entrando..." : "Entrar"}
+          {isSubmitting ? "Entrando…" : "Entrar"}
         </button>
       </form>
     </AuthFormShell>

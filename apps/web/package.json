@@ -23,6 +23,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@fontsource-variable/alegreya": "5.2.8",
+    "@fontsource-variable/source-sans-3": "5.2.9",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^22.15.30",

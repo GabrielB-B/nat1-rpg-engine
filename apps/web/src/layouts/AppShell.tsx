@@ -14,13 +14,18 @@ export function AppShell({ children }: AppShellProps) {
 
   return (
     <div className="app-shell">
+      <a className="skip-link" href="#workspace-content">
+        Pular para o conteúdo
+      </a>
       <Sidebar
         items={workspaceMock.navigation}
         userName={user?.name ?? workspaceMock.userName}
       />
       <div className="workspace-frame">
         <Topbar />
-        <main className="workspace-main">{children}</main>
+        <main className="workspace-main" id="workspace-content" tabIndex={-1}>
+          {children}
+        </main>
       </div>
     </div>
   );

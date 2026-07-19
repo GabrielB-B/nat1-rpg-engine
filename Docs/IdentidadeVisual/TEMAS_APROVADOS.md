@@ -13,6 +13,12 @@ Esta documentacao foi consolidada na branch `docs/fix-approved-visual-themes`, a
 
 O objetivo e impedir divergencia visual antes da criacao do frontend, dos tokens de tema, das CSS variables, do Tailwind e do design system inicial.
 
+O termo “aprovados” neste documento se refere à direção, personalidade e paletas dos três
+temas. Ele não aprova automaticamente a geometria final da marca nem seus ativos para uso
+comercial. Na branch `front/cartographer-brand-tokens`, o contrato semântico dos três temas
+e a aplicação inicial do Cartógrafo estão implementados como fundação candidata/provisória.
+G1 continua em andamento até QA visual e aprovação explícita de Gabriel.
+
 ## Regra geral
 
 A UX base deve permanecer consistente entre os temas. Os temas mudam atmosfera, paleta, textura, icones, avatares e nivel de contraste, mas nao reinventam a navegacao.
@@ -54,7 +60,7 @@ mapas ou sessões mockadas não fazem parte do contrato do MVP.
 
 ### Observacoes para frontend
 
-- Este e o primeiro tema a ser implementado funcionalmente.
+- Este é o primeiro tema aplicado funcionalmente; a fundação visual atual ainda é candidata e está em QA de G1.
 - A chave `cartographer` deve ser o valor padrao de `theme`.
 - Componentes nao devem depender diretamente da estetica de pergaminho; devem consumir tokens.
 
@@ -147,14 +153,14 @@ mapas ou sessões mockadas não fazem parte do contrato do MVP.
 | Sombrio/Terror | `dark_horror` | Horror, investigacao, ocultismo | Tema escuro atmosferico |
 | Futurista Humanista | `humanist_futuristic` | Sci-fi, naves, futuro elegante | Tema tecnico/imersivo |
 
-## Notas para o frontend futuro
+## Notas para continuidade do frontend
 
-- Criar tokens por tema desde o inicio.
+- Manter e evoluir os tokens semânticos já previstos para os três temas.
 - Nao prender componentes ao tema Cartografo.
 - A navegacao deve ser compartilhada entre temas.
 - O frontend deve aceitar troca de tema pelo campo persistido `theme`; `theme_key` não é um segundo contrato.
-- O tema Cartografo sera o primeiro implementado funcionalmente.
-- Sombrio/Terror e Futurista Humanista devem nascer previstos nos tokens.
+- O tema Cartógrafo é o primeiro aplicado funcionalmente.
+- Sombrio/Terror e Futurista Humanista estão previstos no contrato de tokens, mas suas telas completas e o QA comparativo permanecem futuros.
 - Evitar repetir paleta do Cartografo no Futurista Humanista.
 - Evitar transformar o Futurista Humanista em cyberpunk pesado.
 - Preparar CSS variables ou design tokens para:

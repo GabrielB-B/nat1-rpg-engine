@@ -37,7 +37,10 @@ export function Topbar() {
         />
         <input
           aria-label="Buscar no workspace"
-          placeholder="Buscar em tudo..."
+          autoComplete="off"
+          name="workspace-search"
+          placeholder="Buscar em tudo…"
+          spellCheck={false}
           type="search"
         />
       </form>

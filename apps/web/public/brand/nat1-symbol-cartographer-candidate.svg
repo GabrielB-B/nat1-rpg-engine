@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Símbolo candidato Nat 1 RPG</title>
+  <desc id="desc">Chapéu assimétrico, dado de vinte faces com o número um e anel de orientação.</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="80" cy="76" r="61" stroke="#B58A42" stroke-width="2.5"/>
+    <circle cx="80" cy="76" r="55" stroke="#4A3424" stroke-opacity=".38" stroke-width="1.25" stroke-dasharray="3 7"/>
+    <path d="M80 3l3.4 8.6L92 15l-8.6 3.4L80 27l-3.4-8.6L68 15l8.6-3.4L80 3Zm0 122 3.4 8.6L92 137l-8.6 3.4L80 149l-3.4-8.6L68 137l8.6-3.4L80 125ZM7 76l8.6-3.4L19 64l3.4 8.6L31 76l-8.6 3.4L19 88l-3.4-8.6L7 76Zm122 0 8.6-3.4L141 64l3.4 8.6L153 76l-8.6 3.4L141 88l-3.4-8.6L129 76Z" fill="#A1533F" stroke="#B58A42" stroke-width="1.8"/>
+
+    <path d="M40 78c5-12 14-20 27-25 1-16 7-31 16-43 3 15 13 26 27 34-6 5-9 11-10 18 13 3 24 10 31 20-20 9-47 12-70 8-9-2-16-6-21-12Z" fill="#556B4E" stroke="#4A3424" stroke-width="3"/>
+    <path d="M53 62c20-5 43-3 58 4l-5 17c-18-5-39-5-59 1l6-22Z" fill="#6F7F58" stroke="#4A3424" stroke-width="2.4"/>
+    <path d="M57 67c18-4 36-2 50 3" stroke="#B58A42" stroke-width="3"/>
+    <path d="M84 10c5 15 4 27-4 36" stroke="#FFF8E8" stroke-opacity=".42" stroke-width="2"/>
+
+    <path d="M48 78h64l15 25-14 33-33 16-33-16-14-33 15-25Z" fill="#FFF8E8" stroke="#4A3424" stroke-width="3"/>
+    <path d="m48 78 32 20 32-20m-79 25 47-5 47 5m-80 33 33-38 33 38M48 78l-1 58m65-58 1 58M33 103l47 49 47-49" stroke="#B58A42" stroke-width="1.8"/>
+    <path d="m72 105 13-7v30h10v10H67v-10h9v-17l-7 4-4-8 7-2Z" fill="#A1533F" stroke="#4A3424" stroke-width="1.4"/>
+  </g>
+</svg>
